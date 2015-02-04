@@ -20,21 +20,22 @@
 <h2>Day #0</h2>
 <style type="text/css">
 	.ans {color: red; font-weight: bold;}
-	.frame {border: 1px dashed #000;}
+	.frame {border: 1px dashed #000;white-space: pre-wrap;}
 	.print-before {page-break-before: always;}
-	table.full-width {width: 100%;}
+	@media print {.print-hidden{display: none;}}
+	table.full-width {width: 100%;table-layout: fixed;border-collapse: collapse;border-spacing: 0;}
 	table.full-width td {width: 50%; max-width: 50%;}
 </style>
 <ul>
-<table class="full-width">
+<table id="tbl-email" class="full-width" cellpadding="0" cellspacing="0" height="auto">
 <tbody>
 <tr>
 <td width="50%">
-	<li>The adventure all began with this email invitation puzzle:</li>
+	<li>The adventure began with this email invitation puzzle:</li>
 	<img src="img/0email.png">
 </td><td width="50%">
-	<li>A keen eye would immediately notice some characters missing (highlighted in <font class=ans>red+bold</font>)</li>
-	<pre class="frame" style="width: 403px;">Dear YAFer,
+	<li>A keen eye would immediately notice characters missing (<font class=ans>red+bold</font>)</li>
+	<pre class="frame">Dear YAFer,
 
 A very <font class=ans>g</font>ood day to you.
 
@@ -97,14 +98,14 @@ P.S. The case is sensitive.</pre>
 	<li>&quot;<em>If the IPA spelling of the vowel consists of two different symbols, or one symbol followed by the length marker ː , the vowel is long.</em>&quot; [<a href="http://forum.wordreference.com/showthread.php?t=2054773#post_10281407">source</a>]</li>
 	<li>Doesn't <em>short</em> &amp; <em>long</em> remind of something, like <a href="http://en.wikipedia.org/wiki/Morse_code"><strong>Morse Code</strong></a> ?</li>
 	<li>How about the assignment <code>{<em>short</em> vowel word -> .; <em>long</em> vowel word -> -}</code> ?</li>
-	<li>Trying it produces: <code>-----.-...../-.-..--./...-----.-..--..../-..../-.--..------.--</code></li>
+	<li>Trying it produces: <br>&nbsp;&nbsp;&nbsp;<code>-----.-...../-.-..--./...-----.-..--..../-..../-.--..------.--</code></li>
 	<center>
 		<img src="img/morse-code.gif" style="border:none;">
 	</center>
 	</li>...which, when decoded &amp; prettified, becomes: <code>Morse Can Sometimes Be Yummy</code></li>
 </ul>
-
-<h2>Day #1</h2>
+<hr class="print-hidden">
+<h2 class="print-before">Day #1</h2>
 <ul>
 	<li>I ate up one of the Oreo cookies in the box, not knowing that it was supposed to be the first clue; and I don't have a photo of it either, but anyway, as promised in the admin instructions, the <code style="color:#298cca;">Reading Exercise</code> was useful in preparing to parse more (yes, you guessed it!) <a href="http://en.wikipedia.org/wiki/Morse_code"><strong>Morse Code</strong></a>!</li>
 	<i>&lt;insert missing photo here&gt;</i>
@@ -129,7 +130,7 @@ P.S. The case is sensitive.</pre>
 	<img src="img/5-clue2@echo.png">
 	<li>time to head to the <a href="https://www.google.com.sg/maps/@1.285979,103.859376,20z">lily pond</a>, esp. the trees by Olympic Walk, &amp; look up <a href="http://www.photius.com/flags/alphabetic_list.html">flags of the world</a>.</li>
 	<img src="img/5-clue2@echo2.png">
-	<li>(right panel) The flags in order on the clue are:</li>
+	<li class="print-before">(right panel) The flags in order on the clue are:</li>
 	<ol style="list-style-type:disc;">
 		<li>Australia</li>
 		<li>Angola</li>
@@ -158,7 +159,7 @@ P.S. The case is sensitive.</pre>
 	</ol>
 	<li>&lt;some hints given&gt;...<a href="https://sites.google.com/site/yafhunt/birkenstock"><code>birkenstock</code></a></li>
 	<img src="img/7@birkenstock.png">
-	<li><code>When in Rome, decipher like the Romans</code>...mmm...how about <a href="http://en.wikipedia.org/wiki/Caesar_cipher">Caesar cipher</a> ?</li>
+	<li class="print-before"><code>When in Rome, decipher like the Romans</code>...mmm...how about <a href="http://en.wikipedia.org/wiki/Caesar_cipher">Caesar cipher</a> ?</li>
 	<li>from:</li>
 <pre class="frame">
 Ehzduh wkh lghv ri Pdufk
@@ -196,12 +197,12 @@ Pajmksktz! znua gxz lrkj zu hxazoyn hkgyzy
 	<li>translates to: <a href="https://sites.google.com/site/yafhunt/twg"><code>TWG</code></a> [<span id="clue3">Clue #3</span>]</li>
 	<img src="img/10-clue3@twg.png">
 	<li>moving to the TWG shop location reveals that the numbers are, in fact, the codes to different types of tea.</li>
-	<img src="img/10-clue3@twg-tea.jpg">
+	<img src="img/10-clue3@twg-tea.jpg" style="float:left;"><img src="img/twg-0015.jpg">
 	<li>query TWG website via format @ <code>https://www.twgtea.com/product/details?code=T${code}</code>:</li>
 	<pre><code>1002	[R]wanda BP1
 6049	[A]mi Thé
  637	[I]mperial Pu-Erh
-0015	[N]&lt;missing info here&gt;
+0015	[N]umber 15 Tea
 3000	[B]reakfast Earl Grey
 6151	[O]cean Voyage Tea
 6083	[W]ater Flower Tea
@@ -209,12 +210,11 @@ Pajmksktz! znua gxz lrkj zu hxazoyn hkgyzy
 	<li>the first letters of each of these spells: <a href="https://sites.google.com/site/yafhunt/rainbowl"><code>RAINBOWL</code></a></li>
 	<img src="img/11@rainbowl.png">
 	<li>Final Destination gathered from [<a href="#clue1">clue1</a>] [<a href="#clue2">clue2</a>] [<a href="#clue3">clue3</a>]: <a href="https://foursquare.com/v/rain-oculus/4d2c5a86f7a9224b314f17a0">Rain Oculus</a></li>
-	<img src="img/12-vortex-btm.jpg">
-	<img src="img/12-vortex-top.jpg">
-	<img src="img/12-mbs-shoppes.jpg">
+<center>
+	<img src="img/12-vortex-btm.jpg" style="width:98%;">
+	<img src="img/12-vortex-top.jpg" style="width:98%;">
+	<img src="img/12-mbs-shoppes.jpg" style="width:98%;">
+</center>
 </ul>
-	<center>--- <strong>FIN</strong> ---</center>
-		</div>
-	</div>
-</body>
-</html>
+	<center class="print-hidden">--- <strong>FIN</strong> ---</center>
+</div></div></body></html>
