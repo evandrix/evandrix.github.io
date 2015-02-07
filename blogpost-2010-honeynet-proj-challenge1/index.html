@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Honeynet Project Challenge 1 - pcap attack trace</title>
+	<link href="../all.min.css" rel="stylesheet" type="text/css" />
+	<link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		ul >li:before {content: '-';position: absolute;margin-left: -.7em;}
+	</style>
+</head>
+<body>
+	<div id="content">
+	  <div id="post">
+		<h1><a href="http://www.honeynet.org/node/504">Honeynet Project Challenge 1 - pcap attack trace</a></h1>
+		<div id="postinfo">
+		  <div id="postdate"></div>
+		  <div id="posttags">tags: netsec, honeynet, pcap, forensic, 2010</div>
+		</div>
+		<div id="postbody">
+<center><a href="atk-trace.pcap">atk-trace.pcap</a> | <a href="solution.pdf">solution.pdf</a></center>
+<ol>
+	<li>Which systems (i.e. IP addresses) are involved?<br>
+		<code class="ans tab">tshark -r atk-trace.pcap -z ip_hosts,tree -qn</code><br>
+		<span class="tab"></span>unique IP addr: <code class="ans">tshark -r atk-trace.pcap -T fields -e ip.dst -e ip.src | sort | uniq</code><br>
+		<span class="tab"></span>unique MAC addr: <code class="ans">tshark -r atk-trace.pcap -T fields -e eth.dst -e eth.src | sort | uniq</code>
+	</li>
+	<li>What can you find out about the attacking host (e.g., where is it located)?</li>
+		<span class="tab"></span><a href="http://www.hostip.info">http://www.hostip.info</a><br>
+		<code class="ans tab">p0f -r atk-trace.pcap</code><br>
+		<code class="ans tab">tshark -r atk-trace.pcap -Y "tcp.flags==0x02" -n</code><br>
+		<code class="ans tab">sudo snort -q -A console -r atk-trace.pcap</code><br>
+		<code class="ans tab">geoiplookup 98.114.205.102</code>
+	<li>How many TCP sessions are contained in the dump file?</li>
+		<code class="ans tab">tshark -r atk-trace.pcap -qnz conv,tcp</code>
+	<li>How long did it take to perform the attack?</li>
+		<code class="ans tab">capinfos atk-trace.pcap</code>
+	<li>Which operating system was targeted by the attack? And which service? Which vulnerability?</li>
+	<li>Can you sketch an overview of the general actions performed by the attacker?</li>
+	<li>What specific vulnerability was attacked?</li>
+	<li>What actions does the shellcode perform? Pls list the shellcode.</li>
+	<li>Do you think a Honeypot was used to pose as a vulnerable victim? Why?</li>
+	<li>Was there malware involved? Whats the name of the malware? (We are not looking for a detailed malware analysis for this challenge)</li>
+	<li>Do you think this is a manual or an automated attack? Why?</li>
+</ul>
+	<center>--- <strong>FIN</strong> ---</center>
+</div></div></div></body></html>
