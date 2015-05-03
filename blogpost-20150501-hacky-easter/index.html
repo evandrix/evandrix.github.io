@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>20150501: Hacky Easter - writeup</title>
+	<link href="../all.min.css" rel="stylesheet" type="text/css" />
+	<link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		ul >li:before {content: '-';position: absolute;margin-left: -.7em;}
+	</style>
+</head>
+<body>
+	<div id="content">
+	  <div id="post">
+		<h1><a href="http://www.timeanddate.com/worldclock/fixedtime.html?iso=20150430T1600">20150501</a>: <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenges.html">Hacky Easter 2015</a> - writeup</h1>
+		<div id="postinfo">
+		  <div id="postdate"></div>
+		  <div id="posttags">tags: netsec, ctf, hacking-lab, 2015</div>
+		</div>
+		<div id="postbody">
+<center>
+	<i>QR code decoder <a href="http://zxing.org/w/decode.jspx">online</a></i>
+	<br>
+	<i>keys are all in lowercase only</i>
+</center>
+<ol>
+	<li id="qn1"><u>Puzzword</u></li>
+<pre style="padding:.5em;">
+Search out the password in the image
+</pre>
+<img src="img/lvl01.jpg">
+	<ul>
+		<li class="dash">anagram(missing letters {<code>a,c,e,h,k,r,z</code>}) = <code class="ans">hackerz</code></li>
+	</ul>
+
+	<li id="qn2" class="print-before"><u>It's in the Media</u></li>
+<pre class="wrap" style="padding:.5em;">
+New York Times, March 12 2015
+An Easter Egg of the famous Hacky Easter white-hat hacking competition, was leaked last Tuesday by the famous hacker group "Bunnonymous". Experts confirmed its authenticity, but could not crack the code hidden it in yet.
+
+Can you do better?
+</pre>
+<style type="text/css">
+.mediaEgg {background-image: url("img/egg_02_plain.png");}
+.eggImage {height: 240px;width: 240px;background-size: 240px 240px;}
+.h {display: none;}
+.o2 {height: 4%; width: 4%; background: #000;}
+.i3 {height: 4%; width: 4%; background: #fff;}
+.l1 {height: 4%; width: 4%; background: #000;}
+.x5 {height: 4%; width: 4%; background: #fff;/*#000;*/}
+@media print {
+	body {-webkit-print-color-adjust: exact;}
+    .h {display: block;}
+    .x5 {height: 4%; width: 4%; background: #000;}
+}
+</style>
+<div class="eggImage mediaEgg"><table style="position: relative; left: 82px; top: 108px; width:75px; height:75px;"><tr><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="x5"></td><td class="i3"></td><td class="x5"></td><td class="i3"></td><td class="x5"></td><td class="i3"></td><td class="x5"></td><td class="i3"></td><td class="x5"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td></tr><tr><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="l1"></td><td class="i3"></td><td class="i3"></td><td class="l1"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="l1"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="l1"></td><td class="i3"></td><td class="x5"></td><td class="l1"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="x5"></td><td class="l1"></td><td class="i3"></td><td class="l1"></td><td class="o2"></td><td class="x5"></td><td class="l1"></td><td class="i3"></td><td class="x5"></td><td class="o2"></td><td class="x5"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="l1"></td><td class="i3"></td><td class="x5"></td><td class="l1"></td><td class="x5"></td><td class="i3"></td><td class="o2"></td><td class="l1"></td><td class="x5"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="x5"></td><td class="x5"></td><td class="x5"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="x5"></td><td class="i3"></td><td class="i3"></td><td class="x5"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td></tr><tr><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td></tr><tr><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td></tr><tr><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td></tr><tr><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="o2"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="o2"></td><td class="i3"></td><td class="i3"></td><td class="i3"></td><td class="o2"></td></table></div>
+	<ul>
+		<li class="dash">QR code != <code>img</code>, but = HTML <code>table</code></li>
+		<li class="dash">clue in puzzle title: &quot;<u>media</u>&quot; ie. CSS <code>@media</code></li>
+		<li class="dash">inspect CSS styling in HTML src <code>style</code>: <code>class='h5'</code> styled differently when page is printed</li>
+<pre><code>&#8230;
+.x5 { height: 4%; width: 4%; background: <font color=red>#fff</font>;}
+@media print {
+	&#x2026;
+	.x5 { height: 4%; width: 4%; background: <font color=red>#000</font>;}
+}</code></pre>
+	</ul>
+
+	<li id="qn3" class="print-before"><u>Lego Stego</u></li>
+<pre class="wrap" style="padding:.5em;">
+You intercepted a message sent by a nerd from the office nearby. On first sight, there's nothing suspicious in it. However, you are almost sure that something secret must be hidden in it. Can you find out what?
+
+<a href="file/legostego.lxf">legostego.lxf</a>
+</pre>
+	<ul>
+		<li class="dash">fmt: <code>.lxf</code> &dash; open-with: <a href="http://ldd.lego.com/en-us/download">LEGO Digital Designer</a></li>
+		<li class="dash">obs. 3 layers present <a href="file/legostego-blank.lxf"><img src="img/lvl03-3layers.png"></a></li>
+		<li class="dash">QR code in middle layer ie. strip off top layer <a href="file/legostego-qrcode.lxf"><img src="img/challenge03-vpmP0wgxXAdKDGAjdbn6.png"></a></li>
+	</ul>
+
+	<li id="qn4" class="print-before"><u>Twisted Num63rs</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	@<code>/assets/www/challenge04.html</code>:
+	<pre class="wrap" style="padding:.5em;">
+	Calculate/convert the following values, and sort them in <u>ascending</u> order
+	</pre>
+	<table class="full-width" cellpadding="0" cellspacing="0" height="auto"><tbody><tr>
+	<td width="50%">
+	<ol>
+		<li>10101111000</li>
+		<li>8 YiB [bytes]</li>
+		<li>Speed of Light [m/s]</li>
+		<li>127.0.0.1 as integer</li>
+		<li>Pi<sup>Pi</sup></li>
+		<li>java.lang.Integer.MAX_VALUE</li>
+		<li>13 MiB [bytes]</li>
+		<li>2<sup>20</sup></li>
+		<li>ZmlmdHk=</li>
+		<li>sqrt(1296)</li>
+		<li>303240<sub>8</sub></li>
+		<li>Middle C [Hz]</li>
+	</ol>
+	</td><td>
+	<ol>
+		<li data-val="1400">bin2dec: 1400</li>
+		<li data-val="9671406559999999577423872">8 yobibytes = 9.67140656 &times; 10<sup>24</sup> bytes</li>
+		<li data-val="299792458">299792458 m/s</li>
+		<li data-val="2130706433">2130706433</li>
+		<li data-val="36.4621596072">&#8776; 36.4621596072</li>
+		<li data-val="2147483647">2147483647</li>
+		<li data-val="13631488">13631488 bytes</li>
+		<li data-val="1048576">1048576</li>
+		<li data-val="50">base64_decode("ZmlmdHk=")=fifty=50</li>
+		<li data-val="36">36</li>
+		<li data-val="100000">100000</li>
+		<li data-val="261.626">261.626 Hz</li>
+	</ol>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	<ul>
+		<li class="dash none"><code>xs = [1400,9671406559999999577423872,299792458,2130706433,36.4621596072,2147483647,13631488,1048576,50,36,100000,261.626]</code></li>
+		<li class="dash none"><code>sorted(zip(xs,xrange(1,len(xs)+1)))</code></li>
+		<li class="dash">sorted in ascending order:</li>
+			<ol>
+				<li value="10" data-val="36">36</li>
+				<li value="5" data-val="36.4621596072">36.4621596072</li>
+				<li value="9" data-val="50">50</li>
+				<li value="12" data-val="261.626">261.626</li>
+				<li value="1" data-val="1400">1400</li>
+				<li value="11" data-val="100000">100000</li>
+				<li value="8" data-val="1048576">1048576</li>
+				<li value="7" data-val="13631488">13631488</li>
+				<li value="3" data-val="299792458">299792458</li>
+				<li value="4" data-val="2130706433">2130706433</li>
+				<li value="6" data-val="2147483647">2147483647</li>
+				<li value="2" data-val="9671406559999999577423872">9.67140656 &times; 10<sup>24</sup></li>
+			</ol>
+		<li class="dash">extract original indices:</li>
+		<li class="dash none"><code>map(lambda (x,y): y, sorted(zip(xs,xrange(1,len(xs)+1))))</code></li>
+		<li class="dash none"><code>var h = "<font class="ans">10,5,9,12,1,11,8,7,3,4,6,2</font>";</code></li>
+		<li class="dash none"><code>for (var i=0; i<10000; i++) {h = CryptoJS.SHA1(h);} decryptScrambledEggWithKey('' + h);</code></li>
+	</ul>
+
+	<li id="qn5" class="print-before"><u>Phone Fumbling</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+<pre class="wrap" style="padding:.5em;">
+In this challenge, you need to play with your phone a bit. Try to find out what controls the four bars, and make them reach the full width (all at the same time).
+</pre>
+	<ol>
+		<li value="4"><code class="ans">battery power fully charged (100%)</code></li>
+	</ol>
+
+	<li id="qn6" class="print-before"><u>Hack to the Future</u></li>
+<pre class="wrap" style="padding:.5em;">
+The Doc's in trouble again, and you must come to his rescue! As you jump into his time machine, you realize that a password is needed to start it. Just in that moment of despair, you receive an audio message from the Doc, through space and time:
+
+<code>dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah</code>
+</pre>
+	<ul>
+		<li class="dash">Python Morse code decoder</li>
+<pre class="wrap" style="padding:.5em;"><code>morse_rev = {"dah": "T", "dah-dah": "M", "dah-dah-dah": "O", "dah-dah-dit": "G", "dah-dah-dit-dah": "Q", "dah-dah-dit-dit": "Z", "dah-dit": "N", "dah-dit-dah": "K", "dah-di-dah-dah": "Y", "dah-di-dah-dit": "C", "dah-dit-dit": "D", "dah-dit-dit-dah": "X", "dah-dit-dit-dit": "B", "dit": "E", "dit-dah": "A", "dit-dah-dah": "W", "dit-dah-dah-dah": "J", "dit-dah-dah-dit": "P", "di-dah-dit": "R", "di-dah-di-dit": "L", "dit-dit": "I", "dit-dit-dah": "U", "di-di-dah-dit": "F", "dit-dit-dit": "S", "dit-dit-dit-dah": "V", "dit-dit-dit-dit": "H"}
+ms = "dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah"
+print "".join(morse_rev[m] for m in ms.split()).lower()</code></pre>
+		<li class="dash"><code class="ans">georgemcfly</code></li>
+	</ul>
+
+	<li id="qn7" class="print-before"><u>Vista de la Calle</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	<li id="qn8" class="print-before"><u>Spread the Sheet</u></li>
+	<li id="qn9" class="print-before"><u>Fisheye</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	<li id="qn10" class="print-before"><u>Thumper's Den</u></li>
+<pre class="wrap" style="padding:.5em;">
+In order to get this egg, you need to search on the web site. Rumors say that Thumper himself has bagged it.
+</pre>
+	<ul>
+		<li class="dash">under &quot;<a href="http://hackyeaster.hacking-lab.com/hackyeaster/eggs.html">Eggs</a>&quot;</li>
+		<li class="dash"><u>(change)</u> name to <b>Thumper</b> <img src="img/lvl10.png"></li>
+	</ul>
+	<li id="qn11" class="print-before"><u>You've got Mail</u></li>
+	<li id="qn12" class="print-before"><u>This is just a Test</u></li>
+	<li id="qn13" class="print-before"><u>Leet TV</u></li>
+	<li id="qn14" class="print-before"><u>Wise Rabbit's Return</u></li>
+	<li id="qn15" class="print-before"><u>Photo Shooting</u></li>
+	<li id="qn16" class="print-before"><u>Ghost Room</u></li>
+	<li id="qn17" class="print-before"><u>Spot the Difference</u></li>
+	<li id="qn18" class="print-before"><u>Sharks on Wire</u></li>
+	<li id="qn19" class="print-before"><u>Cut'n'Place</u></li>
+	<li id="qn20" class="print-before"><u>Lots of Bots</u></li>
+	<li id="qn21" class="print-before"><u>Cony Code</u></li>
+	<li id="qn22" class="print-before"><u>Hashes to Ashes</u></li>
+	<li id="qn23" class="print-before"><u>Beat the Nerd Master</u></li>
+	<li id="qn24" class="print-before"><u>SHAM Hash</u></li>
+	<li id="qn25" class="print-before"><u>Jad &amp; Ida</u></li>
+	<li id="qn26" class="print-before"><u>Clumsy Cloud</u></li>
+	<li id="qn27" class="print-before"><u>Too Many Time Pad</u></li>
+<img src="2015HE.png">
+</ul>
+	<center class="print-hidden">--- <strong>FIN</strong> ---</center>
+</div></div></div></body></html>
