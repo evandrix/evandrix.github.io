@@ -93,7 +93,7 @@ You intercepted a message sent by a nerd from the office nearby. On first sight,
 		<li>8 YiB [bytes]</li>
 		<li>Speed of Light [m/s]</li>
 		<li>127.0.0.1 as integer</li>
-		<li>Pi<sup>Pi</sup></li>
+		<li>&Pi;<sup>&Pi;</sup></li>
 		<li>java.lang.Integer.MAX_VALUE</li>
 		<li>13 MiB [bytes]</li>
 		<li>2<sup>20</sup></li>
@@ -396,18 +396,62 @@ Hint: The plain texts consist of <u>lowercase letters</u> and <u>spaces</u> only
 	<ul>
 		<li class="dash"></li>
 	</ul>
-<img src="2015HE.png">
 </ul>
-	<center class="print-hidden">--- <strong>FIN</strong> ---</center>
+<div class="print-before"><img src="2015HE.png"></div>
+
+<style type="text/css">
+	#eggs {font-size: 13pt; line-height: 1.75em; font-family: "Source Sans Pro"; font-weight: 300; color: #2d2d2d; clear: none; margin-left: 0; float: left;}
+	#eggs .eggImage{display:inline-block;margin:-15px -30px;height:240px;width:240px;background-size:240px 240px;}
+	.easyEgg{background-image:url("img/egg_easy.png");}
+	.mediumEgg{background-image:url("img/egg_medium.png");}
+	.hardEgg{background-image:url("img/egg_hard.png");}
+	.eggTitle,.eggQR{text-align:center;position:relative;width:100%;display:inline-block;}
+	.eggTitle{top:50px;font-size:3.5em;font-weight:bold;color:#000;}
+	.eggQR{top:65px;font-size:1.2em;font-weight:bold;}
+</style>
+<div id="eggs" class="print-before" style="border:1px dashed #000;"></div>
+
+<center class="print-hidden">--- <strong>FIN</strong> ---</center>
 </div></div></div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <script type="text/javascript">
 	$(function () {
+		"use strict";
+
 		$(".hash.lvl22").append(function() {
 			return "&nbsp;<span>("
 				+$(this).text().length
 			+" chars)</span>";
 		});
+
+		var qr_codes = [null, "Ohlnlgu4C72CHZLWls7f","Gc1lEc7j4y89sTiLWK6m","vpmP0wgxXAdKDGAjdbn6","dLYFunszMowTRHovQx2y","wummMC1dk7EWF97vQMZu","U1TPdguTrTi6uvhwYQOp","vUkFUmo4jola9izLhdS8","B6gZYdONrcSnRlDlvQ03","K3sUBDOu5BtGDtcJ9lgc","ict7vc9uWE5zBGH0oiuj","lZkG3aWzrpYrIWoBX5Kz","an8snbui1FeLO3Ugw89N","vBrtvkpHNRCNZdhZN1nT","yckgKB2iV1rvNEfCoNiR","2N6R5IF2bFmK6nyw6Lnq","a3eIIACKSy02sJ6LxXeh","nYa3ktAoTAQc6yxMAGoM","j9rU8ma6nBfz986gJZmf","zDU6QXeWUfvjtZJxbEnC","PRKuX3CklkoZWwfOHbpK","LvJ3dQ1lrEfzwb61VEEl","mW5Z5nZuqVPtewn754U6","j7vzfUzftszdf754fXDS","w2Rz6VToU8g6Hzfte2VG","m7z6bTZlGQ0bZUd7gzhN","po9Jbzo1337biugGIUda"];
+		for (var i=1; i<qr_codes.length; i++) {
+			var lvl = (i<10)?("0"+i):i;
+			var elem = $("<span>");
+			var diff = null;
+			if (1<=i && i<=9) {
+				diff = "easy";
+			} else if (10<=i && i<=18) {
+				diff = "medium";
+			} else {
+				diff = "hard";
+			}
+			$(elem).attr("class", "eggImage "+diff+"Egg");
+			$(elem).append("<span class='eggTitle'>"+lvl+"</span>");
+			$(elem).append("<span id='lvl"+lvl+"' class='eggQR'></span>");
+			$("#eggs").append(elem);
+			$("#lvl"+lvl).qrcode({
+				/*render: "image",*/ size: 75,
+				left: 0, top: 0, fill: "#000",
+				text: qr_codes[i],
+				label: qr_codes[i]
+			});
+		}
+		var elem = $("<span>");
+		$(elem).attr("class", "eggImage");
+		$(elem).append("<img src='img/challenge27.png' width=240 height=240 style='border:none;vertical-align:middle;position:relative;top:3px;'>");
+		$("#eggs").append(elem);
 	});
 </script>
 </body></html>
