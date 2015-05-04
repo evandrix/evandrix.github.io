@@ -9,15 +9,17 @@
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 	<style type="text/css">
 		ul >li:before {content: '-';position: absolute;margin-left: -.7em;}
+		.qn>a>u {color: #000;}
+		a {color: blue !important;}
 	</style>
 </head>
 <body>
 	<div id="content">
-	  <div id="post">
+		<div id="post">
 		<h1><a href="http://www.timeanddate.com/worldclock/fixedtime.html?iso=20150430T1600">20150501</a>: <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenges.html">Hacky Easter 2015</a> - writeup</h1>
 		<div id="postinfo">
-		  <div id="postdate"></div>
-		  <div id="posttags">tags: netsec, ctf, hacking-lab, 2015</div>
+			<div id="postdate"></div>
+			<div id="posttags">tags: netsec, ctf, hacking-lab, 2015</div>
 		</div>
 		<div id="postbody">
 <center>
@@ -26,7 +28,7 @@
 	<i>keys are all in lowercase only</i>
 </center>
 <ol>
-	<li id="qn1"><u>Puzzword</u></li>
+	<li id="qn1" class="qn"><u>Puzzword</u></li>
 <pre style="padding:.5em;">
 Search out the password in the image
 </pre>
@@ -35,7 +37,7 @@ Search out the password in the image
 		<li class="dash">anagram(missing letters {<code>a,c,e,h,k,r,z</code>}) = <code class="ans">hackerz</code></li>
 	</ul>
 
-	<li id="qn2" class="print-before"><u>It's in the Media</u></li>
+	<hr class="print-hidden"><li id="qn2" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge02.html"><u>It's in the Media</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 New York Times, March 12 2015
 An Easter Egg of the famous Hacky Easter white-hat hacking competition, was leaked last Tuesday by the famous hacker group "Bunnonymous". Experts confirmed its authenticity, but could not crack the code hidden it in yet.
@@ -67,9 +69,10 @@ Can you do better?
 	&#x2026;
 	.x5 { height: 4%; width: 4%; background: <font color=red>#000</font>;}
 }</code></pre>
+		<li class="dash ans">simply <u>print</u> the page to reveal QR code for this level</li>
 	</ul>
 
-	<li id="qn3" class="print-before"><u>Lego Stego</u></li>
+	<hr class="print-hidden"><li id="qn3" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge03.html"><u>Lego Stego</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 You intercepted a message sent by a nerd from the office nearby. On first sight, there's nothing suspicious in it. However, you are almost sure that something secret must be hidden in it. Can you find out what?
 
@@ -78,11 +81,12 @@ You intercepted a message sent by a nerd from the office nearby. On first sight,
 	<ul>
 		<li class="dash">fmt: <code>.lxf</code> &dash; open-with: <a href="http://ldd.lego.com/en-us/download">LEGO Digital Designer</a></li>
 		<li class="dash">obs. 3 layers present <a href="file/legostego-blank.lxf"><img src="img/lvl03-3layers.png"></a></li>
-		<li class="dash">QR code in middle layer ie. strip off top layer <a href="file/legostego-qrcode.lxf"><img src="img/challenge03-vpmP0wgxXAdKDGAjdbn6.png"></a></li>
+		<li class="dash ans">QR code in *mid* layer ie. strip off top layer</li>
+		<li class="dash none"><a href="file/legostego-qrcode.lxf"><img src="img/challenge03-vpmP0wgxXAdKDGAjdbn6.png"></a></li>
 	</ul>
 
-	<li id="qn4" class="print-before"><u>Twisted Num63rs</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
-	@<code>/assets/www/challenge04.html</code>:
+	<hr class="print-hidden"><li id="qn4" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge04.html"><u>Twisted Num63rs</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	@ <code>/assets/www/challenge04.html</code>:
 	<pre class="wrap" style="padding:.5em;">
 	Calculate/convert the following values, and sort them in <u>ascending</u> order
 	</pre>
@@ -142,43 +146,58 @@ You intercepted a message sent by a nerd from the office nearby. On first sight,
 		<li class="dash">extract original indices:</li>
 		<li class="dash none"><code>map(lambda (x,y): y, sorted(zip(xs,xrange(1,len(xs)+1))))</code></li>
 		<li class="dash none"><code>var h = "<font class="ans">10,5,9,12,1,11,8,7,3,4,6,2</font>";</code></li>
-		<li class="dash none"><code>for (var i=0; i<10000; i++) {h = CryptoJS.SHA1(h);} decryptScrambledEggWithKey('' + h);</code></li>
+		<li class="dash none"><code>for (var i=0; i<10000; i++) {h = CryptoJS.SHA1(h);} decryptScrambledEggWithKey('' + h);</code>&#x2026;</li>
 	</ul>
 
-	<li id="qn5" class="print-before"><u>Phone Fumbling</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	<hr class="print-hidden"><li id="qn5" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge05.html"><u>Phone Fumbling</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
 <pre class="wrap" style="padding:.5em;">
 In this challenge, you need to play with your phone a bit. Try to find out what controls the four bars, and make them reach the full width (all at the same time).
 </pre>
 	<ol>
-		<li value="4"><code class="ans">battery power fully charged (100%)</code></li>
+		<li><code class="ans"></code></li>
+		<li><code class="ans"></code></li>
+		<li><code class="ans"></code></li>
+		<li><code class="ans">battery power fully charged (100%)</code></li>
 	</ol>
 
-	<li id="qn6" class="print-before"><u>Hack to the Future</u></li>
+	<hr class="print-hidden"><li id="qn6" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge06.html"><u>Hack to the Future</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 The Doc's in trouble again, and you must come to his rescue! As you jump into his time machine, you realize that a password is needed to start it. Just in that moment of despair, you receive an audio message from the Doc, through space and time:
 
 <code>dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah</code>
 </pre>
 	<ul>
-		<li class="dash">Python Morse code decoder</li>
+		<li class="dash none"><u>Python Morse code decoder</u></li>
 <pre class="wrap" style="padding:.5em;"><code>morse_rev = {"dah": "T", "dah-dah": "M", "dah-dah-dah": "O", "dah-dah-dit": "G", "dah-dah-dit-dah": "Q", "dah-dah-dit-dit": "Z", "dah-dit": "N", "dah-dit-dah": "K", "dah-di-dah-dah": "Y", "dah-di-dah-dit": "C", "dah-dit-dit": "D", "dah-dit-dit-dah": "X", "dah-dit-dit-dit": "B", "dit": "E", "dit-dah": "A", "dit-dah-dah": "W", "dit-dah-dah-dah": "J", "dit-dah-dah-dit": "P", "di-dah-dit": "R", "di-dah-di-dit": "L", "dit-dit": "I", "dit-dit-dah": "U", "di-di-dah-dit": "F", "dit-dit-dit": "S", "dit-dit-dit-dah": "V", "dit-dit-dit-dit": "H"}
 ms = "dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah"
 print "".join(morse_rev[m] for m in ms.split()).lower()</code></pre>
 		<li class="dash"><code class="ans">georgemcfly</code></li>
 	</ul>
 
-	<li id="qn7" class="print-before"><u>Vista de la Calle</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
-	<li id="qn8" class="print-before"><u>Spread the Sheet</u></li>
-	<li id="qn9" class="print-before"><u>Fisheye</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
-	<li id="qn10" class="print-before"><u>Thumper's Den</u></li>
+	<hr class="print-hidden"><li id="qn7" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge07.html"><u>Vista de la Calle</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	<hr class="print-hidden"><li id="qn8" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge08.html"><u>Spread the Sheet</u></a></li>
+<pre class="wrap" style="padding:.5em;">This egg is hidden within an online spreadsheet. Go find it's URL, and extract the egg out of it.
+
+Spreadsheet ID:
+<div style="text-indent: 1em"><code>1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA</code></div>
+<img src="img/spreadsheet.png">
+</pre>
+
+	<ul>
+		<li class="dash"><a href="https://docs.google.com/spreadsheets/d/1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA">https://docs.google.com/spreadsheets/d/1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA</a></li>
+	</ul>
+
+	<hr class="print-hidden"><li id="qn9" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge09.html"><u>Fisheye</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	<hr class="print-hidden"><li id="qn10" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge10.html"><u>Thumper's Den</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 In order to get this egg, you need to search on the web site. Rumors say that Thumper himself has bagged it.
 </pre>
 	<ul>
 		<li class="dash">under &quot;<a href="http://hackyeaster.hacking-lab.com/hackyeaster/eggs.html">Eggs</a>&quot;</li>
-		<li class="dash"><u>(change)</u> name to <b>Thumper</b> <img src="img/lvl10.png"></li>
+		<li class="dash"><u>(change)</u> name to <b>Thumper</b></li>
+		<li class="dash none"><img src="img/lvl10.png"></li>
 	</ul>
-	<li id="qn11" class="print-before"><u>You've got Mail</u></li>
+	<hr class="print-hidden"><li id="qn11" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge11.html"><u>You've got Mail</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 
@@ -188,7 +207,7 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn12" class="print-before"><u>This is just a Test</u></li>
+	<hr class="print-hidden"><li id="qn12" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge12.html"><u>This is just a Test</u></a></li>
 		<!-- Thumper says: D'oh!! You failed! -->
 		<div style="border:1px dashed #000;"><form method="post" action="http://hackyeaster.hacking-lab.com/hackyeaster/ceh">
 		<p>This is your chance to become a Certified Easter Hacker (CEH)! Complete the following little test. Passing score is 100%</p>
@@ -205,17 +224,17 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn13" class="print-before"><u>Leet TV</u></li>
+	<hr class="print-hidden"><li id="qn13" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge13.html"><u>Leet TV</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 Welcome to Leet TV! Click the image below to play our trailer
 
-<a href="file/leettv.mp4"><img src="img/play_movie.jpg"></a>
+<a href="file/leettv.mp4"><img src="img/play_movie.png"></a>
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash none"><img src="img/challenge13-vBrtvkpHNRCNZdhZN1nT.png"></li>
 	</ul>
 
-	<li id="qn14" class="print-before"><u>Wise Rabbit's Return</u></li>
+	<hr class="print-hidden"><li id="qn14" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge14.html"><u>Wise Rabbit's Return</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 Wise Rabbit says:
 
@@ -230,24 +249,37 @@ add a dimension you must!</i>
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn15" class="print-before"><u>Photo Shooting</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	<hr class="print-hidden"><li id="qn15" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge15.html"><u>Photo Shooting</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
 <pre class="wrap" style="padding:.5em;">
 </pre>
 	<ul>
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn16" class="print-before"><u>Ghost Room</u></li>
+	<hr class="print-hidden"><li id="qn16" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge16.html"><u>Ghost Room</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 Ghosts only come out when it's dark...
 
 <img src="img/noghost.png">
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash none"><img src="img/lvl16-light.png"></li>
+		<li class="dash">turn off the lights: click on light bulb in far lower right corner @ webpage footer</li>
+		<li class="dash none"><img src="img/lvl16-dark.png"></li>
+		<li class="dash print-before">clicking on Challenge 16 now leads to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge16-dark.html">challenge16-dark.html</a>, containing another puzzle desc:</li>
+<pre class="wrap" style="padding:.5em;">
+Dark is beautiful. A <a href="http://en.wikipedia.org/wiki/GOST_(block_cipher)"><font color="red">GOST</font></a> with <a href="http://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_Block_Chaining_.28CBC.29"><font color="red">chain</font></a>ing appears and has a message for you:
+
+<code>d5++xytj6RiGwmqEecm63Kow7RZGAAHh
+VFsksHFuj/Anap7pWHDZ1XQw8DAApUEN
+R5ExOGUKTzGOtvSAlCHkHq6NneL6ZUTX
+ej8Taxz+kHK9w9U8dxTOSksZ4HKS2YYD</code>
+
+<img src="img/ghost.png">
+</pre>
 	</ul>
 
-	<li id="qn17" class="print-before"><u>Spot the Difference</u></li>
+	<hr class="print-hidden"><li id="qn17" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge17.html"><u>Spot the Difference</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 Sharpen your eyes, and diff 2 img below
 
@@ -258,37 +290,87 @@ Sharpen your eyes, and diff 2 img below
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn18" class="print-before"><u>Sharks on Wire</u></li>
+	<hr class="print-hidden"><li id="qn18" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge18.html"><u>Sharks on Wire</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 In this challenge, you need to get access to a <a href="">website</a>
 
 Inspect <a href="file/sharks.pcapng">sharks.pcapng</a>, in order to get the credentials needed
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">view <a href="file/sharks.pcapng">sharks.pcapng</a> in WireShark</li>
+		<li class="dash">apply bpf filter: <code>tcp stream eq 3</code></li>
+		<li class="dash">Follow (this) TCP Stream</li>
+		<li class="dash">filter for only <code>10.11.0.52:62046 &rarr; 10.11.0.48:8080</code></li>
+		<li class="dash none"><img src="img/lvl18.png"></li>
+		<li class="dash"><code>curl -sL -H "Authorization: Basic c2hhcmttYW46c2hhcmtzX2hhdmVfajR3cw==" -X POST "http://hackyeaster.hacking-lab.com/hackyeaster/sharks/auth" -d "user=supershark&pass=hashed%21%21%21&hash=b3f3ca462d3fa58b74d6982af14d8841b074994a"</code></li>
+<pre class="wrap" style="padding:.5em;">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Sharks on Wire&lt;/title&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+    &lt;link rel=&quot;icon&quot; type=&quot;image/ico&quot; href=&quot;../images/favicon.ico&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;sharks.css&quot;&gt;
+    &lt;script src=&quot;../js/jquery.min.js&quot;&gt;&lt;/script&gt;
+  &lt;body&gt;
+    &lt;div class=&quot;title&quot;&gt;Sharks on Wire&lt;/div&gt;
+    &lt;div class=&quot;imageBg&quot;&gt;
+      &lt;img src=&quot;<font color="red">egg_18_j9rU8ma6nBfz986gJZmf.png</font>&quot; class=&quot;image&quot;/&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+		<li class="dash"><code>curl -sL -H "Authorization: Basic c2hhcmttYW46c2hhcmtzX2hhdmVfajR3cw==" "http://hackyeaster.hacking-lab.com/hackyeaster/sharks/egg_18_j9rU8ma6nBfz986gJZmf.png" -o egg_18_j9rU8ma6nBfz986gJZmf.png</code></li>
 	</ul>
 
-	<li id="qn19" class="print-before"><u>Cut'n'Place</u></li>
+	<hr class="print-hidden"><li id="qn19" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge19.html"><u>Cut'n'Place</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 Time for paper and scissors! The <a href="file/paperstrips.pdf">PDF</a> contains some paper strips. Your task is to combine them in such a way that a passphrase appears
 
 Hint: The passphrase does *not* use all characters available, and it has <u>no spaces</u>
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash"><code class="ans">paperstripsmadebyshredder</code></li>
 	</ul>
 
-	<li id="qn20" class="print-before"><u>Lots of Bots</u></li>
+	<hr class="print-hidden"><li id="qn20" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge20.html"><u>Lots of Bots</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 Robots have placed an egg on this web server. If you wanna find it, you need to think and act like a bot
 
 <img src="img/robot.jpg">
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash none">@ <a href="http://hackyeaster.hacking-lab.com/robots.txt">http://hackyeaster.hacking-lab.com/robots.txt</a></li>
+<pre style="padding:.5em;">
+<font color="red">User-agent: EasterBot</font>
+Disallow: /
+Allow: <font color="red">/hackyeaster/bots/bots</font>.
+
+User-agent: *
+Disallow: /
+</pre>
+		<li class="dash">visit @ <a href="http://hackyeaster.hacking-lab.com/hackyeaster/bots/bots.html">http://hackyeaster.hacking-lab.com/hackyeaster/bots/bots.html</a>, supplying HTTP header: <code>{&quot;User-agent&quot;: &quot;EasterBot&quot;}</code>
+		<p style="text-indent: 1em"><code>curl -sL -A "EasterBot" "http://hackyeaster.hacking-lab.com/hackyeaster/bots/bots.html"</code></p></li>
+<pre class="wrap print-before" style="padding:.5em;"><code>&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Bots&lt;/title&gt;&lt;
+script type=&quot;text/javascript&quot;&gt;eval(String.fromCharCode(105, 102, 32, 40, 33, 40, 110, 97, 118, 105, 103, 97, 116, 111, 114, 46, 117, 115, 101, 114, 65, 103, 101, 110, 116, 32, 61, 61, 61, 32, 39, 69, 97, 115, 116, 101, 114, 66, 111, 116, 39, 41, 41, 32, 123, 32, 108, 111, 99, 97, 116, 105, 111, 110, 46, 114, 101, 112, 108, 97, 99, 101, 40, 39, 104, 116, 116, 112, 58, 47, 47, 101, 110, 46, 119, 105, 107, 105, 112, 101, 100, 105, 97, 46, 111, 114, 103, 47, 119, 105, 107, 105, 47, 67, 45, 51, 80, 79, 39, 41, 59, 125));&lt;/script&gt;&lt;/head&gt;
+&lt;body style=&quot;background: white; border: 20px solid white;&quot;&gt;
+	&lt;div style=&quot;width: 100%; height: 100%; background: url('<font color="red">./robotbg.jpg</font>') no-repeat center center fixed; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain;&quot;&gt;&amp;#160;&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;
+</code></pre>
+<img src="img/robotbg.jpg">
+		<li class="dash"><a href="http://en.wikipedia.org/wiki/Robot_Interaction_Language">Robot Interaction Language (ROILA)</a></li>
+<pre class="wrap" style="padding:.5em;"><code>&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Bots&lt;/title&gt;&lt;
+script type=&quot;text/javascript&quot;&gt;eval(String.fromCharCode(105, 102, 32, 40, 33, 40, 110, 97, 118, 105, 103, 97, 116, 111, 114, 46, 117, 115, 101, 114, 65, 103, 101, 110, 116, 32, 61, 61, 61, 32, 39, 69, 97, 115, 116, 101, 114, 66, 111, 116, 39, 41, 41, 32, 123, 32, 108, 111, 99, 97, 116, 105, 111, 110, 46, 114, 101, 112, 108, 97, 99, 101, 40, 39, 104, 116, 116, 112, 58, 47, 47, 101, 110, 46, 119, 105, 107, 105, 112, 101, 100, 105, 97, 46, 111, 114, 103, 47, 119, 105, 107, 105, 47, 67, 45, 51, 80, 79, 39, 41, 59, 125));&lt;/script&gt;&lt;/head&gt;
+&lt;body style=&quot;background: white; border: 20px solid white;&quot;&gt;
+	&lt;div style=&quot;width: 100%; height: 100%; background: url('<font color="red">./robotbg2.jpg</font>') no-repeat center center fixed; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain;&quot;&gt;&amp;#160;&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;
+</code></pre>
+<img src="img/robotbg2.png">
 	</ul>
 
-	<li id="qn21" class="print-before"><u>Cony Code</u></li>
+	<hr class="print-hidden"><li id="qn21" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge21.html"><u>Cony Code</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 Tired of boring QR codes, Dr. Bunny C. Easter developed an alternative. He's proudly introducing the "Cony Code" now! Crack the code in order to get another easter egg!
 
@@ -302,7 +384,7 @@ Hint: <code>110</code> is <font color="blue">blue</font>, the rest's up to you..
 <style type="text/css">
 	p.hash {text-indent: 2em;font-family: "Ubuntu Mono",monospace;}
 </style>
-	<li id="qn22" class="print-before"><u>Hashes to Ashes</u></li>
+	<hr class="print-hidden"><li id="qn22" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge22.html"><u>Hashes to Ashes</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 prove your skills in hash cracking:
 </pre>
@@ -338,11 +420,11 @@ prove your skills in hash cracking:
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn23" class="print-before"><u>Beat the Nerd Master</u></li>
+	<hr class="print-hidden"><li id="qn23" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge23.html"><u>Beat the Nerd Master</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 Did you beat the Swordmaster in Monkey Island? Even if, it ain't gonna help you this time. Get to know the mighty Nerd Master!
 
-Connect to <u>hackyeaster.hacking-lab.com:1400</u>, and start the battle.
+Connect to <a href="hackyeaster.hacking-lab.com:1400">hackyeaster.hacking-lab.com:1400</a>, and start the battle.
 
 Here's an insult to start with: <i>Go 127.0.0.1 to your mummy</i>.
 </pre>
@@ -350,12 +432,12 @@ Here's an insult to start with: <i>Go 127.0.0.1 to your mummy</i>.
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn24" class="print-before"><u>SHAM Hash</u></li>
+	<hr class="print-hidden"><li id="qn24" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge24.html"><u>SHAM Hash</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 Crypto Chiefs Ltd. developed a new hash function, which takes a 'divide and conquer' approach and combines several well-known hash functions (&quot;Split, Hash, And Merge&quot;). The inventors claim that with this approach, their function becomes more secure. Can you prove they are wrong?
 
 Create a string which produces the following hash:
-	757c479895d6845b2b0530cd9a2b11
+	<code>757c479895d6845b2b0530cd9a2b11</code>
 
 spec: <a href="file/shamhash.pdf">shamhash.pdf</a>
 </pre>
@@ -363,7 +445,7 @@ spec: <a href="file/shamhash.pdf">shamhash.pdf</a>
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn25" class="print-before"><u>Jad &amp; Ida</u></li>
+	<hr class="print-hidden"><li id="qn25" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge25.html"><u>Jad &amp; Ida</u></a></li>
 <pre style="padding:.5em;">
 <a href="file/jadandida.zip">jadandida.zip</a>
 </pre>
@@ -371,20 +453,20 @@ spec: <a href="file/shamhash.pdf">shamhash.pdf</a>
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn26" class="print-before"><u>Clumsy Cloud</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	<hr class="print-hidden"><li id="qn26" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge26.html"><u>Clumsy Cloud</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
 <pre class="wrap" style="padding:.5em;">
 </pre>
 	<ul>
 		<li class="dash"></li>
 	</ul>
 
-	<li id="qn27" class="print-before"><u>Too Many Time Pad</u></li>
+	<hr class="print-hidden"><li id="qn27" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge27.html"><u>Too Many Time Pad</u></a></li>
 <pre class="wrap" style="padding:.5em;">
-You intercepted messages exchanged by evil Dr. Hopper and his agents. They used a One Time Pad for achieving perfect secrecy. Lucky for you, they have miserably failed, since the same key was used multiple times
+You intercepted messages exchanged by evil Dr. Hopper and his agents. They used a <strong>One Time Pad</strong> for achieving perfect secrecy. Lucky for you, they have miserably failed, since the same key was used multiple times
 
 Check out the ciphertexts, and try to decrypt them
 
-Hint: The plain texts consist of <u>lowercase letters</u> and <u>spaces</u> only
+Hint: The plaintexts consist of <u>lowercase letters</u> and <u>spaces</u> only
 
 <code>60c46964f83879618e2878de539f6f4a6271d716
 63c37a6ca177792092602cc553c9684b
@@ -425,7 +507,7 @@ Hint: The plain texts consist of <u>lowercase letters</u> and <u>spaces</u> only
 			+" chars)</span>";
 		});
 
-		var qr_codes = [null, "Ohlnlgu4C72CHZLWls7f","Gc1lEc7j4y89sTiLWK6m","vpmP0wgxXAdKDGAjdbn6","dLYFunszMowTRHovQx2y","wummMC1dk7EWF97vQMZu","U1TPdguTrTi6uvhwYQOp","vUkFUmo4jola9izLhdS8","B6gZYdONrcSnRlDlvQ03","K3sUBDOu5BtGDtcJ9lgc","ict7vc9uWE5zBGH0oiuj","lZkG3aWzrpYrIWoBX5Kz","an8snbui1FeLO3Ugw89N","vBrtvkpHNRCNZdhZN1nT","yckgKB2iV1rvNEfCoNiR","2N6R5IF2bFmK6nyw6Lnq","a3eIIACKSy02sJ6LxXeh","nYa3ktAoTAQc6yxMAGoM","j9rU8ma6nBfz986gJZmf","zDU6QXeWUfvjtZJxbEnC","PRKuX3CklkoZWwfOHbpK","LvJ3dQ1lrEfzwb61VEEl","mW5Z5nZuqVPtewn754U6","j7vzfUzftszdf754fXDS","w2Rz6VToU8g6Hzfte2VG","m7z6bTZlGQ0bZUd7gzhN","po9Jbzo1337biugGIUda"];
+		var qr_codes = [null, "Ohlnlgu4C72CHZLWls7f","Gc1lEc7j4y89sTiLWK6m","vpmP0wgxXAdKDGAjdbn6","dLYFunszMowTRHovQx2y","wummMC1dk7EWF97vQMZu","U1TPdguTrTi6uvhwYQOp","vUkFUmo4jola9izLhdS8","B6gZYdONrcSnRlDlvQ03","K3sUBDOu5BtGDtcJ9lgc","ict7vc9uWE5zBGH0oiuj","lZkG3aWzrpYrIWoBX5Kz","an8snbui1FeLO3Ugw89N","vBrtvkpHNRCNZdhZN1nT","yckgKB2iV1rvNEfCoNiR","2N6R5IF2bFmK6nyw6Lnq","a3eIIACKSy02sJ6LxXeh","nYa3ktAoTAQc6yxMAGoM","j9rU8ma6nBfz986gJZmf","zDU6QXeWUfvjtZJxbEnC","PRKuX3CklkoZWwfOHbpK","LvJ3dQ1lrEfzwb61VEEl","mW5Z5nZuqVPtewn754U6","j7vzfUzftszdf754fXDS","w2Rz6VToU8g6Hzfte2VG","m7z6bTZlGQ0bZUd7gzhN","po9Jbzo1337biugGIUda"/*, null*/];
 		for (var i=1; i<qr_codes.length; i++) {
 			var lvl = (i<10)?("0"+i):i;
 			var elem = $("<span>");
