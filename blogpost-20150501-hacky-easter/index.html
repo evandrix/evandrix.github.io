@@ -153,11 +153,167 @@ You intercepted a message sent by a nerd from the office nearby. On first sight,
 <pre class="wrap" style="padding:.5em;">
 In this challenge, you need to play with your phone a bit. Try to find out what controls the four bars, and make them reach the full width (all at the same time).
 </pre>
+	<ul>
+		<li class="dash">extract &amp; decompile APK</li>
+		<li class="dash none">@ <code>/assets/www/challenge05.html</code>:</li>
+		<ul>
+			<li class="dash"><code>requestLevels</code> is invoked every 1000ms to query <code>ps://sensors</code> endpt</li>
+			<li class="dash"><code>sensorFeedback(json)</code> sets lvls by parsing JSON response vars <code>{l1,l2,l3,l4,k}</code></li>
+		</ul>
+<pre style="padding:.5em;"><code>&#8230;
+function requestLevels() {
+	window.location.href="<font color="red">ps://sensors</font>";
+}
+&#x2026;
+function sensorFeedback(json) {
+	var jsonResp = JSON.parse(json);
+	setLevel(1, jsonResp.l1);
+	setLevel(2, jsonResp.l2);
+	setLevel(3, jsonResp.l3);
+	setLevel(4, jsonResp.l4);
+	if (jsonResp.k) {
+		decryptScrambledEggWithKey(jsonResp.k);
+		clearInterval(intervalId);
+	}
+}
+var intervalId = setInterval(requestLevels, 1000);</code></pre>
+		<li class="dash"><code>ps://sensors</code> is mentioned @<code>/src/ps/hacking/hackyeaster/android/c.java</code></li>
+<pre style="padding:.5em;"><code>&#8230;
+if ("ps://sensors".equals(s))
+{
+	<font color="red">Activity.e(a);</font>
+	return true;
+}
+&#x2026;</code></pre>
+		<li class="dash"><code>static e(Activity a)</code> is defined @ <code>/src/ps/hacking/hackyeaster/android/Activity.java</code></li>
+<pre class="wrap" style="padding:.5em;word-wrap:break-word;"><code>private SensorManager g;
+&#8230;
+static void e(Activity activity)
+{
+	activity.d();
+}
+&#8230;
+private void d()
+{
+	<font color="red">h = g.getDefaultSensor(1); //TYPE_ACCELEROMETER
+	i = g.getDefaultSensor(2); //TYPE_MAGNETIC_FIELD</font>
+	g.registerListener(this, h, 0);
+	g.registerListener(this, i, 0);
+	&#x2026;
+}
+&#8230;
+public int c()
+{
+	Intent intent = registerReceiver(null, new IntentFilter("<font color="red">android.intent.action.BATTERY_CHANGED</font>")); //current battery level
+	int i1 = intent.getIntExtra("level", -1);
+	int j1 = intent.getIntExtra("scale", -1);
+	if (i1 == -1 || j1 == -1)
+	{
+		return 50;
+	} else
+	{
+		return Math.round((i1 * 100) / j1); // to %
+	}
+}
+&#8230;
+private void j()
+{
+	int i1 = 100;
+	if (l == null || m == null) goto _L2; else goto _L1
+_L1:
+	float af[] = new float[9];
+	if (!SensorManager.getRotationMatrix(af, new float[9], l, m)) goto _L2; else goto _L3
+_L3:
+	float af1[] = new float[3];
+	SensorManager.getOrientation(af, af1);
+	<font color="red">int j1 = 5 * (int)Math.ceil((double)((int)(System.currentTimeMillis() / 1000L) % 100) / 5D);</font>
+	int k1 = Math.round(100F * (Math.abs(af1[1]) + Math.abs(af1[2])));
+	int l1;
+	int i2;
+	int j2;
+	int k2;
+	String s;
+	String s1;
+	MessageDigest messagedigest;
+	String s2;
+	if (k1 &lt;= 20)
+	{
+		l1 = i1;
+	} else
+	if (k1 &gt; 300)
+	{
+		l1 = 0;
+	} else
+	{
+		l1 = Math.round((100 * (300 - k1)) / 280);
+	}
+	i2 = Math.round(100F * Math.abs(af1[0]));
+	if (i2 &lt;= 20)
+	{
+		j2 = i1;
+	} else
+	{
+		j2 = 0;
+		if (i2 &lt;= 300)
+		{
+			j2 = Math.round((100 * (300 - i2)) / 280);
+		}
+	}
+	k2 = <font color="red">c()</font>;
+	Exception exception;
+	if (k2 &lt; 95)
+	{
+		i1 = k2;
+	}
+	s = "";
+	if (i1 + (j2 + (j1 + l1)) != 400)
+	{
+		break MISSING_BLOCK_LABEL_246;
+	}
+	s1 = (new StringBuilder(String.valueOf(j1))).append("f").append(l1).append("u").append(j2).append("n").append(i1).toString();
+	messagedigest = MessageDigest.getInstance("SHA1");
+	messagedigest.update(s1.getBytes());
+	s2 = Base64.encodeToString(messagedigest.digest(), 2);
+	s = s2;
+_L5:
+	<u>a.loadUrl((new StringBuilder("javascript:sensorFeedback('{\"k\": \"")).append(s).append("\", \"l1\": ").append(j1).append(", \"l2\": ").append(l1).append(", \"l3\": ").append(j2).append(", \"l4\": ").append(i1).append("}')").toString());</u>
+	l = null;
+	m = null;
+_L2:
+	return;
+	exception;
+	if (true) goto _L5; else goto _L4
+_L4:
+}
+&#8230;
+public void onSensorChanged(SensorEvent sensorevent)
+{
+	if (sensorevent.sensor.getType() == 1) //TYPE_ACCELEROMETER
+	{
+		l = sensorevent.values;
+		g.unregisterListener(this, h);
+		h = null;
+	}
+	if (sensorevent.sensor.getType() == 2) //TYPE_MAGNETIC_FIELD
+	{
+		m = sensorevent.values;
+		g.unregisterListener(this, i);
+		i = null;
+	}
+	<font color="red">j()</font>;
+}
+&#x2026;</code></pre>
+		<li class="dash"><code>Activity: e(a) &rarr; d() &rarr; callback-onSensorChanged() &rarr; j() &rarr; c() &rarr; ret</code></li>
+		<li class="dash">mapping: <code>sensorFeedback({k: s, l1: j1, l2: l1, l3: j2, l4: i1})</code>, where:</li>
+		<ul>
+			<li class="dash"><code>s</code> &#61; <code>base64(SHA1(j1+&quot;f&quot;+l1+&quot;u&quot;+j2+&quot;n&quot;+i1))</code></li>
+		</ul>
+	</ul>
 	<ol>
-		<li><code class="ans"></code></li>
-		<li><code class="ans"></code></li>
-		<li><code class="ans"></code></li>
-		<li><code class="ans">battery power fully charged (100%)</code></li>
+		<li><code class="ans">Current time</code></li>
+		<li><code class="ans">Accelerometer</code></li>
+		<li><code class="ans">Compass</code></li>
+		<li><code class="ans">Battery percentage</code></li>
 	</ol>
 
 	<hr class="print-hidden"><li id="qn6" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge06.html"><u>Hack to the Future</u></a></li>
@@ -171,23 +327,50 @@ The Doc's in trouble again, and you must come to his rescue! As you jump into hi
 <pre class="wrap" style="padding:.5em;"><code>morse_rev = {"dah": "T", "dah-dah": "M", "dah-dah-dah": "O", "dah-dah-dit": "G", "dah-dah-dit-dah": "Q", "dah-dah-dit-dit": "Z", "dah-dit": "N", "dah-dit-dah": "K", "dah-di-dah-dah": "Y", "dah-di-dah-dit": "C", "dah-dit-dit": "D", "dah-dit-dit-dah": "X", "dah-dit-dit-dit": "B", "dit": "E", "dit-dah": "A", "dit-dah-dah": "W", "dit-dah-dah-dah": "J", "dit-dah-dah-dit": "P", "di-dah-dit": "R", "di-dah-di-dit": "L", "dit-dit": "I", "dit-dit-dah": "U", "di-di-dah-dit": "F", "dit-dit-dit": "S", "dit-dit-dit-dah": "V", "dit-dit-dit-dit": "H"}
 ms = "dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah"
 print "".join(morse_rev[m] for m in ms.split()).lower()</code></pre>
-		<li class="dash"><code class="ans">georgemcfly</code></li>
+		<li class="dash"><code>georgemcfly</code></li>
+		<li class="dash">not quite done yet! enter <code>georgemcfly</code> into Egg-O-Matic performs a HTTP GET request to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&k=georgemcfly">http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&amp;k=georgemcfly</a></li>
+		<li class="dash none">rendering: <img src="img/lvl06-georgemcfly.png" style="vertical-align:middle;"></li>
+		<li class="dash">so need to modify HTTP GET param <code>m</code>, according to given hint in img, by +3 ie. <code>m=7</code></li>
+		<li class="dash none"><code class="ans">curl -sL "http://hackyeaster.hacking-lab.com/hackyeaster/time?m=7&amp;k=georgemcfly" | jq -r '.egg' | base64 -d</code>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn7" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge07.html"><u>Vista de la Calle</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+<pre class="wrap" style="padding:.5em;">
+This egg is hidden in a street-view like viewer. Peek around the area and find it!
+</pre>
+	<ul>
+		<li class="dash">extract &amp; decompile APK reveals:
+		<ul>
+			<li class="dash">query <code>ps://panorama</code> endpt</li>
+			<li class="dash">usage of <a href="https://code.google.com/p/panoramagl-android/">PanoramaGL Library</a></li>
+		</ul></li>
+		<li class="dash">QR code @ <code class="ans">/res/raw/quito2_u.jpg</code></li>
+	</ul>
+
+
 	<hr class="print-hidden"><li id="qn8" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge08.html"><u>Spread the Sheet</u></a></li>
-<pre class="wrap" style="padding:.5em;">This egg is hidden within an online spreadsheet. Go find it's URL, and extract the egg out of it.
+<pre class="wrap" style="padding:.5em;">
+This egg is hidden within an online spreadsheet. Go find it's URL, and extract the egg out of it.
 
 Spreadsheet ID:
 <div style="text-indent: 1em"><code>1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA</code></div>
 <img src="img/spreadsheet.png">
 </pre>
-
 	<ul>
 		<li class="dash"><a href="https://docs.google.com/spreadsheets/d/1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA">https://docs.google.com/spreadsheets/d/1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA</a></li>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn9" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge09.html"><u>Fisheye</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+<pre class="wrap" style="padding:.5em;">
+Egg number nine is hidden here in the app. You've already seen it, haven't you?
+
+Go catch it and squint like a fish.
+</pre>
+	<ul>
+		<li class="dash">img @ <code>/res/drawable/id_launcher.png</code></li>
+		<li class="dash">correct fisheye by following a <a class="print-link" href="http://classroom.synonym.com/correct-fisheye-gimp-19646.html">GIMP tutorial</a></li>
+	</ul>
+
 	<hr class="print-hidden"><li id="qn10" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge10.html"><u>Thumper's Den</u></a></li>
 <pre class="wrap" style="padding:.5em;">
 In order to get this egg, you need to search on the web site. Rumors say that Thumper himself has bagged it.
@@ -218,10 +401,68 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 		<p><b>Question 5</b><br>Which port number is used by Kerberos?<br><select name="q5"><option value="0">please choose</option><option value="53">53</option><option value="139">139</option><option value="161">161</option><option value="8080">8080</option></select></p>
 		<p><button type="submit" name="success" value="false">Submit Test</button></p>
 		</form></div>
-<pre class="wrap" style="padding:.5em;">
-</pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">given form is messed up, eg.
+		<ul>
+			<li class="dash">Q2: specifies numeric-only</li>
+			<li class="dash">Q3: max-width = 3</li>
+			<li class="dash">Q4: uses radio btn; only allowed ≤ 1 option</li>
+			<li class="dash">Q5: correct port # is not one of the choices</li>
+		</ul></li>
+		<li class="dash">correct ans to given qns</li>
+		<ol>
+			<li>nmap</li>
+			<li>revocation</li>
+			<!--@ http://russell.ballestrini.net/symmetric-encryption-vs-public-key-encryption-->
+			<li>100*(100-1)/2 = 4950</li>
+			<li>384, 512</li>
+			<li>88</li>
+			+ <code>&lt;button type=&quot;submit&quot; name=&quot;<font color="red">success</font>&quot; value=&quot;<font color="red">false</font>&quot;&gt;Submit Test&lt;/button&gt;</code>
+		</ol></li>
+		<li class="dash none"><code>curl -sL -X POST "http://hackyeaster.hacking-lab.com/hackyeaster/ceh" -d "q1=nmap&amp;q2=revocation&amp;q3=4950&amp;q4=384&amp;q4=512&amp;q5=88&amp;success=true"</code> returns:</li>
+<pre class="wrap" style="padding:.5em;"><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Hacky Easter 2015&lt;/title&gt;
+		&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+		&lt;meta name=&quot;description&quot; content=&quot;Hacky Easter 2015 is a free white-hat hacking competition&quot; /&gt;
+		&lt;link rel=&quot;icon&quot; type=&quot;image/ico&quot; href=&quot;images/favicon.ico&quot;&gt;
+		&lt;script src=&quot;js/jquery.min.js&quot;&gt;&lt;/script&gt;
+		&lt;script src=&quot;js/jquery.dropotron.min.js&quot;&gt;&lt;/script&gt;
+		&lt;script src=&quot;js/skel.min.js&quot;&gt;&lt;/script&gt;
+		&lt;script src=&quot;js/init.js&quot;&gt;&lt;/script&gt;
+		&lt;script src=&quot;js/scripts.js&quot;&gt;&lt;/script&gt;
+		&lt;script&gt;setChallId(12);&lt;/script&gt;
+	&lt;/head&gt;
+	&lt;body class=&quot;no-sidebar&quot;&gt;
+		&lt;div id=&quot;header-wrapper&quot;&gt;&lt;/div&gt;
+		&lt;script&gt;addHeader('challenges');&lt;/script&gt;
+		&lt;div id=&quot;main-wrapper&quot;&gt;
+			&lt;div class=&quot;container&quot;&gt;
+				&lt;div class=&quot;row&quot;&gt;
+					&lt;div class=&quot;4u&quot; id=&quot;sidebar&quot;&gt;&lt;/div&gt;
+					&lt;script&gt;addChallengeSidebar();&lt;/script&gt;
+					&lt;div class=&quot;8u&quot;&gt;
+						&lt;article class=&quot;box post&quot;&gt;
+							&lt;header id=&quot;challenge-header&quot;&gt;&lt;/header&gt;
+							&lt;script&gt;addChallengeHeader()&lt;/script&gt;
+							&lt;p&gt;
+								Congratulations, you passed!!!
+							&lt;/p&gt;
+							&lt;p&gt;
+								&lt;div class=&quot;eggImage&quot; style=&quot;background-image: url('<font color="red">./images/egg_12_an8snbui1FeLO3Ugw89N.png</font>')&quot;&gt;&lt;/div&gt;
+							&lt;/p&gt;
+						&lt;/article&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div id=&quot;footer-wrapper&quot;&gt;&lt;/div&gt;
+		&lt;script&gt;addFooter();&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+		<li class="dash none"><code class="ans">wget "<a href="img/challenge12-an8snbui1FeLO3Ugw89N.png">http://hackyeaster.hacking-lab.com/hackyeaster/images/egg_12_an8snbui1FeLO3Ugw89N.png</a>"</code></li>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn13" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge13.html"><u>Leet TV</u></a></li>
@@ -251,9 +492,12 @@ add a dimension you must!</i>
 
 	<hr class="print-hidden"><li id="qn15" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge15.html"><u>Photo Shooting</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
 <pre class="wrap" style="padding:.5em;">
+Your gallery needs some nice easter snapshots! What about a nice grasslands panorama, or a still life of a tomato?
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">lol...taking a photo using mobile device's camera creates:</li>
+		<li class="dash none"><img src="img/lvl15.jpg"></li>
+		<li class="dash">extract &amp; decompile APK</li>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn16" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge16.html"><u>Ghost Room</u></a></li>
@@ -287,7 +531,9 @@ Sharpen your eyes, and diff 2 img below
 <img src="img/difference2.bmp">
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">normalising to B/W where pix mismatch produces:</li>
+		<li class="dash none"><img src="img/difference0.bmp"></li>
+		<li class="dash ans">XOR (as instructed) QR code <img src="img/lvl17-qr1.jpg" style="vertical-align:middle;"> w/ target <img src="img/lvl17-qr2.jpg" style="vertical-align:middle;">, each found on one side of Agent's glasses, yields <img src="img/lvl17-qr.jpg" style="vertical-align:middle;"></li>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn18" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge18.html"><u>Sharks on Wire</u></a></li>
@@ -307,16 +553,16 @@ Inspect <a href="file/sharks.pcapng">sharks.pcapng</a>, in order to get the cred
 &lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Sharks on Wire&lt;/title&gt;
-    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-    &lt;link rel=&quot;icon&quot; type=&quot;image/ico&quot; href=&quot;../images/favicon.ico&quot;&gt;
-    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;sharks.css&quot;&gt;
-    &lt;script src=&quot;../js/jquery.min.js&quot;&gt;&lt;/script&gt;
+	&lt;title&gt;Sharks on Wire&lt;/title&gt;
+	&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+	&lt;link rel=&quot;icon&quot; type=&quot;image/ico&quot; href=&quot;../images/favicon.ico&quot;&gt;
+	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;sharks.css&quot;&gt;
+	&lt;script src=&quot;../js/jquery.min.js&quot;&gt;&lt;/script&gt;
   &lt;body&gt;
-    &lt;div class=&quot;title&quot;&gt;Sharks on Wire&lt;/div&gt;
-    &lt;div class=&quot;imageBg&quot;&gt;
-      &lt;img src=&quot;<font color="red">egg_18_j9rU8ma6nBfz986gJZmf.png</font>&quot; class=&quot;image&quot;/&gt;
-    &lt;/div&gt;
+	&lt;div class=&quot;title&quot;&gt;Sharks on Wire&lt;/div&gt;
+	&lt;div class=&quot;imageBg&quot;&gt;
+	  &lt;img src=&quot;<font color="red">egg_18_j9rU8ma6nBfz986gJZmf.png</font>&quot; class=&quot;image&quot;/&gt;
+	&lt;/div&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 </pre>
@@ -352,22 +598,62 @@ Disallow: /
 		<li class="dash">visit @ <a href="http://hackyeaster.hacking-lab.com/hackyeaster/bots/bots.html">http://hackyeaster.hacking-lab.com/hackyeaster/bots/bots.html</a>, supplying HTTP header: <code>{&quot;User-agent&quot;: &quot;EasterBot&quot;}</code>
 		<p style="text-indent: 1em"><code>curl -sL -A "EasterBot" "http://hackyeaster.hacking-lab.com/hackyeaster/bots/bots.html"</code></p></li>
 <pre class="wrap print-before" style="padding:.5em;"><code>&lt;html&gt;
-&lt;head&gt;&lt;title&gt;Bots&lt;/title&gt;&lt;
-script type=&quot;text/javascript&quot;&gt;eval(String.fromCharCode(105, 102, 32, 40, 33, 40, 110, 97, 118, 105, 103, 97, 116, 111, 114, 46, 117, 115, 101, 114, 65, 103, 101, 110, 116, 32, 61, 61, 61, 32, 39, 69, 97, 115, 116, 101, 114, 66, 111, 116, 39, 41, 41, 32, 123, 32, 108, 111, 99, 97, 116, 105, 111, 110, 46, 114, 101, 112, 108, 97, 99, 101, 40, 39, 104, 116, 116, 112, 58, 47, 47, 101, 110, 46, 119, 105, 107, 105, 112, 101, 100, 105, 97, 46, 111, 114, 103, 47, 119, 105, 107, 105, 47, 67, 45, 51, 80, 79, 39, 41, 59, 125));&lt;/script&gt;&lt;/head&gt;
+&lt;head&gt;&lt;title&gt;Bots&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+/**
+	// @ http://matthewfl.com/unPacker.html
+	if (!(navigator.userAgent === 'EasterBot'))
+	{
+		location.replace('http://en.wikipedia.org/wiki/C-3PO');
+	}
+*/
+eval(String.fromCharCode(105, 102, 32, 40, 33, 40, 110, 97, 118, 105, 103, 97, 116, 111, 114, 46, 117, 115, 101, 114, 65, 103, 101, 110, 116, 32, 61, 61, 61, 32, 39, 69, 97, 115, 116, 101, 114, 66, 111, 116, 39, 41, 41, 32, 123, 32, 108, 111, 99, 97, 116, 105, 111, 110, 46, 114, 101, 112, 108, 97, 99, 101, 40, 39, 104, 116, 116, 112, 58, 47, 47, 101, 110, 46, 119, 105, 107, 105, 112, 101, 100, 105, 97, 46, 111, 114, 103, 47, 119, 105, 107, 105, 47, 67, 45, 51, 80, 79, 39, 41, 59, 125));&lt;/script&gt;&lt;/head&gt;
 &lt;body style=&quot;background: white; border: 20px solid white;&quot;&gt;
 	&lt;div style=&quot;width: 100%; height: 100%; background: url('<font color="red">./robotbg.jpg</font>') no-repeat center center fixed; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain;&quot;&gt;&amp;#160;&lt;/div&gt;
 &lt;/body&gt;&lt;/html&gt;
 </code></pre>
 <img src="img/robotbg.jpg">
 		<li class="dash"><a href="http://en.wikipedia.org/wiki/Robot_Interaction_Language">Robot Interaction Language (ROILA)</a></li>
+		<li class="dash"><code>for w in bama waboki pisal fatatu fomu wosebi seju sowu seju bamas mufe wafub fomu mowewe; do egrep "^${w}\b" <a href="file/roila-wordlist.txt">roila-wordlist.txt</a>; done</code></li>
+<pre class="wrap print-before" style="padding:.5em;"><code>bama	you
+waboki	must
+pisal	make
+fatatu	word
+fomu	of
+wosebi	addition
+seju	two
+sowu	and
+seju	two
+bamas	this
+mufe	be
+wafub	name
+fomu	of
+mowewe	page</code></pre>
+<hr style="border-top: 1px dotted;">
+		<li class="dash">visit @ <a href="http://hackyeaster.hacking-lab.com/hackyeaster/bots/four.html">http://hackyeaster.hacking-lab.com/hackyeaster/bots/four.html</a>, supplying HTTP header: <code>{&quot;User-agent&quot;: &quot;EasterBot&quot;}</code>
+		<p style="text-indent: 1em"><code>curl -sL -A "EasterBot" "http://hackyeaster.hacking-lab.com/hackyeaster/bots/four.html"</code></p></li>
 <pre class="wrap" style="padding:.5em;"><code>&lt;html&gt;
-&lt;head&gt;&lt;title&gt;Bots&lt;/title&gt;&lt;
-script type=&quot;text/javascript&quot;&gt;eval(String.fromCharCode(105, 102, 32, 40, 33, 40, 110, 97, 118, 105, 103, 97, 116, 111, 114, 46, 117, 115, 101, 114, 65, 103, 101, 110, 116, 32, 61, 61, 61, 32, 39, 69, 97, 115, 116, 101, 114, 66, 111, 116, 39, 41, 41, 32, 123, 32, 108, 111, 99, 97, 116, 105, 111, 110, 46, 114, 101, 112, 108, 97, 99, 101, 40, 39, 104, 116, 116, 112, 58, 47, 47, 101, 110, 46, 119, 105, 107, 105, 112, 101, 100, 105, 97, 46, 111, 114, 103, 47, 119, 105, 107, 105, 47, 67, 45, 51, 80, 79, 39, 41, 59, 125));&lt;/script&gt;&lt;/head&gt;
-&lt;body style=&quot;background: white; border: 20px solid white;&quot;&gt;
+  &lt;head&gt;
+	&lt;title&gt;Bots&lt;/title&gt;
+	&lt;meta name=&quot;description&quot; content=&quot;Robots talk in ROILA language: <font color="red">eman egap eht esrever tsum</font>&quot;&gt;
+	&lt;meta name=&quot;keywords&quot; content=&quot;secret, page, robots, fun, hacky easter, blrt, five, beep&quot;&gt;
+	&#8230;
+  &lt;/head&gt;
+  &lt;body style=&quot;background: white; border: 20px solid white;&quot;&gt;
 	&lt;div style=&quot;width: 100%; height: 100%; background: url('<font color="red">./robotbg2.jpg</font>') no-repeat center center fixed; -webkit-background-size: contain; -moz-background-size: contain; -o-background-size: contain; background-size: contain;&quot;&gt;&amp;#160;&lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
 <img src="img/robotbg2.png">
+		<li class="dash">using <code>MeTA</code> (hint), together with <code>attr:content</code> of <code>&lt;meta name=&quot;description&quot;&gt;</code>: <i>eman egap eht esrever tsum</i></li>
+		<li class="dash">reverse string: <i>eman egap eht esrever tsum</i> via <code>echo -ne "eman egap eht esrever tsum" | rev</code> yields: <i>must reverse the page name</i></li>
+		<li class="dash">so reverse(<i>page name</i> = four) = <a href="http://hackyeaster.hacking-lab.com/hackyeaster/bots/ruof.html">ruof.html</a></li>
+<pre class="wrap" style="padding:.5em;"><code>&#8230;
+  &lt;body style=&quot;background: white; border: 20px solid white;&quot;&gt;
+	&lt;div style=&quot;position: absolute; left:50%; top: 50%; margin-left: -187px; margin-top: -187px; width: 375px; height: 375px; background: url('<font color="red">./egg_20_j5fir8U6g8.png</font>'); background-size: 375px 375px; background-repeat: no-repeat;&quot;&gt;&amp;#160;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn21" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge21.html"><u>Cony Code</u></a></li>
@@ -455,7 +741,13 @@ spec: <a href="file/shamhash.pdf">shamhash.pdf</a>
 
 	<hr class="print-hidden"><li id="qn26" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge26.html"><u>Clumsy Cloud</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
 <pre class="wrap" style="padding:.5em;">
+Welcome to Clumsy Cloud ™ !
+If your files are the eggs, then we are the hen ™.
+
+We encrypt all your files, with a strong passphrase. The passphrase is kept securely in this app, protected by a PIN.
 </pre>
+<article class="box post"> <header> <h2>Download Files</h2> </header> <p> Enter your PIN to download your secret files. </p> <p> <span class="pinField" id="pin">----</span></p> <p data-dynamite-selected="true"> <span class="pinKeyRow"> <button type="button" class="pinButton" id="pin1" onclick="pinPressed(1);">1</button> <button type="button" class="pinButton" id="pin2" onclick="pinPressed(2);">2</button> <button type="button" class="pinButton" id="pin3" onclick="pinPressed(3);">3</button> </span> <br> <span class="pinKeyRow"> <button type="button" class="pinButton" id="pin4" onclick="pinPressed(4);">4</button> <button type="button" class="pinButton" id="pin5" onclick="pinPressed(5);">5</button> <button type="button" class="pinButton" id="pin6" onclick="pinPressed(6);">6</button> </span> <br> <span class="pinKeyRow"> <button type="button" class="pinButton" id="pin7" onclick="pinPressed(7);">7</button> <button type="button" class="pinButton" id="pin8" onclick="pinPressed(8);">8</button> <button type="button" class="pinButton" id="pin9" onclick="pinPressed(9);">9</button> </span> <br> <span class="pinKeyRow"> <button type="button" class="pinButton" style="margin-left: 80px;" id="pin0" onclick="pinPressed(0);">0</button> <button type="button" class="pinButton" style="background-color: #d52323" id="pinClear" onclick="pinPressed(-1);">clr</button> </span> </p> </article>
+<article class="box post"> <header> <h2>Backup</h2> </header> <p> Worried about losing your phone? Simply create a backup of your passphrase. </p> <a href="file/passphrase_backup.txt"> <button type="button" class="downloadButton">Backup Key</button> </a> </article>
 	<ul>
 		<li class="dash"></li>
 	</ul>
