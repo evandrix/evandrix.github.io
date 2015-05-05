@@ -467,12 +467,28 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 	</ul>
 
 	<hr class="print-hidden"><li id="qn13" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge13.html"><u>Leet TV</u></a></li>
-<pre class="wrap" style="padding:.5em;">
-Welcome to Leet TV! Click the image below to play our trailer
-
+<pre class="wrap" style="padding:.5em;">Welcome to Leet TV! Click the image below to play our trailer
 <a href="file/leettv.mp4"><img src="img/play_movie.png"></a>
 </pre>
 	<ul>
+		<!-- "select=gte(n\,<frame#>)" -->
+		<li class="dash">extract stills from leettv.mp4@30fps:<br><div style="text-indent:1em;"><code>ffmpeg -i file/leettv.mp4 -vf fps=30 leettv@%d.png</code></div></li>
+		<li class="dash">decode QR codes in these imgs:<br><div style="text-indent:1em;"><code>zbarimg -q leettv@[0-9]*.png | sed 's|^QR-Code:||g' | sort | uniq &gt;&gt;leettv-qrcode.lst</code></div></li>
+		<li class="dash">note <a href="file/leettv-qrcode.lst">leettv-qrcode.lst</a> entry: <a href="http://bit.ly/1BJENx8">http://bit.ly/1BJENx8</a></li>
+		<li class="dash none">&rarr; <a href="http://hackyeaster.hacking-lab.com/hackyeaster/leettv_qbEtJZKLTLB3jByIWSpE.wav">http://hackyeaster.hacking-lab.com/hackyeaster/leettv_qbEtJZKLTLB3jByIWSpE.wav</a></li>
+		<li class="dash"><code>exiftool leettv_qbEtJZKLTLB3jByIWSpE.wav</code></li>
+<pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">&#8230;
+File Name : leettv_qbEtJZKLTLB3jByIWSpE.wav
+&#8230;
+Title     : The Hint
+&#8230;
+Comment   : <font color="red">siht esrever ot yrt</font>
+&#x2026;
+</code></pre>
+		<li class="dash"><code>echo -ne &quot;siht esrever ot yrt&quot; | rev</code> says &quot;try to reverse this&quot;</li>
+		<li class="dash">so follow as instructed: <code>sox leettv_qbEtJZKLTLB3jByIWSpE.wav leettv_qbEtJZKLTLB3jByIWSpE-rev.wav reverse</code></li>
+		<li class="dash">audio contents: <code>eight forty-two</code></li>
+		<li class="dash">so extract frame leettv.mp4@08:42:<br><div style="text-indent:1em;"><code>ffmpeg -i file/leettv.mp4 -ss 00:08:42.001 -vframes 1 <font class="ans">leettv@0842.png</font></code></li>
 		<li class="dash none"><img src="img/challenge13-vBrtvkpHNRCNZdhZN1nT.png"></li>
 	</ul>
 
