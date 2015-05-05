@@ -1,0 +1,37 @@
+body,input,textarea,select,button{font-size:11pt;}
+header{}
+header.major{margin:0 0 2em 0;}
+header.major h2{padding:0 1em 0 1em;}
+ul.social{}
+ul.social li{margin:0 0 0.25em 0.75em;}
+
+#header-wrapper{background:url('../img/banner.jpg') repeat-x scroll top center / 960px auto #ffffff;}
+#main-wrapper{position:absolute;top:128px;padding:1.5em 0 4em 0;}
+#footer-wrapper{padding:0.5em 0 0.15em 0; -webkit-backface-visibility: hidden; -webkit-transform: translateZ(0);}
+#footer-wrapper:before{height:2.5em;}
+#footer-wrapper header{margin:0 0 1.5em 0;}
+#footer-wrapper header h2{font-size:1.25em;}
+#bulb, #bulb img,#twitter, #twitter img {width: 32px; height: 32px;}
+margin-top: -4px;
+
+#header{}
+#header h1{margin:0em 0 0.75em 0;}
+
+#banner{padding:2em 0;margin:0 0 1.75em 0;}
+
+#intro{padding:0;}
+#intro section{padding:1em 2em;}
+#intro .middle{}
+#intro .middle:before{left:-12px;}
+#intro .middle:after{right:-12px;}
+
+#copyright{margin:0;}
+
+/* PS */
+.image.featured img{width:303px;margin-top:1.25em;}
+.image.featured.challenge img{width:303px;margin-top:0.75em;}
+.eggTitle{top:54px;font-size:4em;font-weight:bold;color:#000000;}
+.eggDay{top:66px;font-size:1.4em;font-weight:bold;}
+.eggTime{top:63px;font-size:1.2em;}
+.eggPoints{top:60px;font-size:1.2em;}
+.cell{width:1.0em;}

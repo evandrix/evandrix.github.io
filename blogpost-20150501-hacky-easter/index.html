@@ -7,6 +7,7 @@
 	<link href="../all.min.css" rel="stylesheet" type="text/css" />
 	<link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
 	<style type="text/css">
 		ul >li:before {content: '-';position: absolute;margin-left: -.7em;}
 		.qn>a>u {color: #000;}
@@ -531,9 +532,85 @@ Sharpen your eyes, and diff 2 img below
 <img src="img/difference2.bmp">
 </pre>
 	<ul>
-		<li class="dash">normalising to B/W where pix mismatch produces:</li>
+		<li class="dash">QR code is always the flag in these series of challenges;</li>
+		<li class="dash">so can guess must somehow convert 2 input img &rarr; single B/W img</li>
+		<li class="dash">normalise to B/W using transformation:</li>
+		<ul>
+			<li class="dash"><code>pix @ corresponding pos match = 0 ie. RGB(0,0,0) &#61; black</code>,</li>
+			<li class="dash"><code>pix @ corresponding pos mismatch = 1 ie. RGB(255,255,255) &#61; white</code></li>
+		</ul>
+<pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+import codecs
+import operator
+import numpy as np
+from PIL import Image, ImageFilter
+
+def mk_agent_xor():
+	im1 = Image.open("difference1.bmp").convert("RGB")
+	#np.asarray(im1)
+	pix1s = im1.load()
+	im2 = Image.open("difference2.bmp").convert("RGB")
+	pix2s = im2.load()
+	w1, h1 = im1.size
+	for y in xrange(h1):
+		for x in xrange(w1):
+			pix1 = pix1s[x,y]
+			pix2 = pix2s[x,y]
+			if pix1 != pix2:
+				pix1s[x,y] = (255,255,255)
+			else:
+				pix1s[x,y] = (0,0,0)
+	im1.save("difference0.bmp")
+</code></pre>
+
 		<li class="dash none"><img src="img/difference0.bmp"></li>
 		<li class="dash ans">XOR (as instructed) QR code <img src="img/lvl17-qr1.jpg" style="vertical-align:middle;"> w/ target <img src="img/lvl17-qr2.jpg" style="vertical-align:middle;">, each found on one side of Agent's glasses, yields <img src="img/lvl17-qr.jpg" style="vertical-align:middle;"></li>
+<pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+import codecs
+import operator
+import numpy as np
+from PIL import Image, ImageFilter
+
+def crop_agent_xor():
+	im = Image.open("difference0.bmp").convert("RGB")
+	#qr#
+	left, top, right, bottom = 245, 140, 280, 175
+	img = im.crop((left, top, right, bottom))
+	#img = im.filter(ImageFilter.{BLUR,CONTOUR,DETAIL,EDGE_ENHANCE,EDGE_ENHANCE_MORE,EMBOSS,FIND_EDGES,SMOOTH,SMOOTH_MORE,SHARPEN})
+	#img.thumbnail(sz)
+	#img.show()
+	img.save("lvl17-qr1.jpg")
+	#tgt#
+	left, top, right, bottom = 333, 140, 368, 175
+	img = im.crop((left, top, right, bottom))
+	img.save("lvl17-qr2.jpg")
+
+def mk_qr_code():
+	im1 = Image.open("lvl17-qr1.jpg").convert("RGB")
+	#im1.getcolors(), im1.format, im1.size, im1.mode
+	im2 = Image.open("lvl17-qr2.jpg").convert("RGB")
+	pix2s = list(im2.getdata())
+	w2, h2 = im2.size
+	pix2s = [pix2s[i*w2:(i+1)*w2] for i in xrange(h2)]
+	pix1s = im1.load()
+	w1, h1 = im1.size
+	for y in xrange(h1):
+		for x in xrange(w1):
+			pix1 = pix1s[x,y]
+			pix2 = pix2s[x][y]
+			pix = []
+			for ci in xrange(len(pix1)):
+				pix.append(pix1[ci] ^ pix2[ci])
+			pix1s[x,y] = tuple(pix)
+	im1.save("lvl17-qr.jpg")
+</code></pre>
+
 	</ul>
 
 	<hr class="print-hidden"><li id="qn18" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge18.html"><u>Sharks on Wire</u></a></li>
@@ -667,8 +744,12 @@ Hint: <code>110</code> is <font color="blue">blue</font>, the rest's up to you..
 	<ul>
 		<li class="dash"></li>
 	</ul>
+
 <style type="text/css">
-	p.hash {text-indent: 2em;font-family: "Ubuntu Mono",monospace;}
+	.lvl22-hash p {text-indent: 2em;}
+	.lvl22-hash .hint {background: #4923A0;color: #fff;border-radius: 2px;padding: 2px 6px;margin-right: 20px;}
+	.lvl22-hash img {vertical-align: top;}
+	.lvl22-hash .dash:before {content: "- ";}
 </style>
 	<hr class="print-hidden"><li id="qn22" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge22.html"><u>Hashes to Ashes</u></a></li>
 <pre class="wrap" style="padding:.5em;">
@@ -680,31 +761,135 @@ prove your skills in hash cracking:
 	<li>Click the hint for each hash!</li>
 	<li>For hashes 3 and 4, use the following <a href="file/wordlist.txt">word list</a></li>
 </ul>
-<ol>
+<ol class="lvl22-hash">
 	<li>Numeric PIN (16 digits)
-		<p id="lvl22-hash1" class="hash lvl22">raLu6+eAmFelf2/uSy/67iTq57E=</p>
+		<p id="lvl22-hash1" class="hash lvl22"><code>raLu6+eAmFelf2/uSy/67iTq57E=</code></p>
+		<span class="hint">hint</span>
 		<img src="img/lvl22-hint1.jpg">
+		<p class="dash">digits <code>{0,1,7,9}</code> are marked; assume this is charset</p>
+		<p class="dash">hash: <code>ada2eeebe7809857a57f6fee4b2ffaee24eae7b1</code></p>
+		<p>txt: <code class="ans">1199019170177790</code></p>
 	</li>
 
 	<li>Single word (lowercase only)
-		<p id="lvl22-hash2" class="hash lvl22">a791KNndKVmnr7N4mEJfZ1VfZ/Z3mHyufoYhCiyKDb38JI7C17JAEPRAutwiI7S1</p>
+		<p id="lvl22-hash2" class="hash lvl22"><code>a791KNndKVmnr7N4mEJfZ1VfZ/Z3mHyufoYhCiyKDb38JI7C17JAEPRAutwiI7S1</code></p>
+		<span class="hint">hint</span>
 		<img src="img/lvl22-hint2.jpg">
+		<p class="dash">name of song by Rick Astley</p>
+		<p class="dash">hash: <a class="print-link" href="http://www.md5decode.com/decrypt/af4f67875ec3cae6f670b04fe12cba2e"><code>6bbf7528d9dd2959a7afb37898425f67555f67f677987cae7e86210a2c8a0dbdfc248ec2d7b24010f440badc2223b4b5</code></a></p>
+		<p>txt: <code class="ans">hopelessly</code></a></p>
 	</li>
 
 	<li>Complex word (1 upper, 1 substitution, ending with punctuation + digit)
-		<p id="lvl22-hash3" class="hash lvl22">uAgUxeDzhrBjcWP9iv6pKQ==</p>
-		<a href="http://xkcd.com/936/"><img src="img/lvl22-hint3.jpg"></a>
+		<p id="lvl22-hash3" class="hash lvl22"><code>uAgUxeDzhrBjcWP9iv6pKQ==</code></p>
+		<span class="hint">hint</span>
+		<a href="http://xkcd.com/936"><img src="img/lvl22-hint3.jpg"></a>
+		<p class="dash">hash: <code>b80814c5e0f386b0637163fd8afea929</code></p>
+		<p>txt: <code class="ans">Disc0very.5</code></p>
 	</li>
 
 	<li>Multi-Word (lowercase only)
-		<p id="lvl22-hash4" class="hash lvl22">l5HL4K6RmgMwmUota6Jrjww6HaFcc7zl/KOUlYgabJA=</p>
-		<a href="http://xkcd.com/936/"><img src="img/lvl22-hint4.jpg"></a>
+		<p id="lvl22-hash4" class="hash lvl22"><code>l5HL4K6RmgMwmUota6Jrjww6HaFcc7zl/KOUlYgabJA=</code></p>
+		<span class="hint">hint</span>
+		<a href="http://xkcd.com/936"><img src="img/lvl22-hint4.jpg"></a>
+		<p class="dash">hash: <a class="print-link" href="http://www.perturb.org/content/hashes/?word=enginebulbgoatimportant"><code>9791cbe0ae919a0330994a2d6ba26b8f0c3a1da15c73bce5fca39495881a6c90</code></a></p>
+		<p>txt: <code class="ans">enginebulbgoatimportant</code></p>
 	</li>
 </ol>
+<pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
 
-	<ul>
-		<li class="dash"></li>
-	</ul>
+import os #os.linesep
+import sys
+import codecs
+import hashlib
+import base64
+import itertools
+import random
+import string
+import binascii
+
+def hmatch(txt, hash):
+	def name_of(var):
+		import inspect
+		callers_local_vars = inspect.currentframe()\
+			.f_back.f_locals.items()
+		return [var_name \
+			for var_name, var_val in callers_local_vars \
+			if var_val is var][0]
+	hash = hash.lower()
+	md5 = hashlib.md5(txt).hexdigest()
+	sha1 = hashlib.sha1(txt).hexdigest()
+	sha224 = hashlib.sha224(txt).hexdigest()
+	sha256 = hashlib.sha256(txt).hexdigest()
+	sha384 = hashlib.sha384(txt).hexdigest()
+	sha512 = hashlib.sha512(txt).hexdigest()
+	hashes = [md5,sha1,sha224,sha256,sha384,sha512]
+	hnames = map(name_of, hashes)
+	hashes = map(str.lower, hashes)
+	if hash in hashes:
+		i = hashes.index(hash)
+		print "\n".join([
+			"txt: %s [%d]"%(txt,len(txt)),
+			"%s: %s [%d]"%(hnames[i],hashes[i],len(hashes[i]))
+		])
+		return True
+	return False
+
+if __name__ == "__main__":
+	def h(hash):
+		#binascii.hexlify(base64.b64decode(hash))
+		return base64.b64decode(hash).encode("hex")
+	hash1 = h("raLu6+eAmFelf2/uSy/67iTq57E=")
+	hash2 = h("a791KNndKVmnr7N4mEJfZ1VfZ/Z3mHyufoYhCiyKDb38JI7C17JAEPRAutwiI7S1")
+	hash3 = h("uAgUxeDzhrBjcWP9iv6pKQ==")
+	hash4 = h("l5HL4K6RmgMwmUota6Jrjww6HaFcc7zl/KOUlYgabJA=")
+	for i, hash in enumerate([hash1, hash2, hash3, hash4]):
+		print>>sys.stderr, "#%d:"%(i+1), hash
+
+	### Hash 1 ###
+	charset, maxlen = [0,1,7,9], 16
+	def h1_rand(charset, maxlen):
+		return "".join(["%d"%random.choice([charset]) \
+			for i in xrange(maxlen)])
+	def h1_iter(w, charset, maxlen, hash):
+		if len(w) == maxlen:
+			return hmatch(hash, w)
+		for c in charset:
+			if h1_iter(w+str(c), charset, maxlen, hash):
+				break
+	h1_iter("", charset, maxlen, hash1)
+	txt = h1_rand(charset, maxlen)
+	while not hmatch(txt, hash1):
+		txt = h1_rand(charset, maxlen)
+
+	### Hash 3 ###
+	intab, outtab = "aegiost", "4361057" #leetspeak
+	leet = string.maketrans(intab, outtab)
+	with open("<a href="file/lvl22-wordlist.txt">lvl22-wordlist.txt</a>") as f:
+		words = map(string.strip, f.readlines())
+	while True:
+		word = list(random.choice(words))
+		def cfind(s, ch):
+			return [i for i,ltr in enumerate(s) if ltr==ch]
+		possible = []
+		for c in intab:
+			possible.extend(cfind(word, c))
+		if possible == []: continue
+		idx = random.choice(possible)
+		used = set()
+		used.add(idx)
+		word[idx] = word[idx].translate(leet)
+		idx = random.randint(0, len(word)-1)
+		while idx in used:
+			idx = random.randint(0, len(word)-1)
+		used.add(idx)
+		word[idx] = word[idx].upper()
+		punct = random.choice(string.punctuation)
+		digit = random.choice(string.digits)
+		txt = "".join(word)+punct+digit
+		if hmatch(txt, hash3): sys.exit()
+</code></pre>
 
 	<hr class="print-hidden"><li id="qn23" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge23.html"><u>Beat the Nerd Master</u></a></li>
 <pre class="wrap" style="padding:.5em;">
@@ -715,7 +900,138 @@ Connect to <a href="hackyeaster.hacking-lab.com:1400">hackyeaster.hacking-lab.co
 Here's an insult to start with: <i>Go 127.0.0.1 to your mummy</i>.
 </pre>
 	<ul>
-		<li class="dash"></li>
+<pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import os #os.linesep
+import sys
+import codecs
+import json
+import telnetlib
+import hashlib
+from random import randint
+
+def find_answer(question, data):
+	for entry in data:
+		if entry["question"] == question:
+			return entry["answer"].encode("utf-8")
+	data.append({"question": question, "answer": ""})
+	return ""
+
+def ask_question(data):
+	for entry in data:
+		if entry["answer"] == "":
+			return entry["question"].encode("utf-8")
+	return data[randint(0,len(data)-1)]["question"].encode("utf-8")
+
+def add_answer(question, answer, data):
+	for entry in data:
+		if entry["question"] == question:
+			entry["answer"] = answer
+			return
+
+def show(data):
+	for entry in data:
+		print>>sys.stderr, u"Q: %s; A: %s" \
+		%(entry["question"], entry["answer"])
+
+if __name__ == "__main__":
+	filepath = u"challenge23.json"
+	with open(filepath) as file:
+		data = json.load(file)
+	host, port = "hackyeaster.hacking-lab.com", 1400
+	nr = "\r\n"
+	tn = telnetlib.Telnet(host, port)
+	tn.read_until("Do you feel brave enough to challenge the mighty nerdmaster? (y|n)")
+	tn.write("y" + nr)
+	tn.read_until("---- YOUR TURN ----\n")
+	while True:
+		try:
+			my_question = ask_question(data)
+			tn.write(my_question + nr)
+			print "I ask: " + my_question
+			answer = tn.read_until("---- MY TURN ----\n").split("\n")[0]
+			print "It Answered: " + answer
+			if answer != "We've had this one before.":
+				add_answer(my_question, answer, data)
+			print
+			print "---- MY TURN ----"
+			print
+			question = tn.read_until("\n").split("\n")
+			print "It asked: " + question[0]
+			my_answer = find_answer(question[0], data)
+			tn.write(my_answer + nr)
+			print "I answer: " + my_answer
+			response = tn.read_until("---- YOUR TURN ----\n")
+			print "resp:", response
+		except EOFError as e:
+			print ">> Connection closed"
+			break
+	with open(filepath, "w") as outfile:
+		json.dump(data, outfile)
+		print "%s updated"%filepath
+	BUF_SIZE = 65536  #64KB chunk
+	sha1 = hashlib.sha1()
+	with open(filepath, "rb") as f:
+		while True:
+			data = f.read(BUF_SIZE)
+			if not data: break
+			sha1.update(data)
+	print "sha1sum({}): {}".format(filepath, sha1.hexdigest())
+</code></pre>
+		<li class="print-before dash none"><u>Q&amp;A</u></li>
+<pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">question: "Go 127.0.0.1 to your mummy."
+answer: "Won't work. I only support IPv6."
+
+question: "Pna lbh ernq guvf?"
+answer: "EBG13 vf sbe ynzref."
+
+question: "Tell me your name, hobo. I need to check your records."
+answer: "My name is bob'; DROP TABLE VALJ;--"
+
+question: "You'll be 0xdeadbeef soon."
+answer: "Not as long as I have my 0xcafebabe."
+
+question: "After loosing to me, your life won't be the same anymore."
+answer: "A Life? Cool! Where can I download one of those?"
+
+question: "You must be jealous when seeing my phone's display."
+answer: "Not really - Your pixels are so big, some of them have their own region code!"
+
+question: "You're so slow, you must have been written in BASIC."
+answer: "At least I don't have memory leaks like you."
+
+question: "Ping! Anybody there?"
+answer: "ICMP type 3, code 13: Communication Administratively Prohibited"
+
+question: "This fight is like a hash function - it works in one direction only."
+answer: "Too bad you picked LM hashing."
+
+question: "You should leave your cave and socialize a bit."
+answer: "I'm not anti-social. I'm just not user friendly."
+
+question: "1f u c4n r34d th1s u r s70p1d."
+answer: "You better check your spelling. Stoopid has two 'o's."
+
+question: "I have more friends than you."
+answer: "Yeah, but only until you update your Facebook profile with a real picture of you!"
+
+question: "Af7ter th1s f1gh7, I w1ll pwn ur b0x3n."
+answer: "Check your settings - you seem to have chosen the Klingon keyboard layout."
+
+question: "format C:"
+answer: "Specified drive does not exist."
+
+question: "I bet you don't even understand binary."
+answer: "Sure I do. Me and you, we are 10 different kind of persons."
+
+question: "I'll check you out - any last words?"
+answer: "svn:ignore"
+</code></pre>
+
+<pre class="wrap print-before" style="padding:.5em;"><code class="nohighlight">Respect! you've beaten the mighty nerd master! Here's your egg:
+<font class="ans">http://hackyeaster.hacking-lab.com/hackyeaster/images/egg_23_j7vzfUzftszdf754fXDS.png</font>
+</code></pre>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn24" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge24.html"><u>SHAM Hash</u></a></li>
@@ -723,12 +1039,48 @@ Here's an insult to start with: <i>Go 127.0.0.1 to your mummy</i>.
 Crypto Chiefs Ltd. developed a new hash function, which takes a 'divide and conquer' approach and combines several well-known hash functions (&quot;Split, Hash, And Merge&quot;). The inventors claim that with this approach, their function becomes more secure. Can you prove they are wrong?
 
 Create a string which produces the following hash:
-	<code>757c479895d6845b2b0530cd9a2b11</code>
+	<code class="nohighlight">757c479895d6845b2b0530cd9a2b11</code>
 
 spec: <a href="file/shamhash.pdf">shamhash.pdf</a>
 </pre>
 	<ul>
-		<li class="dash"></li>
+<pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+import codecs
+import itertools
+import hashlib
+from hashlib import sha1, sha256, sha512
+from Crypto.Hash import MD2, MD5
+
+if __name__ == "__main__":
+	ans = "<font color="red">afpmqtaaqidtaww8ntangecaaf9pt3</font>"
+	charset = "abcdefghijklmnopqrstuvwxyz0123456789"
+	begin, end = 0, 6
+	hashes = [(MD2, "757c47"), (MD5, "9895d6"), (sha1, "845b2b"), (sha256, "0530cd"), (sha512, "9a2b11")]
+	for algo, frag in hashes:
+		if algo in [MD2, MD5]:
+			begin += 6
+			end += 6
+			continue
+		print>>sys.stderr, algo.__name__
+		for i in itertools.product(charset, repeat=6):
+			word = "".join(i)
+			try: whash = algo.new(word).hexdigest()
+			except AttributeError:
+				m = algo()
+				m.update(word)
+				whash = m.hexdigest()
+			if frag == whash[begin:end]:
+				print word, whash
+				ans += word
+				break
+		begin += 6
+		end += 6
+	print "ans:", ans
+</code></pre>
+		<li class="dash">enter <code>ans</code> &rarr; redirect to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/sham_m7f3ngUfg6LLzf530zub.html">http://hackyeaster.hacking-lab.com/hackyeaster/sham_m7f3ngUfg6LLzf530zub.html</a></li>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn25" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge25.html"><u>Jad &amp; Ida</u></a></li>
@@ -746,8 +1098,16 @@ If your files are the eggs, then we are the hen ™.
 
 We encrypt all your files, with a strong passphrase. The passphrase is kept securely in this app, protected by a PIN.
 </pre>
-<article class="box post"> <header> <h2>Download Files</h2> </header> <p> Enter your PIN to download your secret files. </p> <p> <span class="pinField" id="pin">----</span></p> <p data-dynamite-selected="true"> <span class="pinKeyRow"> <button type="button" class="pinButton" id="pin1" onclick="pinPressed(1);">1</button> <button type="button" class="pinButton" id="pin2" onclick="pinPressed(2);">2</button> <button type="button" class="pinButton" id="pin3" onclick="pinPressed(3);">3</button> </span> <br> <span class="pinKeyRow"> <button type="button" class="pinButton" id="pin4" onclick="pinPressed(4);">4</button> <button type="button" class="pinButton" id="pin5" onclick="pinPressed(5);">5</button> <button type="button" class="pinButton" id="pin6" onclick="pinPressed(6);">6</button> </span> <br> <span class="pinKeyRow"> <button type="button" class="pinButton" id="pin7" onclick="pinPressed(7);">7</button> <button type="button" class="pinButton" id="pin8" onclick="pinPressed(8);">8</button> <button type="button" class="pinButton" id="pin9" onclick="pinPressed(9);">9</button> </span> <br> <span class="pinKeyRow"> <button type="button" class="pinButton" style="margin-left: 80px;" id="pin0" onclick="pinPressed(0);">0</button> <button type="button" class="pinButton" style="background-color: #d52323" id="pinClear" onclick="pinPressed(-1);">clr</button> </span> </p> </article>
-<article class="box post"> <header> <h2>Backup</h2> </header> <p> Worried about losing your phone? Simply create a backup of your passphrase. </p> <a href="file/passphrase_backup.txt"> <button type="button" class="downloadButton">Backup Key</button> </a> </article>
+
+<style type="text/css">
+#lvl26{background:#f7f7f7 url("img/bg-m.png");padding:7px;}.box{background:#fff;border-bottom:solid 1px #ccc}.box .image.featured{position:relative;width:auto}.box{padding:15px 15px 20px}.box .image.featured{left:15px;top:15px;margin:-15px 0 -13px -30px;max-width:400px;align:center}.box .image.featured.details{left:15px;top:0;margin:-15px 0 7px -30px}section,article{margin:0 0 1.5em 0 !important;}.button,button,input[type=button],input[type=submit],input[type=reset]{position:relative;padding:.65em 0;width:100%;text-align:center;font-size:1.25em;margin:.25em 0;-webkit-appearance:none;display:inline-block;text-decoration:none;cursor:pointer;border:0;border-radius:5px;background:#4923a0;color:#fff!important;font-weight:700;outline:0;-moz-transition:background-color .25s ease-in-out;-webkit-transition:background-color .25s ease-in-out;-o-transition:background-color .25s ease-in-out;-ms-transition:background-color .25s ease-in-out;transition:background-color .25s ease-in-out}.pinKeyRow{display:inline-block}.pinButton{display:inline-block;font-size:24px;width:60px;height:60px;margin:4px 7px;text-align:center;float:left;padding:0}.pinField{display:block;background-color:#eee;width:208px;margin-left:7px;padding-top:5px;height:48px;border-radius:5px;text-align:center;font-size:64px}
+</style>
+<script type="text/javascript">
+var pinPressed = function (n){if(-1===n)return pinEntered="",void $("#pin").html("");pinEntered+=n;var e="";for(i=0;i<pinEntered.length;i++)e+="&#x2022;";for(i=pinEntered.length;i<4;i++)e+="-";$("#pin").html(e),pinEntered.length>=4&&setTimeout(function(){$("#pin").html("----"),/*window.location="ps://pin?"+pinEntered,*/pinEntered=""},200)};var pinEntered="";
+</script>
+<div id="lvl26">
+<article class="box post"><header><h2>Download Files</h2></header><p> Enter your PIN to download your secret files. </p><p><span class="pinField" id="pin">----</span></p><p data-dynamite-selected="true"><span class="pinKeyRow"><button type="button" class="pinButton" id="pin1" onclick="pinPressed(1);">1</button><button type="button" class="pinButton" id="pin2" onclick="pinPressed(2);">2</button><button type="button" class="pinButton" id="pin3" onclick="pinPressed(3);">3</button></span><br><span class="pinKeyRow"><button type="button" class="pinButton" id="pin4" onclick="pinPressed(4);">4</button><button type="button" class="pinButton" id="pin5" onclick="pinPressed(5);">5</button><button type="button" class="pinButton" id="pin6" onclick="pinPressed(6);">6</button></span><br><span class="pinKeyRow"><button type="button" class="pinButton" id="pin7" onclick="pinPressed(7);">7</button><button type="button" class="pinButton" id="pin8" onclick="pinPressed(8);">8</button><button type="button" class="pinButton" id="pin9" onclick="pinPressed(9);">9</button></span><br><span class="pinKeyRow"><button type="button" class="pinButton" style="margin-left: 80px;" id="pin0" onclick="pinPressed(0);">0</button><button type="button" class="pinButton" style="background-color: #d52323" id="pinClear" onclick="pinPressed(-1);">clr</button></span></p></article><article class="box post"><header><h2>Backup</h2></header><p> Worried about losing your phone? Simply create a backup of your passphrase. </p><a href="file/passphrase_backup.txt"><button type="button" class="downloadButton">Backup Key</button></a></article>
+</div>
 	<ul>
 		<li class="dash"></li>
 	</ul>
@@ -768,7 +1128,30 @@ Hint: The plaintexts consist of <u>lowercase letters</u> and <u>spaces</u> only
 6cda6d6df87764709c6c7bd357d361556d77</code>
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">employ atk technique known as &quot;<a class="print-link" href="http://travisdazell.blogspot.sg/2012/11/many-time-pad-attack-crib-drag.html">crib drag</a>&quot;
+		<ul>
+			<li class="dash">define:crib - known/guessed piece of plaintext</li>
+			<li class="none"><u>Outline</u></li>
+		</ul>
+		<ol>
+			<li>Guess a word that might appear in 1 of the ciphertext, eg. &quot;the &quot;</li>
+			<li>Encode (word from step 1) as hex string</li>
+			<li>XOR 2 ciphertexts</li>
+			<li>XOR (hex string from step 2) @ each pos of (XOR(2 cipher-texts (from step 3)))</li>
+ 			<li style="list-style-type: none;">5a. When result from step 4 &#61;&#61; readable English text, guess the English word and expand crib search</li>
+            <li style="list-style-type: none;">5b. Otherwise, try XOR of crib word @ nxt pos</li>
+		</ol></li>
+		<li class="dash none"><a href="file/lvl27-cribtastic.py"><img src="img/lvl27.jpg" style="border-color:blue;"></a></li>
+		<li class="dash">key: <code>05aa0c0981181100fd080cb636bf0d250c13b878</code></li>
+		<li class="dash none"><u>plaintext</u></li>
+<pre class="wrap" style="padding:.5em;">
+enemy has the bonbon
+five oh oh seven
+mr bunny is the spy
+i wear a black hat
+the hq is in london
+<font class="ans">ipadyoupadweallpad</font>
+</pre>
 	</ul>
 </ul>
 <div class="print-before"><img src="2015HE.png"></div>
@@ -788,7 +1171,9 @@ Hint: The plaintexts consist of <u>lowercase letters</u> and <u>spaces</u> only
 <center class="print-hidden">--- <strong>FIN</strong> ---</center>
 </div></div></div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 	$(function () {
 		"use strict";
@@ -813,9 +1198,9 @@ Hint: The plaintexts consist of <u>lowercase letters</u> and <u>spaces</u> only
 			}
 			$(elem).attr("class", "eggImage "+diff+"Egg");
 			$(elem).append("<span class='eggTitle'>"+lvl+"</span>");
-			$(elem).append("<span id='lvl"+lvl+"' class='eggQR'></span>");
+			$(elem).append("<span id='egg-lvl"+lvl+"' class='eggQR'></span>");
 			$("#eggs").append(elem);
-			$("#lvl"+lvl).qrcode({
+			$("#eggs #egg-lvl"+lvl).qrcode({
 				/*render: "image",*/ size: 75,
 				left: 0, top: 0, fill: "#000",
 				text: qr_codes[i],
