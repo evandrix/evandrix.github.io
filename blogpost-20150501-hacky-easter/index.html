@@ -388,7 +388,16 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 <a href="file/Mail.zip">Mail.zip</a>
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">in file <code>Inbox</code>, search for attachment:"<code>signature.zip</code>"</li>
+		<li class="dash">carve <code>signature.zip</code> via its base64-encoding<br><div style="text-indent:1em;"><code>pbpaste | base64 -d &gt;signature.zip</code></div></li>
+		<li class="dash">egg can be found inside archive: <code>unzip -l signature.zip</code></li>
+<pre class="wrap" style="padding:.5em;"><code>Archive:  signature.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+    64915  09-17-2014 20:20   <font color="red">egg_11.png</font>
+---------                     -------
+    64915                     1 file
+</code></pre>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn12" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge12.html"><u>This is just a Test</u></a></li>
@@ -400,7 +409,7 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 		<p><b>Question 3</b><br>A group of 100 people plans to use symmetric encryption for secure communication. How many keys are needed to let everybody communicate with each other?<br><input type="text" name="q3" autocapitalize="off" autocorrect="off" placeholder="all lowercase" maxlength="3"></p>
 		<p><b>Question 4</b><br>Which hash sizes are supported by the SHA2 family? <b>Choose two</b>!<br><input type="radio" name="q4" value="192">192 bit<br><input type="radio" name="q4" value="384">384 bit<br><input type="radio" name="q4" value="448">448 bit<br><input type="radio" name="q4" value="512">512 bit</p>
 		<p><b>Question 5</b><br>Which port number is used by Kerberos?<br><select name="q5"><option value="0">please choose</option><option value="53">53</option><option value="139">139</option><option value="161">161</option><option value="8080">8080</option></select></p>
-		<p><button type="submit" name="success" value="false">Submit Test</button></p>
+		<p><button type="submit" name="success" value="false" style="font-size: 1.1em;padding: 0.65em 1.5em 0.65em 1.5em;line-height: 1.75em;-webkit-appearance:none;display:inline-block;text-decoration:none;cursor:pointer;border:0;border-radius:5px;background:#4923a0;color:#fff;font-weight:700;outline:0;-moz-transition:background-color .25s ease-in-out;-webkit-transition:background-color .25s ease-in-out;-o-transition:background-color .25s ease-in-out;-ms-transition:background-color .25s ease-in-out;transition:background-color .25s ease-in-out;">Submit Test</button></p>
 		</form></div>
 	<ul>
 		<li class="dash">given form is messed up, eg.
@@ -479,6 +488,165 @@ Your gallery needs some nice easter snapshots! What about a nice grasslands pano
 		<li class="dash">lol...taking a photo using mobile device's camera creates:</li>
 		<li class="dash none"><img src="img/lvl15.jpg"></li>
 		<li class="dash">extract &amp; decompile APK</li>
+		<li class="dash none">@ <code>/src/ps/hacking/hackyeaster/android/Activity.java</code></li>
+<pre class="wrap" style="padding:.5em;"><code class="java">&#8230;
+protected void onActivityResult(int i1, int j1, Intent intent)
+{
+	super.onActivityResult(i1, j1, intent);
+	if (i1 != 1336) goto _L2; else goto _L1
+_L1:
+	f = false;
+	if (j1 != -1 || intent == null || !&quot;ps.hacking.zxing.client.android.SCAN&quot;.equals(intent.getAction())) goto _L4; else goto _L3
+_L3:
+	a(intent);
+_L6:
+	return;
+_L4:
+	a(2, &quot;&quot;);
+	return;
+_L2:
+	if (i1 != 1337) goto _L6; else goto _L5
+_L5:
+	File file;
+	file = new File(Environment.getExternalStorageDirectory(), &quot;HackyEaster&quot;);
+	if (!file.exists() &amp;&amp; !file.mkdirs())
+	{
+		Toast.makeText(this, &quot;Couldn't create folder on sdcard.&quot;, 0).show();
+	}
+	if (!file.exists() || intent == null || intent.getExtras() == null) goto _L6; else goto _L7
+_L7:
+	File file1;
+	Bitmap bitmap;
+	Bitmap bitmap1;
+	Canvas canvas;
+	int k1;
+	int l1;
+	long l2;
+	long l3;
+	long l4;
+	int i2;
+	file1 = new File(file, (new StringBuilder(&quot;Snapshot_&quot;)).append(e.nextInt()).append(&quot;.png&quot;).toString());
+	bitmap = (Bitmap)intent.getExtras().get(&quot;data&quot;);
+	bitmap1 = bitmap.copy(android.graphics.Bitmap.Config.ARGB_8888, true);
+	canvas = new Canvas(bitmap1);
+	k1 = bitmap.getHeight();
+	l1 = bitmap.getWidth();
+	l2 = 0L;
+	l3 = 0L;
+	l4 = 0L;
+	i2 = 0;
+_L8:
+	if (i2 &gt;= l1)
+	{
+		int j2;
+		int k2;
+		String as[];
+		if (k1 &gt; l1 &amp;&amp; (double)l2 &gt; 0.90000000000000002D * (double)(l3 + l4))
+		{
+			<font color="red">byte abyte2[] = Base64.decode(Base64.decode(j, 0), 0);</font>
+			Bitmap bitmap4 = BitmapFactory.decodeByteArray(abyte2, 0, abyte2.length);
+			int k3 = bitmap4.getHeight();
+			canvas.drawBitmap(bitmap4, (l1 - bitmap4.getWidth()) / 2, k1 - k3 / 2, null);
+		} else
+		if (l1 &gt; k1 &amp;&amp; (double)l3 &gt; 0.90000000000000002D * (double)(l4 + l2))
+		{
+			<font color="red">byte abyte1[] = Base64.decode(Base64.decode(j, 0), 0);</font>
+			Bitmap bitmap3 = BitmapFactory.decodeByteArray(abyte1, 0, abyte1.length);
+			int j3 = bitmap3.getHeight();
+			canvas.drawBitmap(bitmap3, (l1 - bitmap3.getWidth()) / 2, -j3 / 2, null);
+		} else
+		{
+			<font color="red">byte abyte0[] = Base64.decode(k, 0);</font>
+			Bitmap bitmap2 = BitmapFactory.decodeByteArray(abyte0, 0, abyte0.length);
+			int i3 = bitmap2.getHeight();
+			canvas.drawBitmap(bitmap2, (l1 - bitmap2.getWidth()) / 2, (k1 - i3) / 2, null);
+		}
+		try
+		{
+			FileOutputStream fileoutputstream = new FileOutputStream(file1);
+			bitmap1.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, fileoutputstream);
+			fileoutputstream.flush();
+			fileoutputstream.close();
+		}
+		catch (Exception exception) { }
+		as = new String[1];
+		as[0] = file1.toString();
+		MediaScannerConnection.scanFile(this, as, null, new e(this));
+		return;
+	}
+	j2 = 0;
+label0:
+	{
+		if (j2 &lt; k1)
+		{
+			break label0;
+		}
+		i2++;
+	}
+	  goto _L8
+	k2 = bitmap.getPixel(i2, j2);
+	l2 += Color.red(k2);
+	l3 += Color.green(k2);
+	l4 += Color.blue(k2);
+	j2++;
+	break MISSING_BLOCK_LABEL_383;
+}
+&#8230;
+public void onCreate(Bundle bundle)
+	{
+		super.onCreate(bundle);
+		<font color="red">j = getString(0x7f080007);</font>
+		<font color="red">k = getString(0x7f080008);</font>
+		if (!isTaskRoot())
+		{
+			Intent intent = getIntent();
+			String s = intent.getAction();
+			if (intent.hasCategory("android.intent.category.LAUNCHER") && s != null && s.equals("android.intent.action.MAIN"))
+			{
+				super.finish();
+				return;
+			}
+		}
+		ps.hacking.hackyeaster.android.i.a(this);
+		a();
+		g = (SensorManager)getSystemService("sensor");
+		b();
+		a.setOnKeyListener(new a(this, this));
+	}
+&#x2026;
+</code></pre>
+		<li class="dash">this seems to be the routine in <code>Activity.java</code> responsible for the functionality here</li>
+		<li class="dash"><code>j</code> and <code>k</code> look particularly interesting</li>
+		<li class="dash none">@ <code>/src/ps/hacking/hackyeaster/android/R$string.java</code> (inner class <code>string</code> within generated <code>android.R</code>)</li>
+<pre class="wrap" style="padding:.5em;"><code class="java">public static final int ft = 0x7f080007;
+public static final int rick = 0x7f080008;
+</code></pre>
+		<li class="dash">String constants for <code>j=0x7f080007</code> and <code>k=0x7f080008</code> are <code>ft</code> and <code>rick</code> respectively (rick &#61; Rick Astley, whose face is on the photo taken)</li>
+		<li class="dash">time to lookup the (base64-encoded) string vals @ <code>/res/values/strings.xml</code>; just for <code>ft</code> only !</li>
+<pre class="wrap" style="padding:.5em;"><code class="java">&lt;string name="ft"&gt; <a class="print-link" href="file/lvl15-ft.base64">&#8230;</a> &lt;/string&gt;
+</code></pre>
+		<li class="dash">remember to <code>base64 --decode</code> 2x !</li>
+<pre class="wrap" style="padding:.5em;"><code class="java">import java.io.*;
+import java.lang.*;
+import java.util.*;
+import org.apache.commons.io.*;
+
+class Challenge15 {
+	public static void main(String[] args) throws Exception
+	{
+		File file_ft= new File("<a class="print-link" href="file/lvl15-ft.base64">lvl15-ft.base64</a>");
+		String ft = FileUtils.readFileToString(file_ft);
+		byte[] decoded = org.apache.commons.codec.binary.Base64.decodeBase64(
+			org.apache.commons.codec.binary.Base64.decodeBase64(
+				ft.getBytes()
+			));
+		String filename = "lvl15-qr.png";
+		FileOutputStream output = new FileOutputStream(new File(filename));
+		IOUtils.write(decoded, output);
+		System.out.println("=> "+filename);
+	}
+}
+</code></pre>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn16" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge16.html"><u>Ghost Room</u></a></li>
@@ -491,17 +659,34 @@ Ghosts only come out when it's dark...
 		<li class="dash none"><img src="img/lvl16-light.png"></li>
 		<li class="dash">turn off the lights: click on light bulb in far lower right corner @ webpage footer</li>
 		<li class="dash none"><img src="img/lvl16-dark.png"></li>
-		<li class="dash print-before">clicking on Challenge 16 now leads to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge16-dark.html">challenge16-dark.html</a>, containing another puzzle desc:</li>
+		<li class="dash">JS code snippet implementing this behaviour:</li>
+<pre class="wrap" style="padding:.5em;"><code class="javascript">function (){skelD=!skelD,skelD?($("#dark").show(),$("#chall16 img").attr("src","images/banner_challenge_16_dark.jpg"),$("#chall16 a").attr("href","challenge16-dark.html")):($("#dark").hide(),$("#chall16 img").attr("src","images/banner_challenge_16.jpg"),$("#chall16 a").attr("href","challenge16.html"))}
+</code></pre>
+		<li class="dash">clicking on Challenge 16 now leads to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge16-dark.html">challenge16-dark.html</a>, containing another puzzle desc:</li>
 <pre class="wrap" style="padding:.5em;">
 Dark is beautiful. A <a href="http://en.wikipedia.org/wiki/GOST_(block_cipher)"><font color="red">GOST</font></a> with <a href="http://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_Block_Chaining_.28CBC.29"><font color="red">chain</font></a>ing appears and has a message for you:
-
 <code>d5++xytj6RiGwmqEecm63Kow7RZGAAHh
 VFsksHFuj/Anap7pWHDZ1XQw8DAApUEN
 R5ExOGUKTzGOtvSAlCHkHq6NneL6ZUTX
 ej8Taxz+kHK9w9U8dxTOSksZ4HKS2YYD</code>
-
 <img src="img/ghost.png">
 </pre>
+		<li class="dash none"><img src="img/lvl16.png"></li>
+<pre class="wrap" style="padding:.5em;"><code class="php">#!/usr/bin/env php
+
+&lt;?
+	$key = &quot;spooky&quot;;
+	$ciphertxt = &quot;d5++xytj6RiGwmqEecm63Kow7RZGAAHhVFsksHFuj/Anap7pWHDZ1XQw8DAApUENR5ExOGUKTzGOtvSAlCHkHq6NneL6ZUTXej8Taxz+kHK9w9U8dxTOSksZ4HKS2YYD&quot;;
+	$ciphertxt_b64 = base64_decode($ciphertxt);
+	$iv_size = mcrypt_get_iv_size(MCRYPT_GOST, MCRYPT_MODE_CBC);
+	$iv = &quot;&quot;; while(strlen($iv)&lt;$iv_size) {$iv.=0;}
+	$plaintxt = mcrypt_decrypt(MCRYPT_GOST, $key, $ciphertxt_b64, MCRYPT_MODE_CBC, $iv);
+	echo &quot;key: $key&quot;.PHP_EOL;
+	echo &quot;ciphertxt: $ciphertxt&quot;.PHP_EOL;
+	echo &quot;plaintxt: $plaintxt&quot;.PHP_EOL;
+?&gt;
+</code></pre>
+		<li class="dash none">@ <code class="ans">http://hackyeaster.hacking-lab.com/hackyeaster/images/egg_16_a3eIIACKSy02sJ6LxXeh.png</code></li>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn17" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge17.html"><u>Spot the Difference</u></a></li>
@@ -605,25 +790,19 @@ Inspect <a href="file/sharks.pcapng">sharks.pcapng</a>, in order to get the cred
 		<li class="dash">Follow (this) TCP Stream</li>
 		<li class="dash">filter for only <code>10.11.0.52:62046 &rarr; 10.11.0.48:8080</code></li>
 		<li class="dash none"><img src="img/lvl18.png"></li>
-		<li class="dash"><code>curl -sL -H "Authorization: Basic c2hhcmttYW46c2hhcmtzX2hhdmVfajR3cw==" -X POST "http://hackyeaster.hacking-lab.com/hackyeaster/sharks/auth" -d "user=supershark&pass=hashed%21%21%21&hash=b3f3ca462d3fa58b74d6982af14d8841b074994a"</code></li>
-<pre class="wrap" style="padding:.5em;">
-&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-  &lt;head&gt;
-	&lt;title&gt;Sharks on Wire&lt;/title&gt;
-	&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
-	&lt;link rel=&quot;icon&quot; type=&quot;image/ico&quot; href=&quot;../images/favicon.ico&quot;&gt;
-	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;sharks.css&quot;&gt;
-	&lt;script src=&quot;../js/jquery.min.js&quot;&gt;&lt;/script&gt;
+		<li class="dash none"><img src="img/lvl18-login.png"></li>
+		<li class="dash none">Credentials: <code>sharkman:sharks_have_j4ws</code></li>
+		<li class="dash"><code>curl -sL -u sharkman:sharks_have_j4ws -H &quot;Authorization: Basic c2hhcmttYW46c2hhcmtzX2hhdmVfajR3cw==&quot; -X POST &quot;http://hackyeaster.hacking-lab.com/hackyeaster/sharks/auth&quot; -d &quot;user=supershark&amp;pass=hashed%21%21%21&amp;hash=b3f3ca462d3fa58b74d6982af14d8841b074994a&quot;</code></li>
+<pre class="wrap" style="padding:.5em;"><code>&#8230;
   &lt;body&gt;
 	&lt;div class=&quot;title&quot;&gt;Sharks on Wire&lt;/div&gt;
 	&lt;div class=&quot;imageBg&quot;&gt;
 	  &lt;img src=&quot;<font color="red">egg_18_j9rU8ma6nBfz986gJZmf.png</font>&quot; class=&quot;image&quot;/&gt;
 	&lt;/div&gt;
   &lt;/body&gt;
-&lt;/html&gt;
-</pre>
-		<li class="dash"><code>curl -sL -H "Authorization: Basic c2hhcmttYW46c2hhcmtzX2hhdmVfajR3cw==" "http://hackyeaster.hacking-lab.com/hackyeaster/sharks/egg_18_j9rU8ma6nBfz986gJZmf.png" -o egg_18_j9rU8ma6nBfz986gJZmf.png</code></li>
+&#x2026;
+</code></pre>
+		<li class="dash"><code>curl -sL -u sharkman:sharks_have_j4ws -H &quot;Authorization: Basic c2hhcmttYW46c2hhcmtzX2hhdmVfajR3cw==&quot; &quot;<font class="ans">http://hackyeaster.hacking-lab.com/hackyeaster/sharks/egg_18_j9rU8ma6nBfz986gJZmf.png</font>&quot; -o egg_18_j9rU8ma6nBfz986gJZmf.png</code></li>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn19" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge19.html"><u>Cut'n'Place</u></a></li>
@@ -633,6 +812,7 @@ Time for paper and scissors! The <a href="file/paperstrips.pdf">PDF</a> contains
 Hint: The passphrase does *not* use all characters available, and it has <u>no spaces</u>
 </pre>
 	<ul>
+		<li class="dash none"><img src="img/paperstripsmadebyshredder-noexif.jpg"></li>
 		<li class="dash"><code class="ans">paperstripsmadebyshredder</code></li>
 	</ul>
 
@@ -717,12 +897,39 @@ mowewe	page</code></pre>
 <pre class="wrap" style="padding:.5em;">
 Tired of boring QR codes, Dr. Bunny C. Easter developed an alternative. He's proudly introducing the "Cony Code" now! Crack the code in order to get another easter egg!
 
-Hint: <code>110</code> is <font color="blue">blue</font>, the rest's up to you...
+Hint: <code class="nohighlight">110</code> is <font color="blue">blue</font>, the rest's up to you...
 
 <img src="img/egg_21_plain.png" style="vertical-align:middle;"><img src="img/conycode.png" style="vertical-align:middle;">
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash"><font color="blue">blue</font> &#61; RGB(0,0,255) &equiv; 110</li>
+		<li class="dash">looks like bit flip ie. {0&rarr;1, 255&rarr;0}</li>
+<pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+import codecs
+from PIL import Image, ImageFilter
+
+reduced = []
+im1 = Image.open("conycode.png").convert("RGB")
+pix1s = im1.load()
+w1, h1 = im1.size
+for y in xrange(8,h1,17):
+	xyc = []
+	for x in xrange(8,w1,17):
+		pix1 = pix1s[x,y]
+		xyc.append((x,y,pix1))
+	reduced.append(xyc)
+
+ans = ""
+for r in reduced:
+	for xyc in r:
+		_, _, pix1 = xyc
+		ans += "".join(map(lambda c: "1" if c==0 else "0", list(pix1)))
+
+print "".join(chr(int(ans[i:i+8], 2)) for i in xrange(0,len(ans),8))
+</code></pre>
 	</ul>
 
 <style type="text/css">
@@ -1080,7 +1287,7 @@ We encrypt all your files, with a strong passphrase. The passphrase is kept secu
 </pre>
 
 <style type="text/css">
-#lvl26{background:#f7f7f7 url("img/bg-m.png");padding:7px;}.box{background:#fff;border-bottom:solid 1px #ccc}.box .image.featured{position:relative;width:auto}.box{padding:15px 15px 20px}.box .image.featured{left:15px;top:15px;margin:-15px 0 -13px -30px;max-width:400px;align:center}.box .image.featured.details{left:15px;top:0;margin:-15px 0 7px -30px}section,article{margin:0 0 1.5em 0 !important;}.button,button,input[type=button],input[type=submit],input[type=reset]{position:relative;padding:.65em 0;width:100%;text-align:center;font-size:1.25em;margin:.25em 0;-webkit-appearance:none;display:inline-block;text-decoration:none;cursor:pointer;border:0;border-radius:5px;background:#4923a0;color:#fff!important;font-weight:700;outline:0;-moz-transition:background-color .25s ease-in-out;-webkit-transition:background-color .25s ease-in-out;-o-transition:background-color .25s ease-in-out;-ms-transition:background-color .25s ease-in-out;transition:background-color .25s ease-in-out}.pinKeyRow{display:inline-block}.pinButton{display:inline-block;font-size:24px;width:60px;height:60px;margin:4px 7px;text-align:center;float:left;padding:0}.pinField{display:block;background-color:#eee;width:208px;margin-left:7px;padding-top:5px;height:48px;border-radius:5px;text-align:center;font-size:64px}
+#lvl26{background:#f7f7f7 url("img/bg-m.png");padding:7px;}.box{background:#fff;border-bottom:solid 1px #ccc}.box .image.featured{position:relative;width:auto}.box{padding:15px 15px 20px}.box .image.featured{left:15px;top:15px;margin:-15px 0 -13px -30px;max-width:400px;align:center}.box .image.featured.details{left:15px;top:0;margin:-15px 0 7px -30px}section,article{margin:0 0 1.5em 0 !important;}#lvl26 .button,#lvl26 button,input[type=button],input[type=submit],input[type=reset]{position:relative;padding:.65em 0;width:100%;text-align:center;font-size:1.25em;margin:.25em 0;-webkit-appearance:none;display:inline-block;text-decoration:none;cursor:pointer;border:0;border-radius:5px;background:#4923a0;color:#fff!important;font-weight:700;outline:0;-moz-transition:background-color .25s ease-in-out;-webkit-transition:background-color .25s ease-in-out;-o-transition:background-color .25s ease-in-out;-ms-transition:background-color .25s ease-in-out;transition:background-color .25s ease-in-out}.pinKeyRow{display:inline-block}.pinButton{display:inline-block;font-size:24px;width:60px;height:60px;margin:4px 7px;text-align:center;float:left;padding:0}.pinField{display:block;background-color:#eee;width:208px;margin-left:7px;padding-top:5px;height:48px;border-radius:5px;text-align:center;font-size:64px}
 </style>
 <script type="text/javascript">
 var pinPressed = function (n){if(-1===n)return pinEntered="",void $("#pin").html("");pinEntered+=n;var e="";for(i=0;i<pinEntered.length;i++)e+="&#x2022;";for(i=pinEntered.length;i<4;i++)e+="-";$("#pin").html(e),pinEntered.length>=4&&setTimeout(function(){$("#pin").html("----"),/*window.location="ps://pin?"+pinEntered,*/pinEntered=""},200)};var pinEntered="";
