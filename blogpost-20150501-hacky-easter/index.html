@@ -163,7 +163,7 @@ In this challenge, you need to play with your phone a bit. Try to find out what 
 		</ul>
 <pre style="padding:.5em;"><code>&#8230;
 function requestLevels() {
-	window.location.href="<font color="red">ps://sensors</font>";
+	window.location.href=&quot;<font color="red">ps://sensors</font>&quot;;
 }
 &#x2026;
 function sensorFeedback(json) {
@@ -325,9 +325,16 @@ The Doc's in trouble again, and you must come to his rescue! As you jump into hi
 </pre>
 	<ul>
 		<li class="dash none"><u>Python Morse code decoder</u></li>
-<pre class="wrap" style="padding:.5em;"><code>morse_rev = {"dah": "T", "dah-dah": "M", "dah-dah-dah": "O", "dah-dah-dit": "G", "dah-dah-dit-dah": "Q", "dah-dah-dit-dit": "Z", "dah-dit": "N", "dah-dit-dah": "K", "dah-di-dah-dah": "Y", "dah-di-dah-dit": "C", "dah-dit-dit": "D", "dah-dit-dit-dah": "X", "dah-dit-dit-dit": "B", "dit": "E", "dit-dah": "A", "dit-dah-dah": "W", "dit-dah-dah-dah": "J", "dit-dah-dah-dit": "P", "di-dah-dit": "R", "di-dah-di-dit": "L", "dit-dit": "I", "dit-dit-dah": "U", "di-di-dah-dit": "F", "dit-dit-dit": "S", "dit-dit-dit-dah": "V", "dit-dit-dit-dit": "H"}
-ms = "dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah"
-print "".join(morse_rev[m] for m in ms.split()).lower()</code></pre>
+<pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
+
+import sys
+import codecs
+
+if __name__ == &quot;__main__&quot;:
+	morse_rev = {&quot;dah&quot;: &quot;T&quot;, &quot;dah-dah&quot;: &quot;M&quot;, &quot;dah-dah-dah&quot;: &quot;O&quot;, &quot;dah-dah-dit&quot;: &quot;G&quot;, &quot;dah-dah-dit-dah&quot;: &quot;Q&quot;, &quot;dah-dah-dit-dit&quot;: &quot;Z&quot;, &quot;dah-dit&quot;: &quot;N&quot;, &quot;dah-dit-dah&quot;: &quot;K&quot;, &quot;dah-di-dah-dah&quot;: &quot;Y&quot;, &quot;dah-di-dah-dit&quot;: &quot;C&quot;, &quot;dah-dit-dit&quot;: &quot;D&quot;, &quot;dah-dit-dit-dah&quot;: &quot;X&quot;, &quot;dah-dit-dit-dit&quot;: &quot;B&quot;, &quot;dit&quot;: &quot;E&quot;, &quot;dit-dah&quot;: &quot;A&quot;, &quot;dit-dah-dah&quot;: &quot;W&quot;, &quot;dit-dah-dah-dah&quot;: &quot;J&quot;, &quot;dit-dah-dah-dit&quot;: &quot;P&quot;, &quot;di-dah-dit&quot;: &quot;R&quot;, &quot;di-dah-di-dit&quot;: &quot;L&quot;, &quot;dit-dit&quot;: &quot;I&quot;, &quot;dit-dit-dah&quot;: &quot;U&quot;, &quot;di-di-dah-dit&quot;: &quot;F&quot;, &quot;dit-dit-dit&quot;: &quot;S&quot;, &quot;dit-dit-dit-dah&quot;: &quot;V&quot;, &quot;dit-dit-dit-dit&quot;: &quot;H&quot;}
+	ms = &quot;dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah&quot;
+	print &quot;&quot;.join(morse_rev[m] for m in ms.split()).lower()
+</code></pre>
 		<li class="dash"><code>georgemcfly</code></li>
 		<li class="dash">not quite done yet! enter <code>georgemcfly</code> into Egg-O-Matic performs a HTTP GET request to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&k=georgemcfly">http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&amp;k=georgemcfly</a></li>
 		<li class="dash none">rendering: <img src="img/lvl06-georgemcfly.png" style="vertical-align:middle;"></li>
@@ -723,16 +730,16 @@ import org.apache.commons.io.*;
 class Challenge15 {
 	public static void main(String[] args) throws Exception
 	{
-		File file_ft= new File("<a class="print-link" href="file/lvl15-ft.base64">lvl15-ft.base64</a>");
+		File file_ft= new File(&quot;<a class="print-link" href="file/lvl15-ft.base64">lvl15-ft.base64</a>&quot;);
 		String ft = FileUtils.readFileToString(file_ft);
 		byte[] decoded = org.apache.commons.codec.binary.Base64.decodeBase64(
 			org.apache.commons.codec.binary.Base64.decodeBase64(
 				ft.getBytes()
 			));
-		String filename = "lvl15-qr.png";
+		String filename = &quot;lvl15-qr.png&quot;;
 		FileOutputStream output = new FileOutputStream(new File(filename));
 		IOUtils.write(decoded, output);
-		System.out.println("=> "+filename);
+		System.out.println(&quot;=&gt; &quot;+filename);
 	}
 }
 </code></pre>
@@ -749,7 +756,7 @@ Ghosts only come out when it's dark...
 		<li class="dash">turn off the lights: click on light bulb in far lower right corner @ webpage footer</li>
 		<li class="dash none"><img src="img/lvl16-dark.png"></li>
 		<li class="dash">JS code snippet implementing this behaviour:</li>
-<pre class="wrap" style="padding:.5em;"><code class="javascript">function (){skelD=!skelD,skelD?($("#dark").show(),$("#chall16 img").attr("src","images/banner_challenge_16_dark.jpg"),$("#chall16 a").attr("href","challenge16-dark.html")):($("#dark").hide(),$("#chall16 img").attr("src","images/banner_challenge_16.jpg"),$("#chall16 a").attr("href","challenge16.html"))}
+<pre class="wrap" style="padding:.5em;"><code class="javascript">function (){skelD=!skelD,skelD?($(&quot;#dark&quot;).show(),$(&quot;#chall16 img&quot;).attr(&quot;src&quot;,&quot;images/banner_challenge_16_dark.jpg&quot;),$(&quot;#chall16 a&quot;).attr(&quot;href&quot;,&quot;challenge16-dark.html&quot;)):($(&quot;#dark&quot;).hide(),$(&quot;#chall16 img&quot;).attr(&quot;src&quot;,&quot;images/banner_challenge_16.jpg&quot;),$(&quot;#chall16 a&quot;).attr(&quot;href&quot;,&quot;challenge16.html&quot;))}
 </code></pre>
 		<li class="dash">clicking on Challenge 16 now leads to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge16-dark.html">challenge16-dark.html</a>, containing another puzzle desc:</li>
 <pre class="wrap" style="padding:.5em;">
@@ -804,10 +811,10 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 def mk_agent_xor():
-	im1 = Image.open("difference1.bmp").convert("RGB")
+	im1 = Image.open(&quot;img/difference1.bmp&quot;).convert(&quot;RGB&quot;)
 	#np.asarray(im1)
 	pix1s = im1.load()
-	im2 = Image.open("difference2.bmp").convert("RGB")
+	im2 = Image.open(&quot;img/difference2.bmp&quot;).convert(&quot;RGB&quot;)
 	pix2s = im2.load()
 	w1, h1 = im1.size
 	for y in xrange(h1):
@@ -818,7 +825,7 @@ def mk_agent_xor():
 				pix1s[x,y] = (255,255,255)
 			else:
 				pix1s[x,y] = (0,0,0)
-	im1.save("difference0.bmp")
+	im1.save(&quot;difference0.bmp&quot;)
 </code></pre>
 
 		<li class="dash none"><img src="img/difference0.bmp"></li>
@@ -833,23 +840,23 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 def crop_agent_xor():
-	im = Image.open("difference0.bmp").convert("RGB")
+	im = Image.open(&quot;difference0.bmp&quot;).convert(&quot;RGB&quot;)
 	#qr#
 	left, top, right, bottom = 245, 140, 280, 175
 	img = im.crop((left, top, right, bottom))
 	#img = im.filter(ImageFilter.{BLUR,CONTOUR,DETAIL,EDGE_ENHANCE,EDGE_ENHANCE_MORE,EMBOSS,FIND_EDGES,SMOOTH,SMOOTH_MORE,SHARPEN})
 	#img.thumbnail(sz)
 	#img.show()
-	img.save("lvl17-qr1.jpg")
+	img.save(&quot;lvl17-qr1.jpg&quot;)
 	#tgt#
 	left, top, right, bottom = 333, 140, 368, 175
 	img = im.crop((left, top, right, bottom))
-	img.save("lvl17-qr2.jpg")
+	img.save(&quot;lvl17-qr2.jpg&quot;)
 
 def mk_qr_code():
-	im1 = Image.open("lvl17-qr1.jpg").convert("RGB")
+	im1 = Image.open(&quot;lvl17-qr1.jpg&quot;).convert(&quot;RGB&quot;)
 	#im1.getcolors(), im1.format, im1.size, im1.mode
-	im2 = Image.open("lvl17-qr2.jpg").convert("RGB")
+	im2 = Image.open(&quot;lvl17-qr2.jpg&quot;).convert(&quot;RGB&quot;)
 	pix2s = list(im2.getdata())
 	w2, h2 = im2.size
 	pix2s = [pix2s[i*w2:(i+1)*w2] for i in xrange(h2)]
@@ -863,7 +870,7 @@ def mk_qr_code():
 			for ci in xrange(len(pix1)):
 				pix.append(pix1[ci] ^ pix2[ci])
 			pix1s[x,y] = tuple(pix)
-	im1.save("lvl17-qr.jpg")
+	im1.save(&quot;lvl17-qr.jpg&quot;)
 </code></pre>
 
 	</ul>
@@ -902,6 +909,137 @@ Time for paper and scissors! The <a href="file/paperstrips.pdf">PDF</a> contains
 Hint: The passphrase does *not* use all characters available, and it has <u>no spaces</u>
 </pre>
 	<ul>
+		<li class="dash">egg img containing QR code is encrypted using <u>AES; 256-bit key len; op in CBC mode</u>, then base64-encoded</li>
+		<li class="dash">following Python script gen all possible valid str combo, assuming:
+		<ul>
+			<li class="dash">all given paper strips have to be used</li>
+			<li class="dash">all letters that appear on paper strips are used in passphrase</li>
+			<li class="dash">no symbols are found in passphrase, as they are obscured</li>
+		</ul></li>
+<pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+import codecs
+import string
+import itertools
+from functools32 import lru_cache
+
+def gen_wordlst(charset, maxlen):
+	files = {}
+	for letter in charset:
+		files[letter] = open(&quot;c19-wordlist%d-%c&quot;%(maxlen,letter), &quot;w&quot;)
+	for w in itertools.product(charset, repeat=maxlen):
+		print&gt;&gt;files[w[0]], &quot;&quot;.join(w)
+	for v in files.values():
+		if v:
+			print&gt;&gt;sys.stderr, &quot;=&gt;&quot;, v.name
+			v.close()
+
+horzs = [&quot;s.a.e&quot;, &quot;eldpr&quot;, &quot;qt.ia&quot;, &quot;pupar&quot;, &quot;ny.hs&quot;]
+verts = [&quot;lr.se&quot;, &quot;epdke&quot;, &quot;.por.&quot;, &quot;.sob.&quot;, &quot;ahmed&quot;]
+def mkstrip(is_horz=True, mode=1):
+	strips = []
+	for p in itertools.permutations(horzs if is_horz else verts):
+		pp = [[&quot;&quot; for x in xrange(5)] for x in xrange(5)]
+		for i,s in enumerate(p):
+			for j,c in enumerate(s):
+				if is_horz:
+					pp[i][j] = c
+				else: #vert
+					pp[j][i] = c
+		if mode == 1:
+			pp = [&quot;&quot;.join(p) for p in pp]
+		else:
+			pp = &quot;&quot;.join(&quot;&quot;.join(p) for p in pp)
+		strips.append(pp)
+	return strips
+
+def perm_horz(width=5):
+	&quot;&quot;&quot;permute horizontal strips to form grid
+		width: # grids to layout on same line
+	&quot;&quot;&quot;
+
+	strips = mkstrip(is_horz=True, mode=1)
+	for i in xrange(0,len(strips),width):
+		hh = []
+		for j in xrange(len(strips[i])):
+			hh = []
+			for k in xrange(width):
+				if i+k &lt; len(strips):
+					hh.append(strips[i+k][j])
+			print &quot;\t&quot;.join(hh).replace(&quot;.&quot;, &quot; &quot;)
+		print
+
+def perm_vert(width=5):
+	&quot;&quot;&quot;permute vertical strips to form grid
+		width: # grids to layout on same line
+	&quot;&quot;&quot;
+
+	strips = mkstrip(is_horz=False, mode=1)
+	for i in xrange(0,len(strips),width):
+		vv = []
+		for j in xrange(len(strips[i])):
+			vv = []
+			for k in xrange(width):
+				if i+k &lt; len(strips):
+					vv.append(strips[i+k][j])
+			print &quot;\t&quot;.join(vv).replace(&quot;.&quot;, &quot; &quot;)
+		print
+
+@lru_cache(maxsize=None)
+def align_build(a,b,c,s):
+	&quot;&quot;&quot; recursively build all possible valid str
+		from given a,b
+	&quot;&quot;&quot;
+
+	if c == min(len(a),len(b)): return s
+	ss = []
+	if a[c] != &quot;.&quot;:
+		r = align_build(a,b,c+1,&quot;&quot;+s+a[c])
+		if r: ss.append(r)
+	if b[c] != &quot;.&quot;:
+		r = align_build(a,b,c+1,&quot;&quot;+s+b[c])
+		if r: ss.append(r)
+	return &quot;\n&quot;.join(ss)
+
+def align(idx):
+	&quot;&quot;&quot; gen str by align-merge horz+vert strip
+		from cartesian pdt of horz + vert strips
+		- simulate overlap of horz + vert strips
+	&quot;&quot;&quot;
+
+	horzd = mkstrip(is_horz=True, mode=2)
+	vertd = mkstrip(is_horz=False, mode=2)
+	# print &quot;|horzd|=&quot;, len(horzd), &quot;;|vertd|=&quot;, len(vertd) #120
+	# for hs in horzd: print &quot;&quot;.join(hs).replace(&quot;.&quot;, &quot; &quot;)
+	# print
+	# for vs in vertd: print &quot;&quot;.join(vs).replace(&quot;.&quot;, &quot; &quot;)
+	for i,ab in enumerate(itertools.product(horzd, vertd)):
+		if i == int(idx): #idx((a,b))
+			a, b = ab
+			res = align_build(a,b,0,&quot;&quot;)
+			if len(res) &gt; 0:
+				print &quot;&quot;.join(res)
+				break
+
+if __name__ == &quot;__main__&quot;:
+	# gen_wordlst(&quot;abdehiklmnopqrstuy&quot;, 5)
+	# perm_horz()
+	# perm_vert()
+	idx = 10290 #paperstripsmadebyshredder found @ this idx
+	if len(sys.argv)&gt;1: idx = int(sys.argv[1])
+	align(idx)
+</code></pre>
+		<li class="dash">apply <a href="https://pypi.python.org/pypi/wordsegment">word segmentation</a> via
+		<ul>
+			<li class="dash">eg. <code>echo paperstripsmadebyshredder | python -m wordsegment</code></li>
+			<li class="dash none">&rArr; <code>papers trips made by shredder</code></li>
+			<li class="dash">it is evident that this approach is not perfect</li>
+			<li class="dash">but can at least offer some insight into possible words that can be made from the given paper strips</li>
+			<li class="dash">to string together, to form a sensible passphrase</li>
+		</ul></li>
+		<li class="dash">passphrase: &quot;<code class="ans">paper strips made by shredder</code>&quot;</li>
 		<li class="dash none"><img src="img/paperstripsmadebyshredder-noexif.jpg"></li>
 		<li class="dash"><code class="ans">paperstripsmadebyshredder</code></li>
 	</ul>
@@ -941,21 +1079,8 @@ eval(String.fromCharCode(105, 102, 32, 40, 33, 40, 110, 97, 118, 105, 103, 97, 1
 </code></pre>
 <img src="img/robotbg.jpg">
 		<li class="dash"><a href="http://en.wikipedia.org/wiki/Robot_Interaction_Language">Robot Interaction Language (ROILA)</a></li>
-		<li class="dash"><code>for w in bama waboki pisal fatatu fomu wosebi seju sowu seju bamas mufe wafub fomu mowewe; do egrep "^${w}\b" <a href="file/roila-wordlist.txt">roila-wordlist.txt</a>; done</code></li>
-<pre class="wrap print-before" style="padding:.5em;"><code>bama	you
-waboki	must
-pisal	make
-fatatu	word
-fomu	of
-wosebi	addition
-seju	two
-sowu	and
-seju	two
-bamas	this
-mufe	be
-wafub	name
-fomu	of
-mowewe	page</code></pre>
+		<li class="dash"><code>for w in bama waboki pisal fatatu fomu wosebi seju sowu seju bamas mufe wafub fomu mowewe; do egrep "^${w}\b" <a href="file/roila-wordlist.txt">roila-wordlist.txt</a>; done | cut -f2 | tr '\n' ' '</code></li>
+<pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">you must make word of addition two and two this be name of page</code></pre>
 <hr style="border-top: 1px dotted;">
 		<li class="dash">visit @ <a href="http://hackyeaster.hacking-lab.com/hackyeaster/bots/four.html">http://hackyeaster.hacking-lab.com/hackyeaster/bots/four.html</a>, supplying HTTP header: <code>{&quot;User-agent&quot;: &quot;EasterBot&quot;}</code>
 		<p style="text-indent: 1em"><code>curl -sL -A "EasterBot" "http://hackyeaster.hacking-lab.com/hackyeaster/bots/four.html"</code></p></li>
@@ -1002,7 +1127,7 @@ import codecs
 from PIL import Image, ImageFilter
 
 reduced = []
-im1 = Image.open("conycode.png").convert("RGB")
+im1 = Image.open("img/conycode.png").convert("RGB")
 pix1s = im1.load()
 w1, h1 = im1.size
 for y in xrange(8,h1,17):
@@ -1106,28 +1231,28 @@ def hmatch(txt, hash):
 	hashes = map(str.lower, hashes)
 	if hash in hashes:
 		i = hashes.index(hash)
-		print "\n".join([
-			"txt: %s [%d]"%(txt,len(txt)),
-			"%s: %s [%d]"%(hnames[i],hashes[i],len(hashes[i]))
+		print &quot;\n&quot;.join([
+			&quot;txt: %s [%d]&quot;%(txt,len(txt)),
+			&quot;%s: %s [%d]&quot;%(hnames[i],hashes[i],len(hashes[i]))
 		])
 		return True
 	return False
 
-if __name__ == "__main__":
+if __name__ == &quot;__main__&quot;:
 	def h(hash):
 		#binascii.hexlify(base64.b64decode(hash))
-		return base64.b64decode(hash).encode("hex")
-	hash1 = h("raLu6+eAmFelf2/uSy/67iTq57E=")
-	hash2 = h("a791KNndKVmnr7N4mEJfZ1VfZ/Z3mHyufoYhCiyKDb38JI7C17JAEPRAutwiI7S1")
-	hash3 = h("uAgUxeDzhrBjcWP9iv6pKQ==")
-	hash4 = h("l5HL4K6RmgMwmUota6Jrjww6HaFcc7zl/KOUlYgabJA=")
+		return base64.b64decode(hash).encode(&quot;hex&quot;)
+	hash1 = h(&quot;raLu6+eAmFelf2/uSy/67iTq57E=&quot;)
+	hash2 = h(&quot;a791KNndKVmnr7N4mEJfZ1VfZ/Z3mHyufoYhCiyKDb38JI7C17JAEPRAutwiI7S1&quot;)
+	hash3 = h(&quot;uAgUxeDzhrBjcWP9iv6pKQ==&quot;)
+	hash4 = h(&quot;l5HL4K6RmgMwmUota6Jrjww6HaFcc7zl/KOUlYgabJA=&quot;)
 	for i, hash in enumerate([hash1, hash2, hash3, hash4]):
-		print>>sys.stderr, "#%d:"%(i+1), hash
+		print&gt;&gt;sys.stderr, &quot;#%d:&quot;%(i+1), hash
 
 	### Hash 1 ###
 	charset, maxlen = [0,1,7,9], 16
 	def h1_rand(charset, maxlen):
-		return "".join(["%d"%random.choice([charset]) \
+		return &quot;&quot;.join([&quot;%d&quot;%random.choice([charset]) \
 			for i in xrange(maxlen)])
 	def h1_iter(w, charset, maxlen, hash):
 		if len(w) == maxlen:
@@ -1135,15 +1260,15 @@ if __name__ == "__main__":
 		for c in charset:
 			if h1_iter(w+str(c), charset, maxlen, hash):
 				break
-	h1_iter("", charset, maxlen, hash1)
+	h1_iter(&quot;&quot;, charset, maxlen, hash1)
 	txt = h1_rand(charset, maxlen)
 	while not hmatch(txt, hash1):
 		txt = h1_rand(charset, maxlen)
 
 	### Hash 3 ###
-	intab, outtab = "aegiost", "4361057" #leetspeak
+	intab, outtab = &quot;aegiost&quot;, &quot;4361057&quot; #leetspeak
 	leet = string.maketrans(intab, outtab)
-	with open("<a href="file/lvl22-wordlist.txt">lvl22-wordlist.txt</a>") as f:
+	with open(&quot;<a href="file/lvl22-wordlist.txt">lvl22-wordlist.txt</a>&quot;) as f:
 		words = map(string.strip, f.readlines())
 	while True:
 		word = list(random.choice(words))
@@ -1164,7 +1289,7 @@ if __name__ == "__main__":
 		word[idx] = word[idx].upper()
 		punct = random.choice(string.punctuation)
 		digit = random.choice(string.digits)
-		txt = "".join(word)+punct+digit
+		txt = &quot;&quot;.join(word)+punct+digit
 		if hmatch(txt, hash3): sys.exit()
 </code></pre>
 
@@ -1190,120 +1315,120 @@ from random import randint
 
 def find_answer(question, data):
 	for entry in data:
-		if entry["question"] == question:
-			return entry["answer"].encode("utf-8")
-	data.append({"question": question, "answer": ""})
-	return ""
+		if entry[&quot;question&quot;] == question:
+			return entry[&quot;answer&quot;].encode(&quot;utf-8&quot;)
+	data.append({&quot;question&quot;: question, &quot;answer&quot;: &quot;&quot;})
+	return &quot;&quot;
 
 def ask_question(data):
 	for entry in data:
-		if entry["answer"] == "":
-			return entry["question"].encode("utf-8")
-	return data[randint(0,len(data)-1)]["question"].encode("utf-8")
+		if entry[&quot;answer&quot;] == &quot;&quot;:
+			return entry[&quot;question&quot;].encode(&quot;utf-8&quot;)
+	return data[randint(0,len(data)-1)][&quot;question&quot;].encode(&quot;utf-8&quot;)
 
 def add_answer(question, answer, data):
 	for entry in data:
-		if entry["question"] == question:
-			entry["answer"] = answer
+		if entry[&quot;question&quot;] == question:
+			entry[&quot;answer&quot;] = answer
 			return
 
 def show(data):
 	for entry in data:
-		print>>sys.stderr, u"Q: %s; A: %s" \
-		%(entry["question"], entry["answer"])
+		print&gt;&gt;sys.stderr, u&quot;Q: %s; A: %s&quot; \
+		%(entry[&quot;question&quot;], entry[&quot;answer&quot;])
 
-if __name__ == "__main__":
-	filepath = u"challenge23.json"
+if __name__ == &quot;__main__&quot;:
+	filepath = u&quot;challenge23.json&quot;
 	with open(filepath) as file:
 		data = json.load(file)
-	host, port = "hackyeaster.hacking-lab.com", 1400
-	nr = "\r\n"
+	host, port = &quot;hackyeaster.hacking-lab.com&quot;, 1400
+	nr = &quot;\r\n&quot;
 	tn = telnetlib.Telnet(host, port)
-	tn.read_until("Do you feel brave enough to challenge the mighty nerdmaster? (y|n)")
-	tn.write("y" + nr)
-	tn.read_until("---- YOUR TURN ----\n")
+	tn.read_until(&quot;Do you feel brave enough to challenge the mighty nerdmaster? (y|n)&quot;)
+	tn.write(&quot;y&quot; + nr)
+	tn.read_until(&quot;---- YOUR TURN ----\n&quot;)
 	while True:
 		try:
 			my_question = ask_question(data)
 			tn.write(my_question + nr)
-			print "I ask: " + my_question
-			answer = tn.read_until("---- MY TURN ----\n").split("\n")[0]
-			print "It Answered: " + answer
-			if answer != "We've had this one before.":
+			print &quot;I ask: &quot; + my_question
+			answer = tn.read_until(&quot;---- MY TURN ----\n&quot;).split(&quot;\n&quot;)[0]
+			print &quot;It Answered: &quot; + answer
+			if answer != &quot;We've had this one before.&quot;:
 				add_answer(my_question, answer, data)
 			print
-			print "---- MY TURN ----"
+			print &quot;---- MY TURN ----&quot;
 			print
-			question = tn.read_until("\n").split("\n")
-			print "It asked: " + question[0]
+			question = tn.read_until(&quot;\n&quot;).split(&quot;\n&quot;)
+			print &quot;It asked: &quot; + question[0]
 			my_answer = find_answer(question[0], data)
 			tn.write(my_answer + nr)
-			print "I answer: " + my_answer
-			response = tn.read_until("---- YOUR TURN ----\n")
-			print "resp:", response
+			print &quot;I answer: &quot; + my_answer
+			response = tn.read_until(&quot;---- YOUR TURN ----\n&quot;)
+			print &quot;resp:&quot;, response
 		except EOFError as e:
-			print ">> Connection closed"
+			print &quot;&gt;&gt; Connection closed&quot;
 			break
-	with open(filepath, "w") as outfile:
+	with open(filepath, &quot;w&quot;) as outfile:
 		json.dump(data, outfile)
-		print "%s updated"%filepath
+		print &quot;%s updated&quot;%filepath
 	BUF_SIZE = 65536  #64KB chunk
 	sha1 = hashlib.sha1()
-	with open(filepath, "rb") as f:
+	with open(filepath, &quot;rb&quot;) as f:
 		while True:
 			data = f.read(BUF_SIZE)
 			if not data: break
 			sha1.update(data)
-	print "sha1sum({}): {}".format(filepath, sha1.hexdigest())
+	print &quot;sha1sum({}): {}&quot;.format(filepath, sha1.hexdigest())
 </code></pre>
 		<li class="print-before dash none"><u>Q&amp;A</u></li>
-<pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">question: "Go 127.0.0.1 to your mummy."
-answer: "Won't work. I only support IPv6."
+<pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">question: &quot;Go 127.0.0.1 to your mummy.&quot;
+answer: &quot;Won't work. I only support IPv6.&quot;
 
-question: "Pna lbh ernq guvf?"
-answer: "EBG13 vf sbe ynzref."
+question: &quot;Pna lbh ernq guvf?&quot;
+answer: &quot;EBG13 vf sbe ynzref.&quot;
 
-question: "Tell me your name, hobo. I need to check your records."
-answer: "My name is bob'; DROP TABLE VALJ;--"
+question: &quot;Tell me your name, hobo. I need to check your records.&quot;
+answer: &quot;My name is bob'; DROP TABLE VALJ;--&quot;
 
-question: "You'll be 0xdeadbeef soon."
-answer: "Not as long as I have my 0xcafebabe."
+question: &quot;You'll be 0xdeadbeef soon.&quot;
+answer: &quot;Not as long as I have my 0xcafebabe.&quot;
 
-question: "After loosing to me, your life won't be the same anymore."
-answer: "A Life? Cool! Where can I download one of those?"
+question: &quot;After loosing to me, your life won't be the same anymore.&quot;
+answer: &quot;A Life? Cool! Where can I download one of those?&quot;
 
-question: "You must be jealous when seeing my phone's display."
-answer: "Not really - Your pixels are so big, some of them have their own region code!"
+question: &quot;You must be jealous when seeing my phone's display.&quot;
+answer: &quot;Not really - Your pixels are so big, some of them have their own region code!&quot;
 
-question: "You're so slow, you must have been written in BASIC."
-answer: "At least I don't have memory leaks like you."
+question: &quot;You're so slow, you must have been written in BASIC.&quot;
+answer: &quot;At least I don't have memory leaks like you.&quot;
 
-question: "Ping! Anybody there?"
-answer: "ICMP type 3, code 13: Communication Administratively Prohibited"
+question: &quot;Ping! Anybody there?&quot;
+answer: &quot;ICMP type 3, code 13: Communication Administratively Prohibited&quot;
 
-question: "This fight is like a hash function - it works in one direction only."
-answer: "Too bad you picked LM hashing."
+question: &quot;This fight is like a hash function - it works in one direction only.&quot;
+answer: &quot;Too bad you picked LM hashing.&quot;
 
-question: "You should leave your cave and socialize a bit."
-answer: "I'm not anti-social. I'm just not user friendly."
+question: &quot;You should leave your cave and socialize a bit.&quot;
+answer: &quot;I'm not anti-social. I'm just not user friendly.&quot;
 
-question: "1f u c4n r34d th1s u r s70p1d."
-answer: "You better check your spelling. Stoopid has two 'o's."
+question: &quot;1f u c4n r34d th1s u r s70p1d.&quot;
+answer: &quot;You better check your spelling. Stoopid has two 'o's.&quot;
 
-question: "I have more friends than you."
-answer: "Yeah, but only until you update your Facebook profile with a real picture of you!"
+question: &quot;I have more friends than you.&quot;
+answer: &quot;Yeah, but only until you update your Facebook profile with a real picture of you!&quot;
 
-question: "Af7ter th1s f1gh7, I w1ll pwn ur b0x3n."
-answer: "Check your settings - you seem to have chosen the Klingon keyboard layout."
+question: &quot;Af7ter th1s f1gh7, I w1ll pwn ur b0x3n.&quot;
+answer: &quot;Check your settings - you seem to have chosen the Klingon keyboard layout.&quot;
 
-question: "format C:"
-answer: "Specified drive does not exist."
+question: &quot;format C:&quot;
+answer: &quot;Specified drive does not exist.&quot;
 
-question: "I bet you don't even understand binary."
-answer: "Sure I do. Me and you, we are 10 different kind of persons."
+question: &quot;I bet you don't even understand binary.&quot;
+answer: &quot;Sure I do. Me and you, we are 10 different kind of persons.&quot;
 
-question: "I'll check you out - any last words?"
-answer: "svn:ignore"
+question: &quot;I'll check you out - any last words?&quot;
+answer: &quot;svn:ignore&quot;
 </code></pre>
 
 <pre class="wrap" style="padding:.5em;"><code class="nohighlight">Respect! you've beaten the mighty nerd master! Here's your egg:
@@ -1331,19 +1456,19 @@ import hashlib
 from hashlib import sha1, sha256, sha512
 from Crypto.Hash import MD2, MD5
 
-if __name__ == "__main__":
-	ans = "<font color="red">afpmqtaaqidtaww8ntangecaaf9pt3</font>"
-	charset = "abcdefghijklmnopqrstuvwxyz0123456789"
+if __name__ == &quot;__main__&quot;:
+	ans = &quot;<font color="red">afpmqtaaqidtaww8ntangecaaf9pt3</font>&quot;
+	charset = &quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;
 	begin, end = 0, 6
-	hashes = [(MD2, "757c47"), (MD5, "9895d6"), (sha1, "845b2b"), (sha256, "0530cd"), (sha512, "9a2b11")]
+	hashes = [(MD2, &quot;757c47&quot;), (MD5, &quot;9895d6&quot;), (sha1, &quot;845b2b&quot;), (sha256, &quot;0530cd&quot;), (sha512, &quot;9a2b11&quot;)]
 	for algo, frag in hashes:
 		if algo in [MD2, MD5]:
 			begin += 6
 			end += 6
 			continue
-		print>>sys.stderr, algo.__name__
+		print&gt;&gt;sys.stderr, algo.__name__
 		for i in itertools.product(charset, repeat=6):
-			word = "".join(i)
+			word = &quot;&quot;.join(i)
 			try: whash = algo.new(word).hexdigest()
 			except AttributeError:
 				m = algo()
@@ -1355,7 +1480,7 @@ if __name__ == "__main__":
 				break
 		begin += 6
 		end += 6
-	print "ans:", ans
+	print &quot;ans:&quot;, ans
 </code></pre>
 		<li class="dash">enter <code>ans</code> &rarr; redirect to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/sham_m7f3ngUfg6LLzf530zub.html">http://hackyeaster.hacking-lab.com/hackyeaster/sham_m7f3ngUfg6LLzf530zub.html</a></li>
 	</ul>
@@ -1640,19 +1765,19 @@ private int a(String s, Context context)
 {
 	try
 	{
-		<font color="red">SecretKeySpec secretkeyspec = new SecretKeySpec(a(s, "ovaederecumsale", 10000), "AES");
-		Cipher cipher = Cipher.getInstance("AES");
+		<font color="red">SecretKeySpec secretkeyspec = new SecretKeySpec(a(s, &quot;ovaederecumsale&quot;, 10000), &quot;AES&quot;);
+		Cipher cipher = Cipher.getInstance(&quot;AES&quot;);
 		cipher.init(2, secretkeyspec);
-		String s1 = new String(cipher.doFinal(Base64.decode("8QeNdEdkspV6+1I77SEEEF4aWs5dl/auahJ46MMufkg=", 0)));</font>
+		String s1 = new String(cipher.doFinal(Base64.decode(&quot;8QeNdEdkspV6+1I77SEEEF4aWs5dl/auahJ46MMufkg=&quot;, 0)));</font>
 
-		DownloadManager downloadmanager = (DownloadManager)getSystemService("download");
-		android.app.DownloadManager.Request request = new android.app.DownloadManager.Request(Uri.parse((new StringBuilder("http://hackyeaster.hacking-lab.com/hackyeaster/pin?p=")).append(s1).toString()));
-		request.setTitle("Hacky Easter");
-		request.setDescription("Egg Download");
-		request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "egg_26.png");
-		registerReceiver(new d(this), new IntentFilter("android.intent.action.DOWNLOAD_COMPLETE"));
+		DownloadManager downloadmanager = (DownloadManager)getSystemService(&quot;download&quot;);
+		android.app.DownloadManager.Request request = new android.app.DownloadManager.Request(Uri.parse((new StringBuilder(&quot;http://hackyeaster.hacking-lab.com/hackyeaster/pin?p=&quot;)).append(s1).toString()));
+		request.setTitle(&quot;Hacky Easter&quot;);
+		request.setDescription(&quot;Egg Download&quot;);
+		request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, &quot;egg_26.png&quot;);
+		registerReceiver(new d(this), new IntentFilter(&quot;android.intent.action.DOWNLOAD_COMPLETE&quot;));
 		downloadmanager.enqueue(request);
-		Toast.makeText(context, "Download started", 0).show();
+		Toast.makeText(context, &quot;Download started&quot;, 0).show();
 	}
 	catch (Exception exception)
 	{
@@ -1663,12 +1788,12 @@ private int a(String s, Context context)
 &#8230;
 <font color="red">public static byte[] a(String s, String s1, int i1)
 {
-	MessageDigest messagedigest = MessageDigest.getInstance("SHA1");
+	MessageDigest messagedigest = MessageDigest.getInstance(&quot;SHA1&quot;);
 	byte abyte0[] = (new StringBuilder(String.valueOf(s1))).append(s).toString().getBytes();
 	int j1 = 0;
 	do
 	{
-		if (j1 >= i1)
+		if (j1 &gt;= i1)
 		{
 			byte abyte1[] = new byte[16];
 			System.arraycopy(abyte0, 0, abyte1, 0, 15);
@@ -1686,21 +1811,21 @@ private int a(String s, Context context)
 <pre class="wrap" style="padding:.5em;"><code class="java">import java.util.Base64;
 &#8230;
 	Base64.Decoder decoder = Base64.getDecoder();
-	byte[] dec64 = decoder.decode("8QeNdEdkspV6+1I77SEEEF4aWs5dl/auahJ46MMufkg=");
+	byte[] dec64 = decoder.decode(&quot;8QeNdEdkspV6+1I77SEEEF4aWs5dl/auahJ46MMufkg=&quot;);
 	String s1 = new String(cipher.doFinal(dec64));
 &#x2026;
 </code></pre>
 		<li class="dash">then exhaustively enum all 4-digit PIN combo, looking out for any ASCII-readable txt</li>
 <pre class="wrap" style="padding:.5em;"><code class="java">import java.util.Base64;
 &#8230;
-	for(int i=0; i<9999; i++)
+	for(int i=0; i&lt;9999; i++)
 	{
-		String PIN = String.format("%04d", i);
+		String PIN = String.format(&quot;%04d&quot;, i);
 		String ciphertxt = crypt(PIN);
 		if (ciphertxt != null
-		&& ciphertxt.matches("^\\p{ASCII}*$"))
+		&amp;&amp; ciphertxt.matches(&quot;^\\p{ASCII}*$&quot;))
 		{
-			System.out.println(PIN+": "+ciphertxt);
+			System.out.println(PIN+&quot;: &quot;+ciphertxt);
 			break;
 		}
 	}
