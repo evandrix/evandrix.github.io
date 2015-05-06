@@ -163,7 +163,6 @@ In this challenge, you need to play with your phone a bit. Try to find out what 
 function requestLevels() {
 	window.location.href=&quot;<font color="red">ps://sensors</font>&quot;;
 }
-&#x2026;
 function sensorFeedback(json) {
 	var jsonResp = JSON.parse(json);
 	setLevel(1, jsonResp.l1);
@@ -175,15 +174,18 @@ function sensorFeedback(json) {
 		clearInterval(intervalId);
 	}
 }
-var intervalId = setInterval(requestLevels, 1000);</code></pre>
+var intervalId = setInterval(requestLevels, 1000);
+&#x2026;
+</code></pre>
 		<li class="dash"><code>ps://sensors</code> is mentioned @<code>/src/ps/hacking/hackyeaster/android/c.java</code></li>
 <pre style="padding:.5em;"><code>&#8230;
-if ("ps://sensors".equals(s))
-{
-	<font color="red">Activity.e(a);</font>
-	return true;
-}
-&#x2026;</code></pre>
+	if ("ps://sensors".equals(s))
+	{
+		<font color="red">Activity.e(a);</font>
+		return true;
+	}
+&#x2026;
+</code></pre>
 		<li class="dash"><code>static e(Activity a)</code> is defined @ <code>/src/ps/hacking/hackyeaster/android/Activity.java</code></li>
 <pre class="wrap" style="padding:.5em;word-wrap:break-word;"><code>private SensorManager g;
 &#8230;
@@ -191,16 +193,14 @@ static void e(Activity activity)
 {
 	activity.d();
 }
-&#8230;
 private void d()
 {
 	<font color="red">h = g.getDefaultSensor(1); //TYPE_ACCELEROMETER
 	i = g.getDefaultSensor(2); //TYPE_MAGNETIC_FIELD</font>
 	g.registerListener(this, h, 0);
 	g.registerListener(this, i, 0);
-	&#x2026;
+	&#8230;
 }
-&#8230;
 public int c()
 {
 	Intent intent = registerReceiver(null, new IntentFilter("<font color="red">android.intent.action.BATTERY_CHANGED</font>")); //current battery level
@@ -214,7 +214,6 @@ public int c()
 		return Math.round((i1 * 100) / j1); // to %
 	}
 }
-&#8230;
 private void j()
 {
 	int i1 = 100;
@@ -284,7 +283,6 @@ _L2:
 	if (true) goto _L5; else goto _L4
 _L4:
 }
-&#8230;
 public void onSensorChanged(SensorEvent sensorevent)
 {
 	if (sensorevent.sensor.getType() == 1) //TYPE_ACCELEROMETER
@@ -301,7 +299,8 @@ public void onSensorChanged(SensorEvent sensorevent)
 	}
 	<font color="red">j()</font>;
 }
-&#x2026;</code></pre>
+&#x2026;
+</code></pre>
 		<li class="dash"><code>Activity: e(a) &rarr; d() &rarr; callback-onSensorChanged() &rarr; j() &rarr; c() &rarr; ret</code></li>
 		<li class="dash">mapping: <code>sensorFeedback({k: s, l1: j1, l2: l1, l3: j2, l4: i1})</code>, where:</li>
 		<ul>
