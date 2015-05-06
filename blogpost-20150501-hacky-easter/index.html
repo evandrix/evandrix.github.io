@@ -20,13 +20,11 @@
 		<h1><a href="http://www.timeanddate.com/worldclock/fixedtime.html?iso=20150430T1600">20150501</a>: <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenges.html">Hacky Easter 2015</a> - writeup</h1>
 		<div id="postinfo">
 			<div id="postdate"></div>
-			<div id="posttags">tags: netsec, ctf, hacking-lab, 2015</div>
+			<div id="posttags">tags: netsec, ctf, hacking-lab, hacky, easter, 2015, he2015</div>
 		</div>
 		<div id="postbody">
 <center>
-	<i>QR code decoder <a href="http://zxing.org/w/decode.jspx">online</a></i>
-	<br>
-	<i>keys are all in lowercase only</i>
+	<i><a class="print-link" href="http://zxing.org/w/decode.jspx">QR code decoder</a><br>all keys in lowercase only</i>
 </center>
 <ol>
 	<li id="qn1" class="qn"><u>Puzzword</u></li>
@@ -102,7 +100,7 @@ You intercepted a message sent by a nerd from the office nearby. On first sight,
 		<li>java.lang.Integer.MAX_VALUE</li>
 		<li>13 MiB [bytes]</li>
 		<li>2<sup>20</sup></li>
-		<li>ZmlmdHk=</li>
+		<li>ZmlmdHk&#61;</li>
 		<li>sqrt(1296)</li>
 		<li>303240<sub>8</sub></li>
 		<li>Middle C [Hz]</li>
@@ -110,14 +108,14 @@ You intercepted a message sent by a nerd from the office nearby. On first sight,
 	</td><td>
 	<ol>
 		<li data-val="1400">bin2dec: 1400</li>
-		<li data-val="9671406559999999577423872">8 yobibytes = 9.67140656 &times; 10<sup>24</sup> bytes</li>
+		<li data-val="9671406559999999577423872">8 yobibytes &#61; 9.67140656 &times; 10<sup>24</sup> bytes</li>
 		<li data-val="299792458">299792458 m/s</li>
 		<li data-val="2130706433">2130706433</li>
 		<li data-val="36.4621596072">&#8776; 36.4621596072</li>
 		<li data-val="2147483647">2147483647</li>
 		<li data-val="13631488">13631488 bytes</li>
 		<li data-val="1048576">1048576</li>
-		<li data-val="50">base64_decode("ZmlmdHk=")=fifty=50</li>
+		<li data-val="50">base64_decode(&quot;ZmlmdHk&#61;&quot;) &#61; fifty &#61; 50</li>
 		<li data-val="36">36</li>
 		<li data-val="100000">100000</li>
 		<li data-val="261.626">261.626 Hz</li>
@@ -321,8 +319,7 @@ public void onSensorChanged(SensorEvent sensorevent)
 <pre class="wrap" style="padding:.5em;">
 The Doc's in trouble again, and you must come to his rescue! As you jump into his time machine, you realize that a password is needed to start it. Just in that moment of despair, you receive an audio message from the Doc, through space and time:
 
-<code>dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah</code>
-</pre>
+<code>dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah</code></pre>
 	<ul>
 		<li class="dash none"><u>Python Morse code decoder</u></li>
 <pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
@@ -331,15 +328,15 @@ import sys
 import codecs
 
 if __name__ == &quot;__main__&quot;:
-	morse_rev = {&quot;dah&quot;: &quot;T&quot;, &quot;dah-dah&quot;: &quot;M&quot;, &quot;dah-dah-dah&quot;: &quot;O&quot;, &quot;dah-dah-dit&quot;: &quot;G&quot;, &quot;dah-dah-dit-dah&quot;: &quot;Q&quot;, &quot;dah-dah-dit-dit&quot;: &quot;Z&quot;, &quot;dah-dit&quot;: &quot;N&quot;, &quot;dah-dit-dah&quot;: &quot;K&quot;, &quot;dah-di-dah-dah&quot;: &quot;Y&quot;, &quot;dah-di-dah-dit&quot;: &quot;C&quot;, &quot;dah-dit-dit&quot;: &quot;D&quot;, &quot;dah-dit-dit-dah&quot;: &quot;X&quot;, &quot;dah-dit-dit-dit&quot;: &quot;B&quot;, &quot;dit&quot;: &quot;E&quot;, &quot;dit-dah&quot;: &quot;A&quot;, &quot;dit-dah-dah&quot;: &quot;W&quot;, &quot;dit-dah-dah-dah&quot;: &quot;J&quot;, &quot;dit-dah-dah-dit&quot;: &quot;P&quot;, &quot;di-dah-dit&quot;: &quot;R&quot;, &quot;di-dah-di-dit&quot;: &quot;L&quot;, &quot;dit-dit&quot;: &quot;I&quot;, &quot;dit-dit-dah&quot;: &quot;U&quot;, &quot;di-di-dah-dit&quot;: &quot;F&quot;, &quot;dit-dit-dit&quot;: &quot;S&quot;, &quot;dit-dit-dit-dah&quot;: &quot;V&quot;, &quot;dit-dit-dit-dit&quot;: &quot;H&quot;}
+	morse_lookup = {&quot;dah&quot;: &quot;T&quot;, &quot;dah-dah&quot;: &quot;M&quot;, &quot;dah-dah-dah&quot;: &quot;O&quot;, &quot;dah-dah-dit&quot;: &quot;G&quot;, &quot;dah-dah-dit-dah&quot;: &quot;Q&quot;, &quot;dah-dah-dit-dit&quot;: &quot;Z&quot;, &quot;dah-dit&quot;: &quot;N&quot;, &quot;dah-dit-dah&quot;: &quot;K&quot;, &quot;dah-di-dah-dah&quot;: &quot;Y&quot;, &quot;dah-di-dah-dit&quot;: &quot;C&quot;, &quot;dah-dit-dit&quot;: &quot;D&quot;, &quot;dah-dit-dit-dah&quot;: &quot;X&quot;, &quot;dah-dit-dit-dit&quot;: &quot;B&quot;, &quot;dit&quot;: &quot;E&quot;, &quot;dit-dah&quot;: &quot;A&quot;, &quot;dit-dah-dah&quot;: &quot;W&quot;, &quot;dit-dah-dah-dah&quot;: &quot;J&quot;, &quot;dit-dah-dah-dit&quot;: &quot;P&quot;, &quot;di-dah-dit&quot;: &quot;R&quot;, &quot;di-dah-di-dit&quot;: &quot;L&quot;, &quot;dit-dit&quot;: &quot;I&quot;, &quot;dit-dit-dah&quot;: &quot;U&quot;, &quot;di-di-dah-dit&quot;: &quot;F&quot;, &quot;dit-dit-dit&quot;: &quot;S&quot;, &quot;dit-dit-dit-dah&quot;: &quot;V&quot;, &quot;dit-dit-dit-dit&quot;: &quot;H&quot;}
 	ms = &quot;dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah&quot;
-	print &quot;&quot;.join(morse_rev[m] for m in ms.split()).lower()
+	print &quot;&quot;.join(morse_lookup[m] for m in ms.split()).lower()
 </code></pre>
 		<li class="dash"><code>georgemcfly</code></li>
 		<li class="dash">not quite done yet! enter <code>georgemcfly</code> into Egg-O-Matic performs a HTTP GET request to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&k=georgemcfly">http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&amp;k=georgemcfly</a></li>
 		<li class="dash none">rendering: <img src="img/lvl06-georgemcfly.png" style="vertical-align:middle;"></li>
 		<li class="dash">so need to modify HTTP GET param <code>m</code>, according to given hint in img, by +3 ie. <code>m=7</code></li>
-		<li class="dash none"><code class="ans">curl -sL "http://hackyeaster.hacking-lab.com/hackyeaster/time?m=7&amp;k=georgemcfly" | jq -r '.egg' | base64 -d</code>
+		<li class="dash none"><code class="ans">curl -sL "http://hackyeaster.hacking-lab.com/hackyeaster/time?m=7&amp;k=georgemcfly" | <a class="print-link" href="http://stedolan.github.io/jq">jq</a> -r '.egg' | base64 -d</code>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn7" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge07.html"><u>Vista de la Calle</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
@@ -528,7 +525,6 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 		<li class="dash none"><code>curl -sL -X POST "http://hackyeaster.hacking-lab.com/hackyeaster/ceh" -d "q1=nmap&amp;q2=revocation&amp;q3=4950&amp;q4=384&amp;q4=512&amp;q5=88&amp;success=true"</code> returns:</li>
 <pre class="wrap" style="padding:.5em;"><code>&#8230;
 	Congratulations, you passed!!!
-&#8230;
 	&lt;div class=&quot;eggImage&quot; style=&quot;background-image: url('<font color="red">./images/egg_12_an8snbui1FeLO3Ugw89N.png</font>')&quot;&gt;&lt;/div&gt;
 &#x2026;
 </code></pre>
@@ -540,24 +536,19 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 <a href="file/leettv.mp4"><img src="img/play_movie.png"></a>
 </pre>
 	<ul>
-		<!-- "select=gte(n\,<frame#>)" -->
-		<li class="dash">extract stills from leettv.mp4@30fps:<br><div style="text-indent:1em;"><code>ffmpeg -i file/leettv.mp4 -vf fps=30 leettv@%d.png</code></div></li>
-		<li class="dash">decode QR codes in these imgs:<br><div style="text-indent:1em;"><code>zbarimg -q leettv@[0-9]*.png | sed 's|^QR-Code:||g' | sort | uniq &gt;&gt;leettv-qrcode.lst</code></div></li>
+		<!--"select=gte(n\,<frame#>)"-->
+		<li class="dash">extract stills from leettv.mp4@30fps: <code>ffmpeg -i file/leettv.mp4 -vf fps=30 leettv@%d.png</code></li>
+		<li class="dash">decode QR codes in these imgs: <code>zbarimg -q leettv@[0-9]*.png | sed 's|^QR-Code:||g' | sort | uniq &gt;&gt;leettv-qrcode.lst</code></li>
 		<li class="dash">note <a href="file/leettv-qrcode.lst">leettv-qrcode.lst</a> entry: <a href="http://bit.ly/1BJENx8">http://bit.ly/1BJENx8</a></li>
 		<li class="dash none">&rarr; <a href="http://hackyeaster.hacking-lab.com/hackyeaster/leettv_qbEtJZKLTLB3jByIWSpE.wav">http://hackyeaster.hacking-lab.com/hackyeaster/leettv_qbEtJZKLTLB3jByIWSpE.wav</a></li>
 		<li class="dash"><code>exiftool leettv_qbEtJZKLTLB3jByIWSpE.wav</code></li>
-<pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">&#8230;
-File Name : leettv_qbEtJZKLTLB3jByIWSpE.wav
-&#8230;
-Title     : The Hint
-&#8230;
-Comment   : <font color="red">siht esrever ot yrt</font>
-&#x2026;
+<pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">Title  : The Hint
+Comment: <font color="red">siht esrever ot yrt</font>
 </code></pre>
 		<li class="dash"><code>echo -ne &quot;siht esrever ot yrt&quot; | rev</code> says &quot;try to reverse this&quot;</li>
 		<li class="dash">so follow as instructed: <code>sox leettv_qbEtJZKLTLB3jByIWSpE.wav leettv_qbEtJZKLTLB3jByIWSpE-rev.wav reverse</code></li>
-		<li class="dash">audio contents: <code>eight forty-two</code></li>
-		<li class="dash">so extract frame leettv.mp4@08:42:<br><div style="text-indent:1em;"><code>ffmpeg -i file/leettv.mp4 -ss 00:08:42.001 -vframes 1 <font class="ans">leettv@0842.png</font></code></li>
+		<li class="dash">audio content: <code>eight forty-two</code></li>
+		<li class="dash">so extract frame leettv.mp4@08:42: <code>ffmpeg -i file/leettv.mp4 -ss 00:08:42.001 -vframes 1 <font class="ans">leettv@0842.png</font></code></li>
 		<li class="dash none"><img src="img/challenge13-vBrtvkpHNRCNZdhZN1nT.png"></li>
 	</ul>
 
@@ -573,7 +564,12 @@ add a dimension you must!</i>
 <img src="img/egg_14.png">
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash none"><img src="img/lvl14-zxing-decoder-online-1.png"></li>
+		<li class="dash">upload <code>egg_14.png</code> to <a class="print-link" href="http://zxing.org/w/decode.jspx">QR code decoder</a></li>
+		<li class="dash none"><img src="img/lvl14-zxing-decoder-online-2.png"></li>
+		<li class="dash">txt &#61; <code class="ans">yckgKB2iV1rvNEfCoNiR</code></li>
+		<li class="dash none" id="lvl14-qrcode"></li>
+		<li class="dash">gen QR code(txt) via <a class="print-link" href="http://larsjung.de/jquery-qrcode">jQuery.qrcode</a></li>
 	</ul>
 
 	<hr class="print-hidden"><li id="qn15" class="qn print-before"><a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge15.html"><u>Photo Shooting</u></a> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
@@ -730,7 +726,7 @@ import org.apache.commons.io.*;
 class Challenge15 {
 	public static void main(String[] args) throws Exception
 	{
-		File file_ft= new File(&quot;<a class="print-link" href="file/lvl15-ft.base64">lvl15-ft.base64</a>&quot;);
+		File file_ft= new File(&quot;<a class="print-link" href="file/lvl15-ft.base64">file/lvl15-ft.base64</a>&quot;);
 		String ft = FileUtils.readFileToString(file_ft);
 		byte[] decoded = org.apache.commons.codec.binary.Base64.decodeBase64(
 			org.apache.commons.codec.binary.Base64.decodeBase64(
@@ -759,7 +755,7 @@ Ghosts only come out when it's dark...
 <pre class="wrap" style="padding:.5em;"><code class="javascript">function (){skelD=!skelD,skelD?($(&quot;#dark&quot;).show(),$(&quot;#chall16 img&quot;).attr(&quot;src&quot;,&quot;images/banner_challenge_16_dark.jpg&quot;),$(&quot;#chall16 a&quot;).attr(&quot;href&quot;,&quot;challenge16-dark.html&quot;)):($(&quot;#dark&quot;).hide(),$(&quot;#chall16 img&quot;).attr(&quot;src&quot;,&quot;images/banner_challenge_16.jpg&quot;),$(&quot;#chall16 a&quot;).attr(&quot;href&quot;,&quot;challenge16.html&quot;))}
 </code></pre>
 		<li class="dash">clicking on Challenge 16 now leads to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenge16-dark.html">challenge16-dark.html</a>, containing another puzzle desc:</li>
-<pre class="wrap" style="padding:.5em;">
+<pre class="wrap print-before" style="padding:.5em;">
 Dark is beautiful. A <a href="http://en.wikipedia.org/wiki/GOST_(block_cipher)"><font color="red">GOST</font></a> with <a href="http://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_Block_Chaining_.28CBC.29"><font color="red">chain</font></a>ing appears and has a message for you:
 <code>d5++xytj6RiGwmqEecm63Kow7RZGAAHh
 VFsksHFuj/Anap7pWHDZ1XQw8DAApUEN
@@ -769,7 +765,7 @@ ej8Taxz+kHK9w9U8dxTOSksZ4HKS2YYD</code>
 </pre>
 		<li class="dash">as given in img, key: <code>spooky</code>; using <u>GOST</u> Russian symmetric key block cipher (GOST 28147-89) in <u>Cipher Block Chaining</u> (CBC) mode of op on ciphertxt, joined as a single contiguous string</li>
 		<li class="dash none"><img src="img/lvl16.png"></li>
-<pre class="wrap" style="padding:.5em;"><code class="php">#!/usr/bin/env php
+<pre class="wrap" style="padding:.5em;word-wrap:break-word;"><code class="php">#!/usr/bin/env php
 
 &lt;?
 	$key = &quot;spooky&quot;;
@@ -847,16 +843,16 @@ def crop_agent_xor():
 	#img = im.filter(ImageFilter.{BLUR,CONTOUR,DETAIL,EDGE_ENHANCE,EDGE_ENHANCE_MORE,EMBOSS,FIND_EDGES,SMOOTH,SMOOTH_MORE,SHARPEN})
 	#img.thumbnail(sz)
 	#img.show()
-	img.save(&quot;lvl17-qr1.jpg&quot;)
+	img.save(&quot;img/lvl17-qr1.jpg&quot;)
 	#tgt#
 	left, top, right, bottom = 333, 140, 368, 175
 	img = im.crop((left, top, right, bottom))
-	img.save(&quot;lvl17-qr2.jpg&quot;)
+	img.save(&quot;img/lvl17-qr2.jpg&quot;)
 
 def mk_qr_code():
-	im1 = Image.open(&quot;lvl17-qr1.jpg&quot;).convert(&quot;RGB&quot;)
+	im1 = Image.open(&quot;img/lvl17-qr1.jpg&quot;).convert(&quot;RGB&quot;)
 	#im1.getcolors(), im1.format, im1.size, im1.mode
-	im2 = Image.open(&quot;lvl17-qr2.jpg&quot;).convert(&quot;RGB&quot;)
+	im2 = Image.open(&quot;img/lvl17-qr2.jpg&quot;).convert(&quot;RGB&quot;)
 	pix2s = list(im2.getdata())
 	w2, h2 = im2.size
 	pix2s = [pix2s[i*w2:(i+1)*w2] for i in xrange(h2)]
@@ -870,7 +866,7 @@ def mk_qr_code():
 			for ci in xrange(len(pix1)):
 				pix.append(pix1[ci] ^ pix2[ci])
 			pix1s[x,y] = tuple(pix)
-	im1.save(&quot;lvl17-qr.jpg&quot;)
+	im1.save(&quot;img/lvl17-qr.jpg&quot;)
 </code></pre>
 
 	</ul>
@@ -1079,8 +1075,9 @@ eval(String.fromCharCode(105, 102, 32, 40, 33, 40, 110, 97, 118, 105, 103, 97, 1
 </code></pre>
 <img src="img/robotbg.jpg">
 		<li class="dash"><a href="http://en.wikipedia.org/wiki/Robot_Interaction_Language">Robot Interaction Language (ROILA)</a></li>
-		<li class="dash"><code>for w in bama waboki pisal fatatu fomu wosebi seju sowu seju bamas mufe wafub fomu mowewe; do egrep "^${w}\b" <a href="file/roila-wordlist.txt">roila-wordlist.txt</a>; done | cut -f2 | tr '\n' ' '</code></li>
+		<li class="dash"><code>for w in bama waboki pisal fatatu fomu wosebi seju sowu seju bamas mufe wafub fomu mowewe; do egrep "^${w}\b" <a href="file/roila-wordlist.txt">file/roila-wordlist.txt</a>; done | cut -f2 | tr '\n' ' '</code></li>
 <pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">you must make word of addition two and two this be name of page</code></pre>
+		<li class="dash">ie. 2+2 &#61; <code>four.html</code></li>
 <hr style="border-top: 1px dotted;">
 		<li class="dash">visit @ <a href="http://hackyeaster.hacking-lab.com/hackyeaster/bots/four.html">http://hackyeaster.hacking-lab.com/hackyeaster/bots/four.html</a>, supplying HTTP header: <code>{&quot;User-agent&quot;: &quot;EasterBot&quot;}</code>
 		<p style="text-indent: 1em"><code>curl -sL -A "EasterBot" "http://hackyeaster.hacking-lab.com/hackyeaster/bots/four.html"</code></p></li>
@@ -1268,7 +1265,7 @@ if __name__ == &quot;__main__&quot;:
 	### Hash 3 ###
 	intab, outtab = &quot;aegiost&quot;, &quot;4361057&quot; #leetspeak
 	leet = string.maketrans(intab, outtab)
-	with open(&quot;<a href="file/lvl22-wordlist.txt">lvl22-wordlist.txt</a>&quot;) as f:
+	with open(&quot;<a href="file/lvl22-wordlist.txt">file/lvl22-wordlist.txt</a>&quot;) as f:
 		words = map(string.strip, f.readlines())
 	while True:
 		word = list(random.choice(words))
@@ -1939,6 +1936,7 @@ the hq is in london
 		$("#lvl8 td:not(:first-child)").each(function () {
 			$(this).css("background-color", $(this).text()==="0"?"#000":"#fff");
 		});
+		$("#lvl14-qrcode").qrcode("yckgKB2iV1rvNEfCoNiR");
 	});
 </script>
 </body></html>
