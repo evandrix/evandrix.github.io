@@ -767,11 +767,11 @@ ej8Taxz+kHK9w9U8dxTOSksZ4HKS2YYD</code>
 <pre class="wrap" style="padding:.5em;word-wrap:break-word;"><code class="php">#!/usr/bin/env php
 
 &lt;?
-	$key = &quot;spooky&quot;;
+	$key = &quot;spooky&quot;; while(strlen($key)&lt;32) {$key.=&quot;\0&quot;;}
 	$ciphertxt = &quot;d5++xytj6RiGwmqEecm63Kow7RZGAAHhVFsksHFuj/Anap7pWHDZ1XQw8DAApUENR5ExOGUKTzGOtvSAlCHkHq6NneL6ZUTXej8Taxz+kHK9w9U8dxTOSksZ4HKS2YYD&quot;;
 	$ciphertxt_b64 = base64_decode($ciphertxt);
 	$iv_size = mcrypt_get_iv_size(MCRYPT_GOST, MCRYPT_MODE_CBC);
-	$iv = &quot;&quot;; while(strlen($iv)&lt;$iv_size) {$iv.=0;}
+	$iv = &quot;&quot;; while(strlen($iv)&lt;$iv_size) {$iv.=&quot;\0&quot;;}
 	$plaintxt = mcrypt_decrypt(MCRYPT_GOST, $key, $ciphertxt_b64, MCRYPT_MODE_CBC, $iv);
 	echo &quot;key: $key&quot;.PHP_EOL;
 	echo &quot;ciphertxt: $ciphertxt&quot;.PHP_EOL;
