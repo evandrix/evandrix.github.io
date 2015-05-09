@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>20150501: Hacky Easter - writeup</title>
+	<title>20150501: Hacky Easter 2015 - writeup</title>
 	<link rel="stylesheet" type="text/css" href="../all.min.css">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
@@ -27,6 +27,10 @@
 	<i><a class="print-link" href="http://zxing.org/w/decode.jspx">QR code decoder</a><br>all keys in lowercase only</i>
 </center>
 <ol>
+	<li id="qn0" class="qn print-hidden" value="0">
+		<a href="index-teaser.html"><u><font color="red">Teaser Challenge</font></u></a>
+	</li>
+
 	<li id="qn1" class="qn"><u>Puzzword</u></li>
 <pre style="padding:.5em;">
 Search out the password in the image
@@ -333,7 +337,7 @@ if __name__ == &quot;__main__&quot;:
 </code></pre>
 		<li class="dash"><code>georgemcfly</code></li>
 		<li class="dash">not quite done yet! enter <code>georgemcfly</code> into Egg-O-Matic performs a HTTP GET request to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&k=georgemcfly">http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&amp;k=georgemcfly</a></li>
-		<li class="dash none">rendering: <img src="img/lvl06-georgemcfly.png" style="vertical-align:middle;"></li>
+		<li class="dash none">rendering: <img class="vmid" src="img/lvl06-georgemcfly.png"></li>
 		<li class="dash">so need to modify HTTP GET param <code>m</code>, according to given hint in img, by +3 ie. <code>m=7</code></li>
 		<li class="dash none"><code class="ans">curl -sL "http://hackyeaster.hacking-lab.com/hackyeaster/time?m=7&amp;k=georgemcfly" | <a class="print-link" href="http://stedolan.github.io/jq">jq</a> -r '.egg' | base64 -d</code>
 	</ul>
@@ -824,7 +828,7 @@ def mk_agent_xor():
 </code></pre>
 
 		<li class="dash none"><img src="img/difference0.bmp"></li>
-		<li class="dash ans">XOR (as instructed) QR code <img src="img/lvl17-qr1.jpg" style="vertical-align:middle;"> w/ target <img src="img/lvl17-qr2.jpg" style="vertical-align:middle;">, each found on one side of Agent's glasses, yields <img src="img/lvl17-qr.jpg" style="vertical-align:middle;"></li>
+		<li class="dash ans">XOR (as instructed) QR code <img class="vmid" src="img/lvl17-qr1.jpg"> w/ target <img class="vmid" src="img/lvl17-qr2.jpg">, each found on one side of Agent's glasses, yields <img class="vmid" src="img/lvl17-qr.jpg"></li>
 <pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
@@ -1110,7 +1114,7 @@ Tired of boring QR codes, Dr. Bunny C. Easter developed an alternative. He's pro
 
 Hint: <code class="nohighlight">110</code> is <font color="blue">blue</font>, the rest's up to you...
 
-<img src="img/egg_21_plain.png" style="vertical-align:middle;"><img src="img/conycode.png" style="vertical-align:middle;">
+<img class="vmid" src="img/egg_21_plain.png"><img class="vmid" src="img/conycode.png">
 </pre>
 	<ul>
 		<li class="dash"><font color="blue">blue</font> &#61; RGB(0,0,255) &equiv; 110</li>
@@ -1930,7 +1934,7 @@ the hq is in london
 		}
 		var elem = $("<span>");
 		$(elem).attr("class", "eggImage");
-		$(elem).append("<img src='img/challenge27.png' width=240 height=240 style='border:none;vertical-align:middle;position:relative;top:3px;'>");
+		$(elem).append("<img class='vmid' src='img/challenge27.png' width=240 height=240 style='border:none;position:relative;top:3px;'>");
 		$("#eggs").append(elem);
 		$("#lvl8 td:not(:first-child)").each(function () {
 			$(this).css("background-color", $(this).text()==="0"?"#000":"#fff");
