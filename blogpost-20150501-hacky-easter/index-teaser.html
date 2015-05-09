@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>20150501: Hacky Easter 2015 - Teaser - writeup</title>
+	<link rel="stylesheet" type="text/css" href="../all.min.css">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+</head>
+<body>
+	<div id="content">
+		<div id="post">
+		<h1><a href="http://www.timeanddate.com/worldclock/fixedtime.html?iso=20150430T1600">20150501</a>: <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenges.html">Hacky Easter 2015</a> - <a href="">Teaser</a> - writeup</h1>
+		<div id="postinfo">
+			<div id="postdate"></div>
+			<div id="posttags">tags: netsec, ctf, hacking-lab, hacky, easter, 2015, teaser, he2015</div>
+		</div>
+		<div id="postbody">
+<center>
+	<i>analyse <a href="file/teaser-vid.mp4">teaser-vid.mp4</a></i>
+	<br>*<a href="">AtomicParsley</a></i>
+</center>
+<ol>
+	<li id="qn1" class="qn">What type of container is embedded?</li>
+	<ul>
+		<li class="dash none"><img src="img/truecrypt.png"></li>
+		<li class="dash ans">TrueCrypt</li>
+	</ul>
+
+	<li id="qn2" class="qn">Which password was used to protect the container?</li>
+	<ul>
+		<li class="dash none"><img src="img/teaser-vid.png"></li>
+		<li class="dash none"><img src="img/truecrypt-passwd.png"></li>
+		<li class="dash ans">scan</li>
+	</ul>
+
+	<li id="qn3" class="qn">What's the gold nugget / passphrase?</li>
+	<ul>
+		<li class="dash none ans">gold nugget: <img class="vmid" src="img/rabbits.png">, in Volume "NO NAME"</li>
+		<li class="dash ans">passphrase: rabbit attack!</li>
+		<li class="dash"><code>stat</code>, <code>identify</code>, <code>exiftool</code>, <code>strings</code> <a href="img/rabbits.png">rabbits.png</a> yield nothing of particular interest
+	</ul>
+
+<center class="print-hidden">--- <strong>FIN</strong> ---</center>
+</div></div></div>
+</body></html>
