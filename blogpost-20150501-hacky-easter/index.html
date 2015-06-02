@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title>20150501: Hacky Easter 2015 - writeup</title>
-	<link rel="stylesheet" type="text/css" href="../all.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
-	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/default.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/highlight-8.5.min.css">
 	<style type="text/css">
 		ul >li:before {content: '-';position: absolute;margin-left: -.7em;}
 		.qn>a>u {color: #000;}
@@ -1892,13 +1892,10 @@ the hq is in london
 
 <center class="print-hidden">--- <strong>FIN</strong> ---</center>
 </div></div></div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
-<script type="text/javascript">
-	//hljs.configure({useBR: true});
-	hljs.initHighlightingOnLoad();
-</script>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="/js/highlight-8.5.min.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 	$(function () {
 		"use strict";
@@ -1926,7 +1923,7 @@ the hq is in london
 			$(elem).append("<span id='egg-lvl"+lvl+"' class='eggQR'></span>");
 			$("#eggs").append(elem);
 			$("#eggs #egg-lvl"+lvl).qrcode({
-				/*render: "image",*/ size: 75,
+				size: 75,
 				left: 0, top: 0, fill: "#000",
 				text: qr_codes[i],
 				label: qr_codes[i]

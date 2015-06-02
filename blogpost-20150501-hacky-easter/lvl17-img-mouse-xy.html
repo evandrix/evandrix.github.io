@@ -6,9 +6,9 @@
 </head>
 <body>
 	<center>
-		<img class="coords" src="http://i.imgur.com/bhvpy.png" style="border:1px solid #000;">
+		<img class="coords" src="img/bhvpy.png" style="border:1px solid #000;">
 	</center>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript">
 		var tooltip = $('<div id="tooltip">').appendTo("body")[0];
 		$(".coords").each(function() {
@@ -18,8 +18,6 @@
 				width = $(this).width(),
 				height = $(this).height();
 			$(this).mousemove(function(e) {
-			//	var x = ((e.clientX-left)/width).toFixed(1),
-			//		y = ((height-(e.clientY-top))/height).toFixed(1);
 				var x = e.clientX-left, y = e.clientY-top;
 				$(tooltip).text(x+", "+y).css({
 					left: e.clientX-30,

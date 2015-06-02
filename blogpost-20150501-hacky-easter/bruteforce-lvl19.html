@@ -2,12 +2,11 @@
 <html>
 	<head>
 		<title>Hacky Easter 2015 | Challenge #19 | bruteforce</title>
-		<script type="text/javascript" src="js/aes.js"></script>
-		<script type="text/javascript" src="js/core-min.js"></script>
-		<script type="text/javascript" src="js/enc-base64-min.js"></script>
+		<script type="text/javascript" src="/js/aes.js"></script>
+		<script type="text/javascript" src="/js/core-min.js"></script>
+		<script type="text/javascript" src="/js/enc-base64-min.js"></script>
 	</head>
 	<body>
-		<!--<img class="eggImage" id="scrambledEggImage" src="egg_gray.png">-->
 		<script type="text/javascript">
 			"use strict";
 
@@ -19,18 +18,6 @@
 					str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
 				return str;
 			};
-			// var rawData = atob(data);
-			// var iv = btoa(rawData.substring(0,16));
-			// var crypttext = btoa(rawData.substring(16));
-			// var plaintextArray = CryptoJS.AES.decrypt(
-			//   {
-			//     ciphertext: CryptoJS.enc.Base64.parse(crypttext),
-			//     salt: ""
-			//   },
-			//   CryptoJS.enc.Hex.parse(key),
-			//   { iv: CryptoJS.enc.Base64.parse(iv) }
-			// );
-
 			var len = 5;
 			var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
 			var tries = 1000;
@@ -42,12 +29,9 @@
 					);
 				}
 				var decrypted = CryptoJS.AES.decrypt(scrambledEggCipher, key);
-				//var decrypted_str = CryptoJS.enc.Utf8.stringify(decrypted);
 				var sig = hex2ascii(decrypted.toString()).substr(0,4);
-				//var sig = decrypted_str.substr(0,4);
-				if (sig === "iVBO") { //valid PNG img
+				if (sig === "iVBO") { //valid .png
 					console.log("key:", key);
-					//document.getElementById("scrambledEggImage").setAttribute("src", "data:image/png;base64,"+CryptoJS.enc.Latin1.stringify(decrypted));
 				}
 			}
 		</script>
