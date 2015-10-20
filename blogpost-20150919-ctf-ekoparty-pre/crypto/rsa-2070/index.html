@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>20150919: EKOPARTY PRE-CTF 2015 - Crypto - RSA-2070 - writeup</title>
+	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
+	<link rel="stylesheet" type="text/css" href="/css/highlight-8.5.min.css">
+</head>
+<body>
+	<div id="content">
+		<div id="post">
+		<h1><a href="http://www.timeanddate.com/worldclock/fixedtime.html?iso=20150918T1600">20150919</a>: <a href="https://ctf.ekoparty.org">EKOPARTY PRE-CTF 2015</a> - Crypto - RSA-2070 - writeup</h1>
+		<div id="postinfo">
+			<div id="postdate"></div>
+			<div id="posttags">tags: netsec, ctf, ekoparty, crypto, 2015, rsa-2070</div>
+		</div>
+		<div id="postbody">
+<ul>
+	<li id="qn1" class="qn dash">The task is obvious, and pretty straightforward: </li>
+<pre class="wrap" style="padding:.5em;background:#f0f0f0;">just simply recover the <u>private key</u> and (<i>then use it to decrypt</i>) the <a href="flag.enc">flag</a>
+there's *even* a hint given to &quot;check padding&quot; [ref:<a href="https://en.wikipedia.org/wiki/Optimal_asymmetric_encryption_padding">Optimal Asymmetric Encryption Padding (OAEP)</a>]!
+</pre>
+	<li class="dash">contents of provided <code>crypto100.zip</code>:</li>
+	<ul>
+		<li class="dash"><a href="flag.enc"><code>flag.enc</code></a> (SHA256: <code>24fb435930448305d04ceb39a19eee7e922645b5e8f80ab5b5ec97993e9e3e57</code>)</li>
+		<div><code class="nohighlight hljs">
+		CQGd9sC/h9lnLpua50/071knSsP4N8WdmRsjoNIdfclrBhMjp7NoM5xy2SlNLLC2<br>
+		yh7wbRw08nwjo6UF4tmGKKfcjPcb4l4bFa5uvyMY1nJBvmqQylDbiCnsODjhpB1B<br>
+		JfdpU1LUKtwsCxbc7fPL/zzUdWgO+of/R9WmM+QOBPagTANbJo0mpDYxvNKRjvac<br>
+		9Bw4CQTTh87moqsNRSE/Ik5tV2pkFRZfQxAZWuVePsHp0RXVitHwvKzwmN9vMqGm<br>
+		57Wb2Sto64db4gLJDh9GROQN+EQh3yLoSS8NNtBrZCDddzfKHa8wv6zN/5znvBst<br>
+		sDBkGyi88NzQxw9kOGjCWtwpRw==
+		</code></div>
+		<li class="dash"><a href="public.key"><code>public.key</code></a> (SHA256: <code>206bd413f6e7a860b4b25b3fc0addd9472cd29df26ae4c0047f4d6fbcc49ea3b</code>)</li>
+		<div><code class="nohighlight hljs">
+		-----BEGIN PUBLIC KEY-----<br>
+		MIIBJDANBgkqhkiG9w0BAQEFAAOCAREAMIIBDAKCAQMlsYv184kJfRcjeGa7Uc/4<br>
+		3pIkU3SevEA7CZXJfA44bUbBYcrf93xphg2uR5HCFM+Eh6qqnybpIKl3g0kGA4rv<br>
+		tcMIJ9/PP8npdpVE+U4Hzf4IcgOaOmJiEWZ4smH7LWudMlOekqFTs2dWKbqzlC59<br>
+		NeMPfu9avxxQ15fQzIjhvcz9GhLqb373XDcn298ueA80KK6Pek+3qJ8YSjZQMrFT<br>
+		+EJehFdQ6yt6vALcFc4CB1B6qVCGO7hICngCjdYpeZRNbGM/r6ED5Nsozof1oMbt<br>
+		Si8mZEJ/Vlx3gathkUVtlxx/+jlScjdM7AFV5fkRidt0LkwosDoPoRz/sDFz0qTM<br>
+		5q5TAgMBAAE=<br>
+		-----END PUBLIC KEY-----
+		</code></div>
+	</ul>
+
+	<li class="dash none"><a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)"><u>RSA public-key cryptosystem 101</u></a></li>
+	<ul>
+		<li class="dash">modulus <code>n</code> = prime <code>p</code> x prime <code>q</code> (=<code>0x25b...e53</code> here)</li>
+		<li class="dash">exponent <code>e</code> (=65537=0x10001 here)</li>
+		<li class="dash">s.t. 1 < <code>e</code> < φ(<code>n</code>) = (<code>p</code> − 1)(<code>q</code> − 1), <code>e</code> &amp; φ(<code>n</code>) are coprime, where φ is <a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function">Euler's totient function</a></li>
+		<li class="dash"><code>e</code> * <code>d</code> = 1 mod φ(<code>n</code>) (=(<code>p</code> − 1)(<code>q</code> − 1))</li>
+		<li class="dash">pubkey contains (<code>n</code>, <code>e</code>)</li>
+		<li class="dash">privkey contains (<code>n</code>, <code>d</code>)</li>
+		<li class="dash">encrypt: pow(plaintext as <code>int</code>, <code>e</code>, <code>n</code>) = ciphertext</li>
+		<li class="dash">decrypt: pow(ciphertext as <code>int</code>, <code>d</code>, <code>n</code>) = plaintext</li>
+	</ul>
+
+	<li class="dash">retrieve <strong>modulus</strong></li>
+	<ul>
+		<li class="default"><code class="bash">cat <a href="public.key">public.key</a> | grep -v -- ----- | tr -d '\n' | base64 -d | openssl asn1parse -inform DER -strparse 19</code></li>
+		<li class="default"><code class="bash">openssl rsa -pubin -inform PEM -in <a href="public.key">public.key</a> -text -noout -modulus</code></li>
+	</ul>
+<pre class="wrap" style="word-break:break-all;"><code>modulus n = 0x25b18bf5f389097d17237866bb51cff8de922453749ebc403b0995c97c0e386d46c161cadff77c69860dae4791c214cf8487aaaa9f26e920a977834906038aefb5c30827dfcf3fc9e9769544f94e07cdfe0872039a3a6262116678b261fb2d6b9d32539e92a153b3675629bab3942e7d35e30f7eef5abf1c50d797d0cc88e1bdccfd1a12ea6f7ef75c3727dbdf2e780f3428ae8f7a4fb7a89f184a365032b153f8425e845750eb2b7abc02dc15ce0207507aa950863bb8480a78028dd62979944d6c633fafa103e4db28ce87f5a0c6ed4a2f2664427f565c7781ab6191456d971c7ffa395272374cec0155e5f91189db742e4c28b03a0fa11cffb03173d2a4cce6ae53
+</code></pre>
+<pre class="wrap" style="word-break:break-all;"><code>modulus n = 79832181757332818552764610761349592984614744432279135328398999801627880283610900361281249973175805069916210179560506497075132524902086881120372213626641879468491936860976686933630869673826972619938321951599146744807653301076026577949579618331502776303983485566046485431039541708467141408260220098592761245010678592347501894176269580510459729633673468068467144199744563731826362102608811033400887813754780282628099443490170016087838606998017490456601315802448567772411623826281747245660954245413781519794295336197555688543537992197142258053220453757666537840276416475602759374950715283890232230741542737319569819793988431443
+</code></pre>
+	<li class="dash">query online tool @ <a href="http://factordb.com/index.php?query=79832181757332818552764610761349592984614744432279135328398999801627880283610900361281249973175805069916210179560506497075132524902086881120372213626641879468491936860976686933630869673826972619938321951599146744807653301076026577949579618331502776303983485566046485431039541708467141408260220098592761245010678592347501894176269580510459729633673468068467144199744563731826362102608811033400887813754780282628099443490170016087838606998017490456601315802448567772411623826281747245660954245413781519794295336197555688543537992197142258053220453757666537840276416475602759374950715283890232230741542737319569819793988431443">http://factordb.com/index.php?query=<code>${modulus}</code></a></li>
+<pre class="wrap" style="word-break:break-all;"><code>prime p = 3133337
+</code></pre>
+<pre class="wrap" style="word-break:break-all;"><code>prime q = 25478326064937419292200172136399497719081842914528228316455906211693118321971399936004729134841162974144246271486439695786036588117424611881955950996219646807378822278285638261582099108339438949573034101215141156156408742843820048066830863814362379885720395082318462850002901605689761876319151147352730090957556940842144299887394678743607766937828094478336401159449035878306853716216548374273462386508307367713112073004011383418967894930554067582453248981022011922883374442736848045920676341361871231787163441467533076890081721882179369168787287724769642665399992556052144845878600126283968890273067575342061776244939
+</code></pre>
+	<li class="dash"><code class="bash">python <a href="rsatool.py">rsatool.py</a> -p "${p}" -q "${q}" -o private.pem</code></li>
+	<li class="dash none"><u>private.pem</u></li>
+<div><code class="nohighlight hljs">
+-----BEGIN RSA PRIVATE KEY-----<br>
+MIIELQIBAAKCAQMlsYv184kJfRcjeGa7Uc/43pIkU3SevEA7CZXJfA44bUbBYcrf93xphg2uR5HC<br>
+FM+Eh6qqnybpIKl3g0kGA4rvtcMIJ9/PP8npdpVE+U4Hzf4IcgOaOmJiEWZ4smH7LWudMlOekqFT<br>
+s2dWKbqzlC59NeMPfu9avxxQ15fQzIjhvcz9GhLqb373XDcn298ueA80KK6Pek+3qJ8YSjZQMrFT<br>
++EJehFdQ6yt6vALcFc4CB1B6qVCGO7hICngCjdYpeZRNbGM/r6ED5Nsozof1oMbtSi8mZEJ/Vlx3<br>
+gathkUVtlxx/+jlScjdM7AFV5fkRidt0LkwosDoPoRz/sDFz0qTM5q5TAgMBAAECggECMS1yZh8M<br>
+G3FGnKTITEilsh3FOI+PY1kWgrKszzruEbGDNZOsS2BMJ62DF0DFTXhzeFbQqrJtyDDTruQnfH6I<br>
+OpGnigm9QPjuNwoGi++NL0qOlTXq3V6wHSyofVZAxBoYFlw3/ZCg90nzxKbPLB/l7VDigd4Q0CJ4<br>
+XbQlchZ+ZFtSqMd/XexU4iRJKA20mOjzAIa/yJkpdJzCj4rd/iKxDDDR70CEF/hT0md4Zyv8J6gs<br>
+iwGvIG3i2GOGt7/HwL/SQEYfhNkqniM3tltxP9tVu9Ke19bwJRQ8F9GuauxYIOCNaadi7vB6yZQJ<br>
+4cCH2Olu1/dUv3rkloyZhFXelOxjpq8hAgMvz5kCggEBAMnTxKV49ue/YWlBwjEAtF/bSbyysD5E<br>
+dfkUBAblKnh/xl/t1a6GTwIBKRe9n0abYFCNczCzW2JEjz/EraPAlPX/Cb3XaG1Rm7f5OsbGho+F<br>
+jwqtsn3EKWlfCP34pDACkjNu5ebs845rM/AuL/uDccJFxvoEpFz47MdsAZ2j9ZliAGiUhHrUa9A4<br>
+uFv8PUJbdZq1XwFpmyFBc/ymq9KG7G3Kgr1ian09UfQetHbOV/2Wvssg4joIpq7MThzON49EPp37<br>
+wBVKJ+vQtj++/OS84f4uxld3y3j/iwIP67Y8JXmwB9FuES/Acy+8RH1FbUUe1ZNfQaxqjNouXTRd<br>
+ZYJPkMsCAwx6sQKCAQB5XE2y8roFQJ9im5gZv0K3ITWFsi0oRCJsVAzX2JVhP/QZWvpSp5B6tBfx<br>
+nqRX4LZZubS6ZB9fR7qbrbh77yGjimhhL1Yr5has2cDuJhJj2vvYf/oEhiAgrHTLwud3txQSuWyl<br>
+H3aU/QGOOze/FZsiJrMvQ/tRrJ00jU2rbRwRz0xPln7THUh3PKQfK93qOPTOwqEOSGJv7NvB4LcR<br>
+MPCaVFupZbSC+ox9Lrl1dz6RzkOMAYoHO4x/L3sI9zeRfofol6k5JA49TpNIYZ/QK4P5REcf8Xj4<br>
+mTENXGVwf1pJggAxfu32uNKKsbq9WTILji7/HxhuhOONjrOc+UxAv3dhAgMuK/k=<br>
+-----END RSA PRIVATE KEY-----
+</code></div>
+<pre class="wrap" style="padding-top:.5em;"><code class="python">#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import os
+import sys
+import codecs
+
+sys.stdout = codecs.getwriter(&quot;utf-8&quot;)(sys.stdout)
+sys.stderr = codecs.getwriter(&quot;utf-8&quot;)(sys.stderr)
+
+def decrypt_RSA(privkey, encoded):
+	from Crypto.PublicKey import RSA
+	from Crypto.Cipher import PKCS1_OAEP
+	from base64 import b64decode
+
+	assert os.path.isfile(privkey)
+	assert os.path.isfile(encoded)
+
+	with codecs.open(encoded, &quot;r&quot;, &quot;utf-8&quot;) as f:
+		flag = f.read().strip()
+		with codecs.open(privkey, &quot;r&quot;, &quot;utf-8&quot;) as f:
+			key = f.read().strip()
+			rsakey = RSA.importKey(key)
+			rsakey = PKCS1_OAEP.new(rsakey)
+			decrypted = rsakey.decrypt(b64decode(flag))
+			return decrypted
+	return None
+
+if __name__ == &quot;__main__&quot;:
+	print decrypt_RSA(&quot;private.pem&quot;, &quot;flag.enc&quot;)
+</code></pre>
+	<li class="dash">flag: <code class="ans">EKO{classic_rsa_challenge_is_boring_but_necessary}</code></li>
+<center class="print-hidden">--- <strong>FIN</strong> ---</center>
+</div></div></div>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/highlight-8.5.min.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+	$(function () {
+		"use strict";
+	});
+</script>
+</body></html>
