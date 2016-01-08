@@ -1,20 +1,18 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>CSAW CTF 2012</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CSAW CTF 2012 Qual</title>
 	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
-	<style type="text/css">
-		ul >li:before {content: '-';position: absolute;margin-left: -.7em;}
-	</style>
 </head>
 <body>
 	<div id="content">
 	  <div id="post">
-		<h1><a href="http://shell-storm.org/CTF/CSAW-2012">CSAW CTF 2012</a></h1>
+		<h1><a href="http://shell-storm.org/CTF/CSAW-2012">CSAW CTF 2012 Qual</a></h1>
 		<div id="postinfo">
 		  <div id="postdate"></div>
 		  <div id="posttags">tags: netsec, ctf, csaw, 2012</div>
@@ -23,36 +21,36 @@
 <center><img src="img/dashboard.png"></center>
 <h2><code>Trivia</code></h2>
 <ul>
-	<li>What is the first step of owning a target? <strong>recon</strong></li>
-	<li>What is the name of the Google's dynamic malware analysis tool for Android applications? <strong>bouncer</strong></li>
-	<li>What is the x86 opcode for and al, 0x24? Put your answer in the form 0xFFFF. <strong>0x2424</strong></li>
+	<li class="dash">What is the first step of owning a target? <strong>recon</strong></li>
+	<li class="dash">What is the name of the Google's dynamic malware analysis tool for Android applications? <strong>bouncer</strong></li>
+	<li class="dash">What is the x86 opcode for and al, 0x24? Put your answer in the form 0xFFFF. <strong>0x2424</strong></li>
 <pre><code>$ echo 'and al, 0x24' >a.asm &amp;&amp; nasm a.asm &amp;&amp; ndisasm a &amp;&amp; rm -f a.asm
 00000000  2424              and al,0x24
 </code></pre>
-	<li>Who was the first security researcher to publish the DEP bypass that utilized WriteProcessMemory()? <strong>Spencer Pratt</strong></li>
-	<li>What is the name of Microsoft's sophisticated distributed fuzzing system that utilizes automated debugging, taint analysis, model building, and constaint solving? <strong>SAGE</strong></li>
+	<li class="dash">Who was the first security researcher to publish the DEP bypass that utilized WriteProcessMemory()? <strong>Spencer Pratt</strong></li>
+	<li class="dash">What is the name of Microsoft's sophisticated distributed fuzzing system that utilizes automated debugging, taint analysis, model building, and constaint solving? <strong>SAGE</strong></li>
 </ul>
 <hr class="print-hidden">
 <h2 class="print-before"><code>Recon</code></h2>
 <ul>
 	<li id="recon-jordan-wiens" class="none"><em>Jordan Wiens</em></li>
 	<ul>
-		<li>one of the judges for the CTF</li>
-		<li>given <a href="https://www.google.com/search?&q=Jordan+Wiens">Google Search link</a></li>
-		<li>and fmt:key = <code>key{something}</code></li>
-		<li>found his <em>Twitter</em> &amp; <em>LinkedIn</em> accts => <code>@psifertex</code></li>
-		<li>check sites where this alias is taken: <a href="http://namechk.com">NameChk</a></li>
+		<li class="dash">one of the judges for the CTF</li>
+		<li class="dash">given <a href="https://www.google.com/search?&q=Jordan+Wiens">Google Search link</a></li>
+		<li class="dash">and fmt:key = <code>key{something}</code></li>
+		<li class="dash">found his <em>Twitter</em> &amp; <em>LinkedIn</em> accts => <code>@psifertex</code></li>
+		<li class="dash">check sites where this alias is taken: <a href="http://namechk.com">NameChk</a></li>
 		<img src="img/namechk@psifertex.png">
-		<li>nothing much here, so Google for <a href="https://www.google.com/search?q=psifertex">alias</a> instead</li>
-		<li>result:<a href="http://psifertex.com">psifertex.com</a>, containing the string '<i>Nothing to see here, move along.</i>'</li>
-		<li><a href="http://cty.psifertex.com">http://cty.psifertex.com</a> contains HTML comment string '<code>&lt;!-- The CSAW key is not on this domain. --&gt;</code>'</li>
-		<li><a href="http://psifertex.com/csaw">http://psifertex.com/csaw</a> looks like:</li>
+		<li class="dash">nothing much here, so Google for <a href="https://www.google.com/search?q=psifertex">alias</a> instead</li>
+		<li class="dash">result:<a href="http://psifertex.com">psifertex.com</a>, containing the string '<i>Nothing to see here, move along.</i>'</li>
+		<li class="dash"><a href="http://cty.psifertex.com">http://cty.psifertex.com</a> contains HTML comment string '<code>&lt;!-- The CSAW key is not on this domain. --&gt;</code>'</li>
+		<li class="dash"><a href="http://psifertex.com/csaw">http://psifertex.com/csaw</a> looks like:</li>
 		<img src="img/psifertex.com-csaw.png">
-		<li>the first characters of each word in the string &quot;[S]ome [U]nderstanding [B]ecomes [D]ominant [O]n [M]anipulation [A]nd [I]nquisitive Naming&quot; gives us <strong>SUBDOMAIN</strong>.</li>
-		<li>bruteforce subdomains using: <a href="https://github.com/TheRook/subbrute"><code>python subbrute.py psifertex.com</code></a></li>
+		<li class="dash">the first characters of each word in the string &quot;[S]ome [U]nderstanding [B]ecomes [D]ominant [O]n [M]anipulation [A]nd [I]nquisitive Naming&quot; gives us <strong>SUBDOMAIN</strong>.</li>
+		<li class="dash">bruteforce subdomains using: <a href="https://github.com/TheRook/subbrute"><code>python subbrute.py psifertex.com</code></a></li>
 			<ul>
-				<li>tool performs multithreaded DNS lookups to a configurable list of DNS resolvers</li>
-				<li>via a list of possible subdomains</li>
+				<li class="dash">tool performs multithreaded DNS lookups to a configurable list of DNS resolvers</li>
+				<li class="dash">via a list of possible subdomains</li>
 			</ul>
 <u>Output</u>
 <pre><code>Checking psifertex.com
@@ -63,16 +61,16 @@
 	69.163.249.183 ssh.psifertex.com
 	74.125.45.121 start.psifertex.com
 	69.163.249.183 www.psifertex.com</code></pre>
-		<li><a href="http://key.psifertex.com/2012.html">http://key.psifertex.com/2012.html</a></li>
-		<li>key{<code class="ans">secret sonambulist</code>}</li>
+		<li class="dash"><a href="http://key.psifertex.com/2012.html">http://key.psifertex.com/2012.html</a></li>
+		<li class="dash">key{<code class="ans">secret sonambulist</code>}</li>
 		<img src="img/recon-jordan-wiens.png">
 	</ul>
 </ul>
 <ul>
 	<li id="recon-jeff-jarmoc" class="none"><em>Jeff Jarmoc</em></li>
 	<ul>
-		<li>again, given <a href="https://www.google.com/search?&q=jjarmoc">Google Search link</a></li>
-		<li>EXIF metadata from photo of Jeff on Judges page</li>
+		<li class="dash">again, given <a href="https://www.google.com/search?&q=jjarmoc">Google Search link</a></li>
+		<li class="dash">EXIF metadata from photo of Jeff on Judges page</li>
 <pre><code>$ jhead jjarmoc.jpg
 
 File name    : jjarmoc.jpg
@@ -81,15 +79,15 @@ File date    : 2012:09:29 02:57:00
 Resolution   : 213 x 284
 Comment      : <font color="red">finger://jjarmoc@finger.offenseindepth.com:79</font></code></pre>
 		<li class="none">...OR...</li>
-		<li>from his <a href="https://de.twitter.com/jjarmoc">Twitter page</a>, he links <a href="http://offenseindepth.com">offenseindepth.com</a> as his homepage</li>
-		<li>bruteforce subdomains using: <a href="https://github.com/TheRook/subbrute"><code>python subbrute.py offenseindepth.com</code></a></li>
+		<li class="dash">from his <a href="https://de.twitter.com/jjarmoc">Twitter page</a>, he links <a href="http://offenseindepth.com">offenseindepth.com</a> as his homepage</li>
+		<li class="dash">bruteforce subdomains using: <a href="https://github.com/TheRook/subbrute"><code>python subbrute.py offenseindepth.com</code></a></li>
 <u>Output</u>
 <pre><code>Checking offenseindepth.com
 107.21.146.162 <font color="red">finger.offenseindepth.com</font>
 173.201.193.71 imap.offenseindepth.com
 74.125.45.121 mail.offenseindepth.com
 107.21.146.162 www.offenseindepth.com</code></pre>
-		<li>using subdomain name as a clue: <code>finger jjarmoc@finger.offenseindepth.com</code></li>
+		<li class="dash">using subdomain name as a clue: <code>finger jjarmoc@finger.offenseindepth.com</code></li>
 <pre><code>Debian GNU/Linux      Copyright (C) 1993-1999 Software in the Public Interest
 -----------------------------------------------------------------------------
 Username: jjarmoc                   In real life:
@@ -99,37 +97,37 @@ This is my .plan.  There are many more like it, but this one is mine.
 
 {key:does anyone still use finger?}
 -----------------------------------------------------------------------------</code></pre>
-		<li>key{<code class="ans">does anyone still use finger?</code>}</li>
+		<li class="dash">key{<code class="ans">does anyone still use finger?</code>}</li>
 	</ul>
 </ul>
 <ul>
 	<li id="recon-julian-cohen" class="none"><em>Julian Cohen</em></li>
 	<ul>
-		<li>just given <a href="https://www.google.com/search?&q=HockeyInJune">Google Search link</a></li>
-		<li>@<a href="https://twitter.com/HockeyInJune">Twitter account</a></li>
+		<li class="dash">just given <a href="https://www.google.com/search?&q=HockeyInJune">Google Search link</a></li>
+		<li class="dash">@<a href="https://twitter.com/HockeyInJune">Twitter account</a></li>
 		<img src="img/twitter-HockeyInJune.png">
-		<li>using <a href="http://namechk.com">NameChk</a>, found his <a href="http://www.reddit.com/user/HockeyInJune">Reddit profile</a>, consistently posting about CSAW CTF</li>
+		<li class="dash">using <a href="http://namechk.com">NameChk</a>, found his <a href="http://www.reddit.com/user/HockeyInJune">Reddit profile</a>, consistently posting about CSAW CTF</li>
 		<img src="img/namechk@HockeyInJune.png">
-		<li>a link included in a comment on one of his Reddit posts contains the key, ie. <a href="http://cockcab.com">http://cockcab.com</a></li>
+		<li class="dash">a link included in a comment on one of his Reddit posts contains the key, ie. <a href="http://cockcab.com">http://cockcab.com</a></li>
 		<img src="img/reddit-HockeyInJune.png">
-		<li>key{<code class="ans">The_first_step_of_owning_a_target_is_recon.</code>}</li>
+		<li class="dash">key{<code class="ans">The_first_step_of_owning_a_target_is_recon.</code>}</li>
 		<img src="img/recon-julian-cohen.png">
 	</ul>
 </ul>
 <ul>
 	<li id="recon-dan-guido" class="none"><em>Dan Guido</em></li>
 	<ul>
-		<li><font color="red">What are Dan Guido's two favorite foods?</font></li>
-		<li>also look at comments on Reddit</li>
-		<li>key{<code class="ans">salami and cheese</code>}</li>
+		<li class="dash"><font color="red">What are Dan Guido's two favorite foods?</font></li>
+		<li class="dash">also look at comments on Reddit</li>
+		<li class="dash">key{<code class="ans">salami and cheese</code>}</li>
 		<img src="img/recon-dan-guido.png">
 	</ul>
 </ul>
 <ul>
 	<li id="recon-yoda" class="none"><em>Yoda</em></li>
 	<ul>
-		<li>hangs out on IRC, so check there</li>
-		<li>$ <code>/whois yoda</code></li>
+		<li class="dash">hangs out on IRC, so check there</li>
+		<li class="dash">$ <code>/whois yoda</code></li>
 <pre><code>yoda [~o@ISIS-B0CFAD3E.com]
 ircname  : key{<font color="red">hockey lock outs mean probably april</font>}
 channels : @#csaw
@@ -137,9 +135,8 @@ server   : isis.poly.edu [ISIS IRC Server]
          : is using a Secure Connection
 idle     : 0 days 0 hours 22 mins 1 secs [signon: Sat Sep 29 21:31:54 2012]
 End of WHOIS</code></pre>
-		<li>key{<code class="ans">hockey lock outs mean probably april</code>}</li>
+		<li class="dash">key{<code class="ans">hockey lock outs mean probably april</code>}</li>
 	</ul>
 </ul>
-<hr class="print-hidden">
-	<center>--- <strong>FIN</strong> ---</center>
+<center class="print-hidden">--- <strong>FIN</strong> ---</center>
 </div></div></div></body></html>
