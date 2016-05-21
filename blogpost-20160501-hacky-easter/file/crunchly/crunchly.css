@@ -1,0 +1,9 @@
+html { background: url(crunchly.jpg) no-repeat center center fixed;  -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; font-family:'Source Sans Pro';}
+.panel { position: absolute; top: 50%; left: 50%; width: 442px; height: 200px; margin-top: -107px; margin-left: -240px; background-color: rgba(0,0,0,0.5); border-radius: 5px;}
+.title {color:white; font-size: 48px; font-weight:bold; position:absolute; top: 20px; left: 0; width: 100%; text-align: center;}
+.prefix  {padding:10px 0 10px 30px; font-size: 26px; font-weight:bold; width: 120px; height: 25px; color:white;}
+input[type=text], input[type=password] {border: 0; border-radius: 5px; padding:10px 20px; font-size:25px; background:#fff; height: 25px; margin: 20px 20px 0 20px;}
+input[type=submit] {border: 0; border-radius: 5px; font-weight: bold; font-size:24px;  background:#adff2f; color: #333; width: 401px; height: 44px; margin: 20px 20px 0 20px;}
+.imageBg { position: absolute; top: 50%; left: 50%; width: 360px; height: 360px; margin-top: -180px; margin-left: -180px; background-color: rgba(255,255,255,0.7); border-radius: 5px;}
+.image {width: 360px; height:360px;}
+.link{padding-left: 145px; font-size: 18px; width: 400px; height: 25px; color:#e4cba3; text-decoration: underline;}

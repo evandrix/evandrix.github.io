@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>crunch.ly</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="crunchly.css">
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="title">crunch.ly</div>
+    <div class="panel" id="panel1" style="display:block;">
+        <span class="prefix">http://crunch.ly/</span><input style="width: 140px;" class="input" type="text" id="shorturl" maxlength="7" placeholder="short url"/><br/>
+		<input id="gobutton" onclick="javascript:goButtonPressed();" class="button" type="submit" value="open"/><br/><br/>
+		<span class="link" onclick="javascript:showPanel2();">create new short url</span>
+    </div>
+    <div class="panel" id="panel2" style="display:none;">
+		<input id="url" class="input" style="width:361px;" type="text" id="shorturl" placeholder="url to shorten"/><br/>
+        <input id="urlbutton" onclick="javascript:urlButtonPressed();" class="button" type="submit" value="check"/><br/><br/>
+		<span class="link" onclick="javascript:showPanel1('');">forget it and go back</span>
+    </div>
+  </body>
+</html>

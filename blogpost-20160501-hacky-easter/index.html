@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>20160501: Hacky Easter 2016 - writeup</title>
+	<link rel="stylesheet" type="text/css" href="/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+	<link rel="stylesheet" type="text/css" href="//vjs.zencdn.net/5.9.2/video-js.css">
+	<script type="text/javascript" src="//vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+	<style type="text/css">
+		/* video.js */
+		.vjs-menu-button-popup .vjs-menu ul.vjs-menu-content {
+			margin: 0 !important;
+		}
+		/* */
+		.btn-dl {
+			font-size: 1.1em;
+			padding: 0.65em 1.5em 0.65em 1.5em;
+			line-height: 1.75em;
+			-webkit-appearance: none;
+			display: inline-block;
+			text-decoration: none;
+			cursor: pointer;
+			border: 0;
+			border-radius: 5px;
+			background: #4923a0;
+			color: #fff;
+			font-weight: 700;
+			outline: 0;
+			-moz-transition: background-color .25s ease-in-out;
+			-webkit-transition: background-color .25s ease-in-out;
+			-o-transition: background-color .25s ease-in-out;
+			-ms-transition: background-color .25s ease-in-out;
+			transition: background-color .25s ease-in-out;
+		}
+		@media print {
+			.wrap-print {
+				white-space: pre-wrap;
+				word-break: break-all;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<div id="post">
+		<h1><a href="http://www.timeanddate.com/worldclock/fixedtime.html?iso=20160430T1600">20160501</a>: <a href="http://hackyeaster.hacking-lab.com/hackyeaster/challenges.html">Hacky Easter 2016</a> - writeup</h1>
+		<div id="postinfo">
+			<div id="postdate"></div>
+			<div id="posttags">tags: netsec, ctf, hacking-lab, hacky, easter, 2016, he2016</div>
+		</div>
+		<div id="postbody">
+<center>
+	<i><a class="print-link" href="http://zxing.org/w/decode.jspx">QR code decoder</a><br>all keys in lowercase only</i>
+</center>
+<ol>
+	<li id="qn0" class="qn print-hidden" value="0">
+		<a href="index-teaser.html"><u><font color="red">Teaser Challenge</font></u></a>
+	</li>
+
+	<li id="qn1" class="qn"><u>Easy One</u></li>
+<pre class="wrap" style="padding:.5em;">
+As always, the first challenge is very easy. Even babies can solve this one!
+
+Find the code and enter it in the Egg-O-Matic™ below! One word, all lowercase.
+
+xt   hex   yhi   dde   nyy   str
+in   gyy   isy   ymo   lly   cod
+dl   exy   sox   xsi   mpl   ey🚼
+</pre>
+	<ul>
+		<li class="dash">remove whitespace =&gt; x<font class="ans">the</font>xy<font class="ans">hidden</font>yy<font class="ans">string</font>yy<font class="ans">is</font>yy<code class="ans">mollycoddle</code>xy<font class="ans">so</font>xx<font class="ans">simple</font>y</li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn2" class="qn print-before"><u>Just Cruisin'</u></li>
+<pre class="wrap" style="padding:.5em;">
+Need a holiday? Book a cruise on our new flag ship!
+
+Seek out the promotion code below (lowercase only, no spaces) and get a free welcome package!
+</pre>
+<style type="text/css">
+	img.shipflag {
+		width: 72px;
+		height: 72px;
+		margin: 16px;
+		border: 1px solid #000;
+	}
+</style>
+<img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag02.svg"><img class="shipflag" src="img/flag03.svg"><img class="shipflag" src="img/flag04.svg"><img class="shipflag" src="img/flag05.svg"><br><img class="shipflag" src="img/flag06.svg"><img class="shipflag" src="img/flag07.svg"><img class="shipflag" src="img/flag08.svg"><img class="shipflag" src="img/flag09.svg"><img class="shipflag" src="img/flag10.svg"><br><img class="shipflag" src="img/flag11.svg"><img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag12.svg"><img class="shipflag" src="img/flag13.svg"><img class="shipflag" src="img/flag12.svg"><br><img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag08.svg"><img class="shipflag" src="img/flag14.svg"><img class="shipflag" src="img/flag10.svg"><img class="shipflag" src="img/flag15.svg"><br><img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag16.svg"><img class="shipflag" src="img/flag17.svg"><img class="shipflag" src="img/flag01.svg">
+	<ul>
+		<li class="dash"><code class="ans">enjoyafreshseabreeze</code></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn3" class="qn print-before"><u>Bird's Nest</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	@ <code>/assets/www/challenge03.html</code>:
+<pre class="wrap" style="padding:.5em;">
+The little bird has hidden an egg in its nest. Can you find it?
+
+<img src="img/nest.jpg">
+</pre>
+	<ul>
+		<li class="dash">@ <a href="//twitter.com/8lueL1ttleB1rd/status/720201875945984001">//twitter.com/8lueL1ttleB1rd/status/720201875945984001</a></li>
+		<li class="dash none"><img src="img/egg03-tweet=720201875945984001.png"></li>
+		<li class="dash">@ <a href="//bit.ly/1JjtbId">//bit.ly/1JjtbId</a></li>
+		<li class="dash none">=&gt; <a href="//hackyeaster.hacking-lab.com/hackyeaster/images/egg03_jPr5bJuNexwI4NsRkEcs.png">//hackyeaster.hacking-lab.com/hackyeaster/images/egg03_jPr5bJuNexwI4NsRkEcs.png</a></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn4" class="qn print-before"><u>Sound Check</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	@ <code>/assets/www/challenge04.html</code>:
+<pre class="wrap" style="padding:.5em;">
+The new sound system needs a check. Sharpen your ears and listen carefully!
+
+<button class="btn-dl">Start sound check</button>
+</pre>
+	<ul>
+		<li class="dash">@ <code>ps.hacking.hackyeaster.android.SoundActivity</code>:
+<pre class="wrap" style="padding:.5em;"><code>&#8230;
+byte[] woozle = Base64.decode(this.val$activity.getString(C0174R.string.woozle), 0);
+for (int i = 0; i < woozle.length; i++) {
+	woozle[i] = (byte) (woozle[i] ^ i);
+}
+&#x2026;
+</code></pre></li>
+		<li class="dash"><pre class="wrap" style="padding:.5em;"><code>#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+import struct
+
+data = bytearray(open(&quot;<a href="file/egg04-woozle.in">egg04-woozle.in</a>&quot;, &quot;rb&quot;).read())
+key = map(int, list(xrange(len(data))))
+o = [(data[i]^key[i])%256 for i in xrange(len(data))]
+with open(&quot;egg04-woozle.png&quot;, &quot;wb&quot;) as f: f.write(bytearray(o))
+print &quot;egg04-woozle.in =&gt; egg04-woozle.png&quot;</code></pre></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn5" class="qn print-before"><u>Play it again, Paul</u></li>
+<pre class="wrap" style="padding:.5em;">
+Do you know Paul? If not, it's about time to get to know him! Check out his video below!
+Ĉu vi scias Paŭlo? Se ne, ĝi estas pri tempo ekkoni lin! Kontroli lian video sube!
+</pre>
+<video id="video" class="video-js vjs-default-skin" controls preload="metadata" width="480" height="400" poster="img/paul/poster.png" data-setup="">
+<source src="file/paul/video.mp4" type="video/mp4"><source src="file/paul/video.webm" type="video/webm"><source src="file/paul/video.ogv" type="video/ogg">
+<track label="English" kind="captions" srclang="en" src="file/paul/video-en.vtt" default><track label="Deutsch" kind="captions" srclang="de" src="file/paul/video-de.vtt"><track label="Français" kind="captions" srclang="fr" src="file/paul/video-fr.vtt"><track label="Esperanto" kind="captions" srclang="eo" src="file/paul/video-eo.vtt"></video>
+	<ul>
+		<li class="dash">hint to look in <a href="file/paul/video-eo.vtt">Esperanto subtitle file</a>, since given translation (second line) is in Esperanto</li>
+		<li class="dash">
+<pre class="wrap" style="padding:.5em;"><code>1
+00:01:00.000 --> 00:01:03.000
+passphrase is &quot;<font class="ans">youtubelotitis</font>&quot;</code></pre></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn6" class="qn print-before"><u>Going Up</u></li>
+<pre class="wrap" style="padding:.5em;">
+Time for an elevator ride. Guess the right floor, and find the hidden easter egg!
+</pre>
+<style type="text/css">
+	.tablediv { display: table; }
+	.tablerow { display: table-row; }
+	.tablecell { display: table-cell; }
+
+	.round-button {
+		/*width: 75px;
+		height: 75px;*/
+		margin-left: 5px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+		float: left;
+	}
+	.round-button-circle {
+		width: 75px;
+		height: 75px;
+		padding-bottom: 0px;
+		border-radius: 50%;
+		border: 10px solid #333;
+		overflow: hidden;
+		background: #eee none repeat scroll 0% 0%;
+		box-shadow: 0px 0px 3px #555;
+	}
+	.round-button-circle:hover {
+		background: #666;
+	}
+	.round-button a {
+		display:block;
+		float:left;
+		width:100%;
+		padding-top:50%;
+		padding-bottom:50%;
+		line-height:1em;
+		margin-top:-0.5em;
+		margin-left: 0;
+		text-align:center;
+		color:#333 !important;
+		font-family:Verdana;
+		font-size:1.2em;
+		font-weight:bold;
+		text-decoration:none;
+	}
+</style>
+<div class="tablediv" id="table"><div class="tablerow"><div class="tablecell" style="width: 25%; padding-bottom: 10px;"><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=sixteen" class="round-button" onclick="return false;">16</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=seventeen" class="round-button" onclick="return false;">17</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=eighteen" class="round-button" onclick="return false;">18</a></div></div></div></div><div class="tablerow"><div class="tablecell" style="width: 25%; padding-bottom: 10px;">
+<div class="round-button" onclick="return false;"><div class="round-button-circle" style="background-color:yellow;" ><a href="?sybbe=punatrzr" class="round-button" onclick="return false;">13</a></div></div>
+<div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=fourteen" class="round-button" onclick="return false;">14</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=fifteen" class="round-button" onclick="return false;">15</a></div></div></div></div><div class="tablerow"><div class="tablecell" style="width: 25%; padding-bottom: 10px;"><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=ten" class="round-button" onclick="return false;">10</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=eleven" class="round-button" onclick="return false;">11</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=twelve" class="round-button" onclick="return false;">12</a></div></div></div></div><div class="tablerow"><div class="tablecell" style="width: 25%; padding-bottom: 10px;"><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=seven" class="round-button" onclick="return false;">07</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=eight" class="round-button" onclick="return false;">08</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=nine" class="round-button" onclick="return false;">09</a></div></div></div></div><div class="tablerow"><div class="tablecell" style="width: 25%; padding-bottom: 10px;"><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=four" class="round-button" onclick="return false;">04</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=five" class="round-button" onclick="return false;">05</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=six" class="round-button" onclick="return false;">06</a></div></div></div></div><div class="tablerow"><div class="tablecell" style="width: 25%; padding-bottom: 10px;"><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=one" class="round-button" onclick="return false;">01</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=two" class="round-button" onclick="return false;">02</a></div></div><div class="round-button" onclick="return false;"><div class="round-button-circle"><a href="?floor=three" class="round-button" onclick="return false;">03</a></div></div></div></div></div>
+<div id="fail" style="width: 300px;background: rgba(221,221,221,0.5);border: 1px solid #000;">Nope! Click the image to try again!<br/><img class="no-border" src="img/elevator_fail.jpg" style="width: 284px;" onclick="javascript:window.location.href='challenge06.html';" /></div>
+	<ul>
+		<li class="dash">one of the links is not like the others: btn #13 links to <a href="?sybbe=punatrzr" onclick="return false;">?sybbe=punatrzr</a></li>
+		<li class="dash"><code>rot13</code> => <a href="?floor=changeme" onclick="return false;">?floor=changeme</a></li>
+		<li class="dash">so <a href="?floor=thirteen" onclick="return false;">?floor=thirteen</a> => <code>rot13</code> => <a href="//hackyeaster.hacking-lab.com/hackyeaster/challenge06.html?sybbe=guvegrra">?sybbe=guvegrra</a></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn7" class="qn print-before"><u>Wise Rabbit Once More</u></li>
+<pre class="wrap" style="padding:.5em;">
+Wise Rabbit says:
+
+<i>The solution is in the solutions!
+Go back and scroll to 123!</i>
+</pre>
+	<ul>
+		<li class="dash"><a href="//media.hacking-lab.com/hackyeaster/HackyEaster2015_Solutions_high.pdf">2015HE solution document</a> pg #123</li>
+		<li class="dash">password: <code class="ans">goldfish</code></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn8" class="qn print-before"><u>Just Drive</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+	@ <code>/assets/www/challenge08.html</code>:
+<pre class="wrap" style="padding:.5em;"><code>var solved = false;
+var hist = &quot;&quot;;
+&#8230;
+function rotFeedback(jsonString) {
+	if (json) {
+		hist = json.h;
+		if (json.k) {
+			solved = true;
+		} else if (json.s &gt; 1) {
+			$(&quot;#rotImg&quot;).attr(&quot;src&quot;, &quot;images/rot/rot&quot;+json.s+&quot;.png&quot;);
+		} else {
+			$(&quot;#rotImg&quot;).attr(&quot;src&quot;, &quot;images/egg_gray.png&quot;);
+		}
+	}
+}
+
+setInterval(function () {
+	if (!solved) {
+		document.location.href = &quot;ps://<font class="ans">rot</font>?h=&quot; + hist;
+	}
+}, 1000);</code></pre>
+	<ul>
+		<li class="dash">@ <code>ps.hacking.hackyeaster.android.Activity</code>:</li>
+<pre class="wrap" style="padding:.5em;"><code>private String handleRot(String s) {
+	char c;
+	switch (((WindowManager) getSystemService(&quot;window&quot;)).getDefaultDisplay().getRotation()) {
+		case SwipeRefreshLayout.LARGE /*0*/:
+			c = &#39;r&#39;;
+			break;
+		case SwipeRefreshLayout.DEFAULT /*1*/:
+			c = &#39;n&#39;;
+			break;
+		case WearableExtender.SIZE_MEDIUM /*3*/:
+			c = &#39;x&#39;;
+			break;
+		default:
+			c = &#39;l&#39;;
+			break;
+	}
+	if (!s.startsWith(BuildConfig.VERSION_NAME + c)) {
+		s = c + s;
+	}
+	if (s.length() &gt; 8) {
+		s = s.substring(0, 8);
+	}
+	int steps = 0;
+	String key = BuildConfig.VERSION_NAME;
+	String h = sha1(s);
+	if (h.startsWith(&quot;4692bd56dd3070f74b7e&quot;)) {
+		key = h;
+	} else if (s.length() &gt;= 7 &amp;&amp; &quot;1ab9a97066f747c25d9c6a6b0fda647fae98cb98&quot;.equals(sha1(s.substring(0, 7)))) {
+		steps = 7;
+	} else if (s.length() &gt;= 6 &amp;&amp; &quot;58192f7d1263bd420efb788cc884a84f871239cf&quot;.equals(sha1(s.substring(0, 6)))) {
+		steps = 6;
+	} else if (s.length() &gt;= 5 &amp;&amp; &quot;e8f235e79be9f8b13598b285a6fdaf2ac70a66ca&quot;.equals(sha1(s.substring(0, 5)))) {
+		steps = 5;
+	} else if (s.length() &gt;= 4 &amp;&amp; &quot;3daee0c0bada99f5bf0866728fd78299acaafa15&quot;.equals(sha1(s.substring(0, 4)))) {
+		steps = 4;
+	} else if (s.length() &gt;= 3 &amp;&amp; &quot;f11fa81c0b72716bba0536dd34b9b0987af69b03&quot;.equals(sha1(s.substring(0, 3)))) {
+		steps = 3;
+	} else if (s.length() &gt;= 2 &amp;&amp; &quot;a8643e0e26d5ead82e73aae64966ca144f152d8a&quot;.equals(sha1(s.substring(0, 2)))) {
+		steps = 2;
+	} else if (s.length() &gt;= 1 &amp;&amp; &quot;4dc7c9ec434ed06502767136789763ec11d2c4b7&quot;.equals(sha1(s.substring(0, 1)))) {
+		steps = 1;
+	}
+	return &quot;{ \&quot;s\&quot;: &quot; + steps + &quot;, \&quot;h\&quot;:\&quot;&quot; + s + &quot;\&quot;, \&quot;k\&quot;:\&quot;&quot; + key + &quot;\&quot; }&quot;;
+}</code></pre>
+		<li class="dash">crack SHA1 hashes using <code>cudaHashcat</code>; charset: `rnxl`</li>
+		<ul>
+			<li class="dash"><code class="ans">4692bd56dd3070f74b7e81c6b2f69339b0fd6062:&nbsp;nrxrxrnr</code></li>
+			<li class="dash"><code>1ab9a97066f747c25d9c6a6b0fda647fae98cb98:&nbsp;&nbsp;rxrxrnr</code></li>
+			<li class="dash"><code>58192f7d1263bd420efb788cc884a84f871239cf:&nbsp;&nbsp;&nbsp;xrxrnr</code></li>
+			<li class="dash"><code>e8f235e79be9f8b13598b285a6fdaf2ac70a66ca:&nbsp;&nbsp;&nbsp;&nbsp;rxrnr</code></li>
+			<li class="dash"><code>3daee0c0bada99f5bf0866728fd78299acaafa15:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xrnr</code></li>
+			<li class="dash"><code>f11fa81c0b72716bba0536dd34b9b0987af69b03:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rnr</code></li>
+			<li class="dash"><code>a8643e0e26d5ead82e73aae64966ca144f152d8a:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nr</code></li>
+			<li class="dash"><code>4dc7c9ec434ed06502767136789763ec11d2c4b7:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r</code></li>
+		</ul>
+		<li class="dash"><pre class="wrap" style="padding:.5em;"><code>$(document).ready(function () {
+	var o = {k: &quot;4692bd56dd3070f74b7e81c6b2f69339b0fd6062&quot;};
+	var s = CryptoJS.enc.Latin1.stringify(
+		CryptoJS.AES.decrypt(scrambledEggCipher, o.k)
+	);
+	// var png_magic_s = &quot;iVBORw0KGgoAAAANSUhEUgAAA&quot;;
+	// s.startsWith(png_magic_s);
+	// s.substring(0,26) === png_magic_s;
+	document.getElementById(&quot;rotImg&quot;).src = &quot;data:image/png;base64,&quot;+s;
+});</code></pre></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn9" class="qn print-before"><u>Brain Game</u></li>
+<pre class="wrap" style="padding:.5em;">
+What about a little brain game?
+
+<img src="img/braingame.png">
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. d3 Bc5 5. O-O d6 6. Nbd2 O-O 7. Bxc6 bxc6 8. h3 h6 9. Re1 Re8 10. Nf1 a5 11. Ng3 Rb8 12. b3 Bb4 13. Bd2 Ra8 14. c3 Bc5 15. d4 Bb6 16. dxe5 dxe5 17. c4 Nh7 18. Qe2 Nf8 19. Be3 c5 20. Rad1 Qf6 21. Nh5 Qe7 22. Nh2 Kh7 23. Qf3 f6 24. Ng4 Bxg4 25. Qxg4 Red8 26. Qf5+ Kh8 27. f4 Rxd1 28. Rxd1 exf4 29. Bxf4 Qe6 30. Rd3 Re8 31. Nxg7 Kxg7 32. Qh5 Nh7 33. Bxh6+ Kh8 34. Qg6 Qg8 35. Bg7+ Qxg7 36. Qxe8+ Qf8 37. Qe6 Qh6 38. e5 Qc1+ 39. Kh2 Qf4+ 40. Rg3 1-0
+</pre>
+	<ul>
+		<li class="dash none"></li>
+	</ul>
+</ul>
+
+	<hr class="print-hidden">
+	<li id="qn10" class="qn print-before"><u>Blueprint</u></li>
+<!-- @ http://dean.edwards.name/packer -->
+<script type="text/javascript">
+eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('z C(){9 a=$("#q").s();9 b=6(a);9 y,e,f=0;9 c=$("#B")[0].D("o");c.g="#r";c.h(0,0,u*4,d*4);l(x=F;x>=0;x--){e=0;y=b;l(v=0;v<=p;v++){i(6.j(6.k(6.k(y,d),6.t(2,(d*x)+6.j(y,d))),2)>0.5){c.g="#w";c.h(f,e,3,3)}y=6.A(y,1);e+=4}f+=4}i(7.8(7.8(a))=="m"){E("7.8(7.8(a)) == \\"m\\"\\n\\n@ G"+7.8(a)+".H")}}',44,44,'||||||BigInteger|CryptoJS|SHA1|var||||17|yy|xx|fillStyle|fillRect|if|remainder|divide|for|c63733cf3c66f0311b5c029f2a981f0239d990ad||2d|16|value|0000dd|val|pow|106||ffffff|||function|add|canvas|plot|getContext|alert|105|challenge10_|html'.split('|'),0,{}))
+</script>
+<pre class="wrap" style="padding:.5em;">
+Time for some math! Find the number which produces the plot on the bottom!
+Try these two samples: <a onclick="$('#value').val('2228207');">sample 1</a>, <a onclick="$('#value').val('607016736537520995594815505941151025266085572371665528200038731931478673846727319684910259261305939019800769557502357959237333126657517770919783070679372916294368356299408372540498306857438421105135681283249346869449792967320249238095120706670142921097242873599571883821374208364354014530087192947246803225868116625497030891935667180689024971315282228337059319954976085961871005910163343474177499795224476259823484556802260391642987108868423291931973521858141803706752591127589236027411683906358835596869641180286211179357749072326208778420088');">sample 2</a>.<textarea id="value" style="width:100%;height:68px;" placeholder="number to plot">17657949201581490152887262552977461550821547861463862839240664323911642807489754168164179332567124887458095049966838272395838833335464853226293169893063985683542234868393982863605544853380459104965350326137397441646486218169598347856207906783361422905911386919743769975974237367400302886153547602709155224361686573545769765610544442950623858438305126210029328322211845690185546981876389418111008050801364588449772605640341039292322155464883254208546726202316901388360683605114288184962864450110296056848249404578342545423849729556480</textarea><button class="btn-dl" onClick="javascript:plot();">Plot!</button>
+Your plot:<br/><canvas id="canvas" width="424" height="68" style="background:#0000dd;border-top:1px solid #0000dd;border-left:1px solid #0000dd;"></canvas>
+Target plot:<br/><img src="img/plot.png" style="width:424px;height:68px;border:1px solid #0000dd;" />
+</pre>
+	<ul>
+		<li class="dash ans" style="word-break:break-all;">17657949201581490152887262552977461550821547861463862839240664323911642807489754168164179332567124887458095049966838272395838833335464853226293169893063985683542234868393982863605544853380459104965350326137397441646486218169598347856207906783361422905911386919743769975974237367400302886153547602709155224361686573545769765610544442950623858438305126210029328322211845690185546981876389418111008050801364588449772605640341039292322155464883254208546726202316901388360683605114288184962864450110296056848249404578342545423849729556480</li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn11" class="qn print-before"><u>Twisted Disc</u></li>
+<pre class="wrap" style="padding:.5em;">
+You found a secret disc which conceals a secret password. Can you crack it?
+
+Hint: Each ring of the disc holds one letter. The first letter sits on the outermost ring.
+
+<a href="file/disc.pdf"><button class="btn-dl">Download</button></a>
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn12" class="qn print-before"><u>Version Out Of Control</u></li>
+<pre class="wrap" style="padding:.5em;">
+Version control is a powerful tool. Thinking she was oh so smart, Fluffy used it to hide an easter egg. Can you pull out the egg from her file?
+
+Hint: If you get stuck, go one step back.
+
+<a href="file/1000.zip"><button class="btn-dl">Download her file</button></a>
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn13" class="qn print-before"><u>Fractal Fumbling</u></li>
+<pre class="wrap" style="padding:.5em;">
+Do you need a new wallpaper? What about a fancy fractal?
+
+Find the password hidden in the wallpaper image, and enter it in the Egg-O-Matic below.
+
+<a href="img/wallpaper.jpg"><img src="img/wallpaper-thumb.jpg"></a>
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn14" class="qn print-before"><u>P.A.L.M.</u></li>
+<pre class="wrap" style="padding:.5em;">
+Folks at <font style="font-variant:small-caps;">HOBO Authentication Systems</font> implemented a new authentication system named <nobr>P.A.L.M. &trade;</nobr>
+
+Prove that you can break it and find a pair of username and passcode to log on.
+
+<h3>P.A.L.M. Authentication &trade;</h3>
+<input type="text" name="username" id="puser" value="">
+<input type="number" name="password" id="ppass" value="">
+<input type="button" onclick="javascript:checkEntries();" value="Login" class="btn-dl">
+</pre>
+	<ul>
+		<li class="dash"><pre class="wrap" style="padding:.5em;word-break:break-all;"><code>function checkEntries() {
+	var u = document.getElementById(&quot;puser&quot;).value;
+	var p = document.getElementById(&quot;ppass&quot;).value;
+	if (u === &quot;yolo&quot; &amp;amp;&amp;amp; p === &quot;1337&quot;) {
+		document.location.href = &quot;challenge14_&quot; + u + &quot;_&quot; + p + &quot;.html&quot;;
+	} else {
+		alert(&quot;nope&quot;);
+	}
+}
+var _0x549b = [&quot;value&quot;, &quot;puser&quot;, &quot;getElementById&quot;, &quot;ppass&quot;, &quot;rolo&quot;, &quot;length&quot;, &quot;charAt&quot;, &quot;href&quot;, &quot;location&quot;, &quot;challenge14_&quot;, &quot;_&quot;, &quot;.html&quot;, &quot;nope&quot;];
+function checkEntries() {
+	var u = document[_0x549b[2]](_0x549b[1])[_0x549b[0]];
+	var p = document[_0x549b[2]](_0x549b[3])[_0x549b[0]];
+	var ok = false;
+	if (u === _0x549b[4]) {
+		if (p &gt; 0 &amp;amp;&amp;amp; p[_0x549b[5]] == 10) {
+			ok = true;
+			for (i = 0; i &lt;= 9; i++) {
+				var digit = p[_0x549b[6]](i);
+				if (digit != 9 - i) {
+					ok = false
+				}
+			}
+		}
+	};
+	if (ok) {
+		document[_0x549b[8]][_0x549b[7]] = _0x549b[9] + u + _0x549b[10] + p + _0x549b[11]
+	} else {
+		alert(_0x549b[12])
+	}
+};</code></pre></li>
+		<li class="dash"><pre class="wrap" style="padding:.5em;word-break:break-all;"><code>eval(atob("ZXZhbChmdW5jdGlvbihwLGEsYyxrLGUsZCl7ZT1mdW5jdGlvbihjKXtyZXR1cm4gYy50b1N0cmluZygzNil9O2lmKCEnJy5yZXBsYWNlKC9eLyxTdHJpbmcpKXt3aGlsZShjLS0pe2RbYy50b1N0cmluZyhhKV09a1tjXXx8Yy50b1N0cmluZyhhKX1rPVtmdW5jdGlvbihlKXtyZXR1cm4gZFtlXX1dO2U9ZnVuY3Rpb24oKXtyZXR1cm4nXFx3Kyd9O2M9MX07d2hpbGUoYy0tKXtpZihrW2NdKXtwPXAucmVwbGFjZShuZXcgUmVnRXhwKCdcXGInK2UoYykrJ1xcYicsJ2cnKSxrW2NdKX19cmV0dXJuIHB9KCdyIHEoKXsyIHU9Ny44KFwnd1wnKS5iOzIgcD03LjgoXCd2XCcpLmI7MiA0PVswLDAsMCwwLDAsMCwwLDAsMCwwXTsyIDU9YzszKHU9PT1cJ2dcJyl7MyhwPjAmJnAuaD09OSl7NT1qO2YoaT0xO2k8PTk7aSsrKXsyIDY9cC5rKGktMSk7MiBhPXAuZSgwLGkpOzMoNFs2XSE9MHx8YSVpIT0wKXs1PWN9Myg0WzZdPT0wKXs0WzZdPTF9fX19Myg1KXs3Lm0ubj1cJ29cJyt1K1wneFwnK3ArXCcuc1wnfXR7ZChcJ2xcJyl9fScsMzQsMzQsJ3x8dmFyfGlmfHVzZWR8b2t8ZGlnaXR8ZG9jdW1lbnR8Z2V0RWxlbWVudEJ5SWR8MTB8cGFydHx2YWx1ZXxmYWxzZXxhbGVydHxzdWJzdHJpbmd8Zm9yfGVsc2F8bGVuZ3RofHx0cnVlfGNoYXJBdHxub3BlfGxvY2F0aW9ufGhyZWZ8Y2hhbGxlbmdlMTRffHxjaGVja0VudHJpZXN8ZnVuY3Rpb258aHRtbHxlbHNlfHxwcGFzc3xwdXNlcnxfJy5zcGxpdCgnfCcpLDAse30pKQ=="));</code></pre></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn15" class="qn print-before"><u>Big Bad Wolf</u></li>
+<pre class="wrap" style="padding:.5em;">
+Three little pigs have hidden in their house. You're the big, bad wolf, and your stomach is growling. Huff and puff and blow the pigs' house in! Get that juicy bacon!
+
+Hints:
+• the pigs have hidden in three different media types (image, sound, text)</li>
+• no password cracking is necessary
+
+<a href="file/disk.img"><button class="btn-dl">Download the pigs' file</button></a>
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn16" class="qn print-before"><u>Egg Coloring</u> (<a href="file/ps.hacking.hackyeaster.android.apk">mobile</a>)</li>
+<pre class="wrap" style="padding:.5em;">
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn17" class="qn print-before"><u>Bunny Hop</u></li>
+<pre class="wrap" style="padding:.5em;">
+Wannabe programming guru Hazel B. Easterwood created a new programming language called &quot;Bunny Hop&quot;. You suspect Hazel to have cheated, because the language looks very familiar to you.
+
+Download the following code and complete it! It will yield the QR code for egg 17.
+
+<a href="file/egg17.bunny"><button class="btn-dl">Download the code</button></a>
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn18" class="qn print-before"><u>Bug Hunter</u></li>
+<pre class="wrap" style="padding:.5em;">
+Lacking of time, you were not able not complete your DeggCryptor program. In an act of desperation, you instructed Sammy, the junior programmer, to implement the missing key generation function.
+
+As always, Sammy miserably failed. Can you fix his code? It's the KeyGen class. Pay attention to the comments!
+
+<a href="file/sourcecode.zip"><button class="btn-dl">Source Code</button></a>
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn19" class="qn print-before"><u>Assemble This!</u></li>
+<pre class="wrap" style="padding:.5em;">
+In this challenge you must crack a server-side program. Lucky for you, you got the assembly file of the program. First, reverse-engineer the program and find a valid code! Then, submit the code to the server.
+
+The server is located at:
+<u>hackyeaster.hacking-lab.com:1234</u>
+
+Important: Do not launch brute-force attacks on the server - you'll not be lucky with it!
+
+<a href="file/assembly.txt"><button class="btn-dl">Download assembly file</button></a>
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn20" class="qn print-before"><u>Humpty's Dump</u></li>
+<pre class="wrap" style="padding:.5em;">
+You got hold of a dump of Humpty Dumpty's secret egg database.
+
+Search and extract the egg hidden in the dump!
+
+<u>Hints</u>
+• The `puzz` is not more than 8 chars, letters only.
+• The decryption of the file can be done using AES_DECRYPT().
+
+<a href="file/assembly.txt"><button class="btn-dl">Download the dump</button></a>
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn21" class="qn print-before"><u>Crypto Council</u></li>
+<pre class="wrap" style="padding:.5em;">
+Clever crypto brains had a little get-together. Find out who they are and break the riddles they created! Each plain text contains a password - once you've got them all, enter them in the Egg-O-Matic below. Lowercase only.
+
+<img class="vmid no-border" src="img/head1.jpg" style="width:212px;height:270px">
+DV D UXOH PHQ ZRUUB PRUH DERXW ZKDW WKHB FDQW VHH WKDQ DERXW ZKDW WKHB FDQ SDVVZRUG LV FDUWKDJR
+
+<img class="vmid no-border" src="img/head2.jpg" style="width:212px;height:270px">
+4423154215 2443 3334 52244433154343 4334 1442151114214531 3334 11131345431542 4334 4415424224123115 1143 442315 13343343132415331315 44231144 145215313143 2433 442315 2315114244 3421 1551154254 321133 3515313435343333154315 2443 442315 3511434352344214
+
+<img class="vmid no-border" src="img/head3.jpg" style="width:212px;height:270px">
+EHIIKT YFC FTEU QK PLTPWBY MQYTNVZW LAJ JGGN ZVLD A EWTAE WIEXLP QF IHV DAALROW DF JIACT GWMGCRQF WIJ NSIHVZ BTAE IJGAEOWS FFZ ZXM KW ZPVV I UAAJAARAC MVJCRBADN ZV HPRZA TAAZAW SE MQYTNVZW HTLLATD XZWTK RVV WESZWL UELWG AUZAPNLA LJREMTJS RVV YERV VDRRB SI TYM SVE FN SVE JMNTNKMWC HV MFIEIMV IHV LAELFUSIIT AWGVZKW PNU ZWBAZVWS TYMJT FFZ LWIIBQ NERZK UIMM QTAIA ACTF PAH CRZWTR YM SRCFUHPNZMV IHV NJTNTP WCVFG DDUZA SSHVUSG DV OJXGEIF IO KPW SIVB GU WFZEH AJ I BJNZWJ HETZWIAIG ZT EEBWGEU BZT SVZNXCV WX IHV LMZE FN FTVVZK PS YQK HETZWIAIG S EOJQLXOE PW WECL MCTZT LWE UMSIHJ WX IHV LMZE RVV WIJ AGC HV IDHO JMJKEU IK P SVKJTTRZQ IO YMFGY ZQA
+
+<img class="vmid no-border" src="img/head4.jpg" style="width:212px;height:270px">
+WEN XQWVIBQZ KGQEAL TWB WEH GKQCW QLTBAKBTU LKIQTME DWCOAKWZAKNB BKMETP WEW NOTHPA HWB GBXHCEWG IA OTTQPWD SEATWCWNBA NZW HTO BHQWG HIWAL MCMG LQWVIBQL TOF QLFVCHWG WEW XNW FM WET NGQEAL QWBDSCMF KO CPWCKWMAX
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn22" class="qn print-before"><u>Dumpster Diving</u></li>
+<pre class="wrap" style="padding:.5em;">
+You've sniffed some password hashes of a web site:
+	hash 1:  fad202a6e094dd8f1d63da8bdf85b3ba099971d3
+	hash 2:  f71e1b0b9b3a57d864c2e9f7bd6dd90f66b5a7d6
+	hash 3:  84c6bcb681b79b690b53f9f3a8ba24e1e970d348
+	hash 4:  0d6bb0df8918168798ce6b770014aeb81ac6ce76
+
+However, none of your tools succeeded in cracking the hashes. As a last resort, you inspected the dumpster of the software development company which created the web site. And indeed you found something: a paper with a part of the hash calculation code.
+
+Can you crack the hashes now?
+
+<img src="img/paper.png">
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn23" class="qn print-before"><u>Heizohack</u></li>
+<pre class="wrap" style="padding:.5em;">
+Can you crack the Heizohack?
+
+The password for the Egg-O-Matic is hidden in the image.
+
+<img src="img/heizohack.bmp">
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+
+	<hr class="print-hidden">
+	<li id="qn24" class="qn print-before"><u>crunch.ly</u></li>
+<pre class="wrap" style="padding:.5em;">
+Do you know <i>crunch.ly</i>, the fancy new URL shortener? It was used to create a short URL for Hacky Easter. In order to lure people onto the web site of your alternative hacking competition "Evil Easter", you decide to attack this service.
+
+What you know
+• Short URL for Hacky Easter: <u>http://crunch.ly/IU66SMI</u>
+• Web site of crunch.ly (not a real domain!): <a href="file/crunchly/crunchly.html">OPEN WEB SITE</a>
+• Algorithms used on the web site: <a href="file/crunchly.txt">DOWNLOAD</a>
+
+Your mission
+1. find a URL <u>starting with http://evileaster.com</u>, which produces the same short URL
+2. make the web site store your URL, instead of the original URL
+3. open the short URL on the web site
+4. do not bomb or DoS the server - you'll have no luck with it; cracking must happen offline
+</pre>
+	<ul>
+		<li class="dash"></li>
+	</ul>
+</ul>
+
+<br clear="both">
+<div class="print-before"><img src="2016HE.png"></div>
+
+<style type="text/css">
+	#eggs {line-height:1.75em;font-size:13pt;}
+	#eggs .eggImage{margin:-15px -30px;width:240px;height:240px;background-size:240px 240px;display:inline-block;}
+	#eggs .easyEgg{background-image:url("img/egg_easy.png");}
+	#eggs .mediumEgg{background-image:url("img/egg_medium.png");}
+	#eggs .hardEgg{background-image:url("img/egg_hard.png");}
+	#eggs .eggTitle,#eggs .eggQR{text-align:center;position:relative;width:100%;display:inline-block;}
+	#eggs .eggTitle{top:50px;font-family:"Source Sans Pro";font-size:3.5em;font-weight:bold;color:#000;}
+	#eggs .eggQR{top:64px;}
+</style>
+<div id="eggs" class="print-before" style="border:1px dashed #000;"></div>
+
+<center class="print-hidden">--- <strong>FIN</strong> ---</center>
+</div></div></div>
+<script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="/js/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript" src="//vjs.zencdn.net/5.9.2/video.js"></script>
+<script type="text/javascript" src="/js/sha1.js"></script>
+<script type="text/javascript" src="/js/core-min.js"></script>
+<script type="text/javascript" src="/js/enc-base64-min.js"></script>
+<script type="text/javascript" src="js/biginteger.js"></script>
+<script type="text/javascript">
+	$(function () {
+		"use strict";
+
+		var qr_codes = [null, "1fQArOSgpdSCBr8zXove", "P2kVqrkD2ykiNcwWAAKv", "FUYEMZoOCLis7tPvs5pq", "dLYFunszMowTRHovQx2y", "X8pfJTkxJeRX0bMHZsTP", "mGMzyuWnqVnC014Irq5S", "3OgwkgZmzaFUvPBwnKr8", "B6gZYdONrcSnRlDlvQ03", "vgOObZR6VjxuwRkBVm2F", "QOXm6kvOYt3ATkc9rDnk", "wjlKxyRNWcLnyhdXhHCV", "kR4ZCgRneYR27YAYr8eE", "Jvl8olPUI9yfuJDWIJFi", "Qa5miycTGMkfXUe1iOeJ", "JMv1xX8LZGM0VspECD1b", "7dUDQDhMQkLYsQTMJq62", "nYa3ktAoTAQc6yxMAGoM", "83OHadUPAeWRfd6YBv6t", "WCeZB8yUTdgjayQol2KS", "PRKuX3CklkoZWwfOHbpK", "cH3zySmRf29wCQpE7FSK", "Jbpfr31iCjbpThSfHk6i", "mwBDDBrer7qemsD7RDSf", "avHJJ56JeUvZ8fr7wkGB"];
+		for (var i=1; i<qr_codes.length; i++) {
+			var lvl = (i<10)?("0"+i):i;
+			var elem = $("<span>");
+			var diff = null;
+			if (1<=i && i<=9) {
+				diff = "easy";
+			} else if (10<=i && i<=18) {
+				diff = "medium";
+			} else {
+				diff = "hard";
+			}
+			$(elem).attr("class", "eggImage "+diff+"Egg");
+			$(elem).append("<span class='eggTitle'>"+lvl+"</span>");
+			$(elem).append("<span id='egg-lvl"+lvl+"' class='eggQR'></span>");
+			$("#eggs").append(elem);
+			$("#eggs #egg-lvl"+lvl).qrcode({
+				size: 75,
+				left: 0, top: 0, fill: "#000",
+				text: qr_codes[i],
+				label: qr_codes[i]
+			});
+		}
+	});
+</script>
+</body></html>
