@@ -83,7 +83,7 @@ You intercepted a message sent by a nerd from the office nearby. On first sight,
 		<li class="dash">fmt: <code>.lxf</code> &dash; open-with: <a href="http://ldd.lego.com/en-us/download">LEGO Digital Designer</a></li>
 		<li class="dash">obs. 3 layers present <a href="file/legostego-blank.lxf"><img src="img/lvl03-3layers.png"></a></li>
 		<li class="dash ans">QR code in *mid* layer ie. strip off top layer</li>
-		<li class="dash none"><a href="file/legostego-qrcode.lxf"><img src="img/challenge03-vpmP0wgxXAdKDGAjdbn6.png"></a></li>
+		<li><a href="file/legostego-qrcode.lxf"><img src="img/challenge03-vpmP0wgxXAdKDGAjdbn6.png"></a></li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -128,8 +128,8 @@ Calculate/convert the following values, and sort them in <u>ascending</u> order
 	</tbody>
 	</table>
 	<ul>
-		<li class="dash none"><code>xs = [1400,9671406559999999577423872,299792458,2130706433,36.4621596072,2147483647,13631488,1048576,50,36,100000,261.626]</code></li>
-		<li class="dash none"><code>sorted(zip(xs,xrange(1,len(xs)+1)))</code></li>
+		<li><code>xs = [1400,9671406559999999577423872,299792458,2130706433,36.4621596072,2147483647,13631488,1048576,50,36,100000,261.626]</code></li>
+		<li><code>sorted(zip(xs,xrange(1,len(xs)+1)))</code></li>
 		<li class="dash">sorted in ascending order:</li>
 			<ol>
 				<li value="10" data-val="36">36</li>
@@ -146,9 +146,9 @@ Calculate/convert the following values, and sort them in <u>ascending</u> order
 				<li value="2" data-val="9671406559999999577423872">9.67140656 &times; 10<sup>24</sup></li>
 			</ol>
 		<li class="dash">extract original indices:</li>
-		<li class="dash none"><code>map(lambda (x,y): y, sorted(zip(xs,xrange(1,len(xs)+1))))</code></li>
-		<li class="dash none"><code>var h = "<font class="ans">10,5,9,12,1,11,8,7,3,4,6,2</font>";</code></li>
-		<li class="dash none"><code>for (var i=0; i<10000; i++) {h = CryptoJS.SHA1(h);} decryptScrambledEggWithKey('' + h);</code>&#x2026;</li>
+		<li><code>map(lambda (x,y): y, sorted(zip(xs,xrange(1,len(xs)+1))))</code></li>
+		<li><code>var h = "<font class="ans">10,5,9,12,1,11,8,7,3,4,6,2</font>";</code></li>
+		<li><code>for (var i=0; i<10000; i++) {h = CryptoJS.SHA1(h);} decryptScrambledEggWithKey('' + h);</code>&#x2026;</li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -158,7 +158,7 @@ In this challenge, you need to play with your phone a bit. Try to find out what 
 </pre>
 	<ul>
 		<li class="dash">extract &amp; decompile APK</li>
-		<li class="dash none">@ <code>/assets/www/challenge05.html</code>:</li>
+		<li>@ <code>/assets/www/challenge05.html</code>:</li>
 		<ul>
 			<li class="dash"><code>requestLevels</code> is invoked every 1000ms to query <code>ps://sensors</code> endpt</li>
 			<li class="dash"><code>sensorFeedback(json)</code> sets lvls by parsing JSON response vars <code>{l1,l2,l3,l4,k}</code></li>
@@ -325,7 +325,7 @@ The Doc's in trouble again, and you must come to his rescue! As you jump into hi
 
 <code>dah-dah-dit dit dah-dah-dah di-dah-dit dah-dah-dit dit dah-dah dah-di-dah-dit di-di-dah-dit di-dah-di-dit dah-di-dah-dah</code></pre>
 	<ul>
-		<li class="dash none"><u>Python Morse code decoder</u></li>
+		<li><u>Python Morse code decoder</u></li>
 <pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
 
 import sys
@@ -338,9 +338,9 @@ if __name__ == &quot;__main__&quot;:
 </code></pre>
 		<li class="dash"><code>georgemcfly</code></li>
 		<li class="dash">not quite done yet! enter <code>georgemcfly</code> into Egg-O-Matic performs a HTTP GET request to <a href="http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&k=georgemcfly">http://hackyeaster.hacking-lab.com/hackyeaster/time?m=4&amp;k=georgemcfly</a></li>
-		<li class="dash none">rendering: <img class="vmid" src="img/lvl06-georgemcfly.png"></li>
+		<li>rendering: <img class="vmid" src="img/lvl06-georgemcfly.png"></li>
 		<li class="dash">so need to modify HTTP GET param <code>m</code>, according to given hint in img, by +3 ie. <code>m=7</code></li>
-		<li class="dash none"><code class="ans">curl -sL "http://hackyeaster.hacking-lab.com/hackyeaster/time?m=7&amp;k=georgemcfly" | <a class="print-link" href="http://stedolan.github.io/jq">jq</a> -r '.egg' | base64 -d</code>
+		<li><code class="ans">curl -sL "http://hackyeaster.hacking-lab.com/hackyeaster/time?m=7&amp;k=georgemcfly" | <a class="print-link" href="http://stedolan.github.io/jq">jq</a> -r '.egg' | base64 -d</code>
 	</ul>
 
 	<hr class="print-hidden">
@@ -368,7 +368,7 @@ Spreadsheet ID:
 <img src="img/spreadsheet.png">
 </pre>
 	<ul>
-		<li class="dash none">@ <a href="https://docs.google.com/spreadsheets/d/1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA">https://docs.google.com/spreadsheets/d/1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA</a></li>
+		<li>@ <a href="https://docs.google.com/spreadsheets/d/1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA">https://docs.google.com/spreadsheets/d/1QPkfrnSVRAhQKL7AZx_HVXWrRXDvwCnVX2ih0jYp1CA</a></li>
 <style type="text/css">
 	#lvl8 {max-width: 100%;background-color: transparent;table-layout: fixed;width: 100%;text-align: center;}
 	#lvl8 th, #lvl8 td:first-child {font-weight: bold;color: red;}
@@ -467,7 +467,7 @@ In order to get this egg, you need to search on the web site. Rumors say that Th
 	<ul>
 		<li class="dash">under &quot;<a href="http://hackyeaster.hacking-lab.com/hackyeaster/eggs.html">Eggs</a>&quot;</li>
 		<li class="dash"><u>(change)</u> name to <b>Thumper</b></li>
-		<li class="dash none"><img src="img/lvl10.png"></li>
+		<li><img src="img/lvl10.png"></li>
 	</ul>
 	<hr class="print-hidden">
 	<li id="qn11" class="qn print-before"><u>You've got Mail</u></li>
@@ -532,13 +532,13 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 			<li>88</li>
 			+ <code>&lt;button type=&quot;submit&quot; name=&quot;<font color="red">success</font>&quot; value=&quot;<font color="red">false</font>&quot;&gt;Submit Test&lt;/button&gt;</code>
 		</ol></li>
-		<li class="dash none"><code>curl -sL -X POST "http://hackyeaster.hacking-lab.com/hackyeaster/ceh" -d "q1=nmap&amp;q2=revocation&amp;q3=4950&amp;q4=384&amp;q4=512&amp;q5=88&amp;success=true"</code> returns:</li>
+		<li><code>curl -sL -X POST "http://hackyeaster.hacking-lab.com/hackyeaster/ceh" -d "q1=nmap&amp;q2=revocation&amp;q3=4950&amp;q4=384&amp;q4=512&amp;q5=88&amp;success=true"</code> returns:</li>
 <pre class="wrap" style="padding:.5em;"><code>&#8230;
 	Congratulations, you passed!!!
 	&lt;div class=&quot;eggImage&quot; style=&quot;background-image: url('<font color="red">./images/egg_12_an8snbui1FeLO3Ugw89N.png</font>')&quot;&gt;&lt;/div&gt;
 &#x2026;
 </code></pre>
-		<li class="dash none"><code class="ans">wget "<a href="img/challenge12-an8snbui1FeLO3Ugw89N.png">http://hackyeaster.hacking-lab.com/hackyeaster/images/egg_12_an8snbui1FeLO3Ugw89N.png</a>"</code></li>
+		<li><code class="ans">wget "<a href="img/challenge12-an8snbui1FeLO3Ugw89N.png">http://hackyeaster.hacking-lab.com/hackyeaster/images/egg_12_an8snbui1FeLO3Ugw89N.png</a>"</code></li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -551,7 +551,7 @@ You caught a Thunderbird mail box, which contains an easter egg. Go find it!
 		<li class="dash">extract stills from leettv.mp4@30fps: <code>ffmpeg -i file/leettv.mp4 -vf fps=30 leettv@%d.png</code></li>
 		<li class="dash">decode QR codes in these imgs: <code>zbarimg -q leettv@[0-9]*.png | sed 's|^QR-Code:||g' | sort | uniq &gt;&gt;leettv-qrcode.lst</code></li>
 		<li class="dash">note <a href="file/leettv-qrcode.lst">leettv-qrcode.lst</a> entry: <a href="http://bit.ly/1BJENx8">http://bit.ly/1BJENx8</a></li>
-		<li class="dash none">&rarr; <a href="http://hackyeaster.hacking-lab.com/hackyeaster/leettv_qbEtJZKLTLB3jByIWSpE.wav">http://hackyeaster.hacking-lab.com/hackyeaster/leettv_qbEtJZKLTLB3jByIWSpE.wav</a></li>
+		<li>&rarr; <a href="http://hackyeaster.hacking-lab.com/hackyeaster/leettv_qbEtJZKLTLB3jByIWSpE.wav">http://hackyeaster.hacking-lab.com/hackyeaster/leettv_qbEtJZKLTLB3jByIWSpE.wav</a></li>
 		<li class="dash"><code>exiftool leettv_qbEtJZKLTLB3jByIWSpE.wav</code></li>
 <pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">Title  : The Hint
 Comment: <font color="red">siht esrever ot yrt</font>
@@ -560,7 +560,7 @@ Comment: <font color="red">siht esrever ot yrt</font>
 		<li class="dash">so follow as instructed: <code>sox leettv_qbEtJZKLTLB3jByIWSpE.wav leettv_qbEtJZKLTLB3jByIWSpE-rev.wav reverse</code></li>
 		<li class="dash">audio content: <code>eight forty-two</code></li>
 		<li class="dash">so extract frame leettv.mp4@08:42: <code>ffmpeg -i file/leettv.mp4 -ss 00:08:42.001 -vframes 1 <font class="ans">leettv@0842.png</font></code></li>
-		<li class="dash none"><img src="img/challenge13-vBrtvkpHNRCNZdhZN1nT.png"></li>
+		<li><img src="img/challenge13-vBrtvkpHNRCNZdhZN1nT.png"></li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -576,11 +576,11 @@ add a dimension you must!</i>
 <img src="img/egg_14.png">
 </pre>
 	<ul>
-		<li class="dash none"><img src="img/lvl14-zxing-decoder-online-1.png"></li>
+		<li><img src="img/lvl14-zxing-decoder-online-1.png"></li>
 		<li class="dash">upload <code>egg_14.png</code> to <a class="print-link" href="http://zxing.org/w/decode.jspx">QR code decoder</a></li>
-		<li class="dash none"><img src="img/lvl14-zxing-decoder-online-2.png"></li>
+		<li><img src="img/lvl14-zxing-decoder-online-2.png"></li>
 		<li class="dash">txt &#61; <code class="ans">yckgKB2iV1rvNEfCoNiR</code></li>
-		<li class="dash none" id="lvl14-qrcode"></li>
+		<li id="lvl14-qrcode"></li>
 		<li class="dash">gen QR code(txt) via <a class="print-link" href="http://larsjung.de/jquery-qrcode">jQuery.qrcode</a></li>
 	</ul>
 
@@ -591,9 +591,9 @@ Your gallery needs some nice easter snapshots! What about a nice grasslands pano
 </pre>
 	<ul>
 		<li class="dash">lol...taking a photo using mobile device's camera creates:</li>
-		<li class="dash none"><img src="img/lvl15.jpg"></li>
+		<li><img src="img/lvl15.jpg"></li>
 		<li class="dash">extract &amp; decompile APK</li>
-		<li class="dash none">@ <code>/src/ps/hacking/hackyeaster/android/Activity.java</code></li>
+		<li>@ <code>/src/ps/hacking/hackyeaster/android/Activity.java</code></li>
 <pre class="wrap" style="padding:.5em;"><code class="java">&#8230;
 protected void onActivityResult(int i1, int j1, Intent intent)
 {
@@ -722,7 +722,7 @@ public void onCreate(Bundle bundle)
 </code></pre>
 		<li class="dash">this seems to be the routine in <code>Activity.java</code> responsible for the functionality here</li>
 		<li class="dash"><code>j</code> and <code>k</code> look particularly interesting</li>
-		<li class="dash none">@ <code>/src/ps/hacking/hackyeaster/android/R$string.java</code> (inner class <code>string</code> within generated <code>android.R</code>)</li>
+		<li>@ <code>/src/ps/hacking/hackyeaster/android/R$string.java</code> (inner class <code>string</code> within generated <code>android.R</code>)</li>
 <pre class="wrap" style="padding:.5em;"><code class="java">public static final int ft = 0x7f080007;
 public static final int rick = 0x7f080008;
 </code></pre>
@@ -762,9 +762,9 @@ Ghosts only come out when it's dark...
 <img src="img/noghost.png">
 </pre>
 	<ul>
-		<li class="dash none"><img src="img/lvl16-light.png"></li>
+		<li><img src="img/lvl16-light.png"></li>
 		<li class="dash">turn off the lights: click on light bulb in far lower right corner @ webpage footer</li>
-		<li class="dash none"><img src="img/lvl16-dark.png"></li>
+		<li><img src="img/lvl16-dark.png"></li>
 		<li class="dash">JS code snippet implementing this behaviour:</li>
 <pre class="wrap" style="padding:.5em;"><code class="javascript">function (){skelD=!skelD,skelD?($(&quot;#dark&quot;).show(),$(&quot;#chall16 img&quot;).attr(&quot;src&quot;,&quot;images/banner_challenge_16_dark.jpg&quot;),$(&quot;#chall16 a&quot;).attr(&quot;href&quot;,&quot;challenge16-dark.html&quot;)):($(&quot;#dark&quot;).hide(),$(&quot;#chall16 img&quot;).attr(&quot;src&quot;,&quot;images/banner_challenge_16.jpg&quot;),$(&quot;#chall16 a&quot;).attr(&quot;href&quot;,&quot;challenge16.html&quot;))}
 </code></pre>
@@ -778,7 +778,7 @@ ej8Taxz+kHK9w9U8dxTOSksZ4HKS2YYD</code>
 <img src="img/ghost.png">
 </pre>
 		<li class="dash">as given in img, key: <code>spooky</code>; using <u>GOST</u> Russian symmetric key block cipher (GOST 28147-89) in <u>Cipher Block Chaining</u> (CBC) mode of op on ciphertxt, joined as a single contiguous string</li>
-		<li class="dash none"><img src="img/lvl16.png"></li>
+		<li><img src="img/lvl16.png"></li>
 <pre class="wrap" style="padding:.5em;word-wrap:break-word;"><code class="php">#!/usr/bin/env php
 
 &lt;?
@@ -793,7 +793,7 @@ ej8Taxz+kHK9w9U8dxTOSksZ4HKS2YYD</code>
 	echo &quot;plaintxt: $plaintxt&quot;.PHP_EOL;
 ?&gt;
 </code></pre>
-		<li class="dash none">@ <code class="ans">http://hackyeaster.hacking-lab.com/hackyeaster/images/egg_16_a3eIIACKSy02sJ6LxXeh.png</code></li>
+		<li>@ <code class="ans">http://hackyeaster.hacking-lab.com/hackyeaster/images/egg_16_a3eIIACKSy02sJ6LxXeh.png</code></li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -839,7 +839,7 @@ def mk_agent_xor():
 	im1.save(&quot;difference0.bmp&quot;)
 </code></pre>
 
-		<li class="dash none"><img src="img/difference0.bmp"></li>
+		<li><img src="img/difference0.bmp"></li>
 		<li class="dash ans">XOR (as instructed) QR code <img class="vmid" src="img/lvl17-qr1.jpg"> w/ target <img class="vmid" src="img/lvl17-qr2.jpg">, each found on one side of Agent's glasses, yields <img class="vmid" src="img/lvl17-qr.jpg"></li>
 <pre class="wrap" style="padding:.5em;"><code class="python">#!/usr/bin/env python
 #-*- coding: utf-8 -*-
@@ -898,9 +898,9 @@ Inspect <a href="file/sharks.pcapng">sharks.pcapng</a>, in order to get the cred
 		<li class="dash">apply bpf filter: <code>tcp stream eq 3</code></li>
 		<li class="dash">Follow (this) TCP Stream</li>
 		<li class="dash">filter for only <code>10.11.0.52:62046 &rarr; 10.11.0.48:8080</code></li>
-		<li class="dash none"><img src="img/lvl18.png"></li>
-		<li class="dash none"><img src="img/lvl18-login.png"></li>
-		<li class="dash none">Credentials: <code>sharkman:sharks_have_j4ws</code></li>
+		<li><img src="img/lvl18.png"></li>
+		<li><img src="img/lvl18-login.png"></li>
+		<li>Credentials: <code>sharkman:sharks_have_j4ws</code></li>
 		<li class="dash"><code>curl -sL -u sharkman:sharks_have_j4ws -H &quot;Authorization: Basic c2hhcmttYW46c2hhcmtzX2hhdmVfajR3cw==&quot; -X POST &quot;http://hackyeaster.hacking-lab.com/hackyeaster/sharks/auth&quot; -d &quot;user=supershark&amp;pass=hashed%21%21%21&amp;hash=b3f3ca462d3fa58b74d6982af14d8841b074994a&quot;</code></li>
 <pre class="wrap" style="padding:.5em;"><code>&#8230;
   &lt;body&gt;
@@ -1047,13 +1047,13 @@ if __name__ == &quot;__main__&quot;:
 		<li class="dash">apply <a href="https://pypi.python.org/pypi/wordsegment">word segmentation</a> via
 		<ul>
 			<li class="dash">eg. <code>echo paperstripsmadebyshredder | python -m wordsegment</code></li>
-			<li class="dash none">&rArr; <code>papers trips made by shredder</code></li>
+			<li>&rArr; <code>papers trips made by shredder</code></li>
 			<li class="dash">it is evident that this approach is not perfect</li>
 			<li class="dash">but can at least offer some insight into possible words that can be made from the given paper strips</li>
 			<li class="dash">to string together, to form a sensible passphrase</li>
 		</ul></li>
 		<li class="dash">passphrase: &quot;<code class="ans">paper strips made by shredder</code>&quot;</li>
-		<li class="dash none"><img src="img/paperstripsmadebyshredder-noexif.jpg"></li>
+		<li><img src="img/paperstripsmadebyshredder-noexif.jpg"></li>
 		<li class="dash"><code class="ans">paperstripsmadebyshredder</code></li>
 	</ul>
 
@@ -1065,7 +1065,7 @@ Robots have placed an egg on this web server. If you wanna find it, you need to 
 <img src="img/robot.jpg">
 </pre>
 	<ul>
-		<li class="dash none">@ <a href="http://hackyeaster.hacking-lab.com/robots.txt">http://hackyeaster.hacking-lab.com/robots.txt</a></li>
+		<li>@ <a href="http://hackyeaster.hacking-lab.com/robots.txt">http://hackyeaster.hacking-lab.com/robots.txt</a></li>
 <pre class="wrap" style="padding:.5em;">
 <font color="red">User-agent: EasterBot</font>
 Disallow: /
@@ -1399,7 +1399,7 @@ if __name__ == &quot;__main__&quot;:
 			sha1.update(data)
 	print &quot;sha1sum({}): {}&quot;.format(filepath, sha1.hexdigest())
 </code></pre>
-		<li class="print-before dash none"><u>Q&amp;A</u></li>
+		<li class="print-before"><u>Q&amp;A</u></li>
 <pre class="wrap" style="padding:.5em;"><code class="nohighlight hljs">question: &quot;Go 127.0.0.1 to your mummy.&quot;
 answer: &quot;Won't work. I only support IPv6.&quot;
 
@@ -1780,7 +1780,7 @@ var pinPressed = function (n){if(-1===n)return pinEntered="",void $("#pin").html
 </div>
 	<ul>
 		<li class="dash">looking up lvl-specific param eg. &quot;<code>ovaederecumsale</code>&quot; or &quot;<code>8QeNdEdkspV6+1I77SEEEF4aWs5dl/auahJ46MMufkg=</code>&quot;; or even &quot;egg_26.png&quot; reveals relevant code block
-		<li class="dash none">@ <code>/src/src/ps/hacking/hackyeaster/android/Activity.java</code>:</li>
+		<li>@ <code>/src/src/ps/hacking/hackyeaster/android/Activity.java</code>:</li>
 <pre class="wrap" style="padding:.5em;"><code class="java">&#8230;
 private int a(String s, Context context)
 {
@@ -1853,7 +1853,7 @@ private int a(String s, Context context)
 &#x2026;
 </code></pre>
 		<li class="dash">finds PIN=<code>7113</code>, linked to passwd=<code>wirestarter54321</code></li>
-		<li class="dash none">@ <a class="ans" href="http://hackyeaster.hacking-lab.com/hackyeaster/pin?p=wirestarter54321" style="color:red !important;">http://hackyeaster.hacking-lab.com/hackyeaster/pin?p=wirestarter54321</a></li>
+		<li>@ <a class="ans" href="http://hackyeaster.hacking-lab.com/hackyeaster/pin?p=wirestarter54321" style="color:red !important;">http://hackyeaster.hacking-lab.com/hackyeaster/pin?p=wirestarter54321</a></li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -1885,9 +1885,9 @@ Hint: The plaintexts consist of <u>lowercase letters</u> and <u>spaces</u> only
  			<li style="list-style-type: none;">5a. When result from step 4 &#61;&#61; readable English text, guess the English word and expand crib search</li>
             <li style="list-style-type: none;">5b. Otherwise, try XOR of crib word @ nxt pos</li>
 		</ol></li>
-		<li class="dash none"><a href="file/lvl27-cribtastic.py"><img src="img/lvl27.jpg" style="border-color:blue;"></a></li>
+		<li><a href="file/lvl27-cribtastic.py"><img src="img/lvl27.jpg" style="border-color:blue;"></a></li>
 		<li class="dash">key: <code>05aa0c0981181100fd080cb636bf0d250c13b878</code></li>
-		<li class="dash none"><u>plaintext</u></li>
+		<li><u>plaintext</u></li>
 <pre class="wrap" style="padding:.5em;">
 enemy has the bonbon
 five oh oh seven
