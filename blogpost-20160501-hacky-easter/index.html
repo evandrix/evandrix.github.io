@@ -156,6 +156,27 @@ Do you know Paul? If not, it's about time to get to know him! Check out his vide
 <pre class="wrap" style="padding:.5em;"><code>1
 00:01:00.000 --> 00:01:03.000
 passphrase is &quot;<font class="ans">youtubelotitis</font>&quot;</code></pre></li>
+		<!--
+			$ mediainfo file/paul/video.mp4
+			# Text #4
+			# ID                                       : 7
+			# Format                                   : Timed Text
+			# Muxing mode                              : sbtl
+			# Codec ID                                 : tx3g
+			# Duration                                 : 1mn 3s
+			# Bit rate mode                            : Variable
+			# Bit rate                                 : 82 bps
+			# Stream size                              : 644 Bytes (0%)
+			# Language                                 : Esperanto
+			# Encoded date                             : UTC 2015-08-25 20:48:27
+			# Tagged date                              : UTC 2015-08-25 20:48:27
+
+			$ ffmpeg -i file/paul/video.mp4
+			# Stream #0:6(epo): Subtitle: mov_text (tx3g / 0x67337874), 1152x60, 0 kb/s
+
+			$ ffmpeg -i file/paul/video.mp4 -an -vn -map 0:6 -c:s:0 srt file/paul/epo.srt
+			# passphrase is "youtubelotitis"
+		-->
 	</ul>
 
 	<hr class="print-hidden">
@@ -213,7 +234,17 @@ Time for an elevator ride. Guess the right floor, and find the hidden easter egg
 	<ul>
 		<li class="dash">one of the links is not like the others: btn #13 links to <a href="?sybbe=punatrzr" onclick="return false;">?sybbe=punatrzr</a></li>
 		<li class="dash"><code>rot13</code> => <a href="?floor=changeme" onclick="return false;">?floor=changeme</a></li>
-		<li class="dash">so <a href="?floor=thirteen" onclick="return false;">?floor=thirteen</a> => <code>rot13</code> => <a href="//hackyeaster.hacking-lab.com/hackyeaster/challenge06.html?sybbe=guvegrra">?sybbe=guvegrra</a></li>
+		<li class="dash">so <a href="?floor=thirteen" onclick="return false;">?floor=thirteen</a> => <code>rot13</code> => <a class="ans" href="//hackyeaster.hacking-lab.com/hackyeaster/challenge06.html?sybbe=guvegrra">?sybbe=guvegrra</a></li>
+		<li class="dash none ans">@ <a href="//hackyeaster.hacking-lab.com/hackyeaster/challenge06_8ce833745ef167679aa44d6d6c098ab6abf8ec80.html">//hackyeaster.hacking-lab.com/hackyeaster/challenge06_8ce833745ef167679aa44d6d6c098ab6abf8ec80.html</a></li>
+		<!--
+			p = window.location.search; //?sybbe=guvegrra
+			if (p) {
+				if (CryptoJS.SHA1(CryptoJS.SHA1(p)) == "ed64517461f2d60887f75c2ea4d8a0b03f5ece49") {
+					window.location.href = "challenge06_" + CryptoJS.SHA1(p) + ".html";
+				}
+				...
+			}
+		-->
 	</ul>
 
 	<hr class="print-hidden">
@@ -332,7 +363,25 @@ What about a little brain game?
 1. e4 e5 2. Nf3 Nc6 3. Bb5 Nf6 4. d3 Bc5 5. O-O d6 6. Nbd2 O-O 7. Bxc6 bxc6 8. h3 h6 9. Re1 Re8 10. Nf1 a5 11. Ng3 Rb8 12. b3 Bb4 13. Bd2 Ra8 14. c3 Bc5 15. d4 Bb6 16. dxe5 dxe5 17. c4 Nh7 18. Qe2 Nf8 19. Be3 c5 20. Rad1 Qf6 21. Nh5 Qe7 22. Nh2 Kh7 23. Qf3 f6 24. Ng4 Bxg4 25. Qxg4 Red8 26. Qf5+ Kh8 27. f4 Rxd1 28. Rxd1 exf4 29. Bxf4 Qe6 30. Rd3 Re8 31. Nxg7 Kxg7 32. Qh5 Nh7 33. Bxh6+ Kh8 34. Qg6 Qg8 35. Bg7+ Qxg7 36. Qxe8+ Qf8 37. Qe6 Qh6 38. e5 Qc1+ 39. Kh2 Qf4+ 40. Rg3 1-0
 </pre>
 	<ul>
-		<li class="dash none"></li>
+		<li class="dash">each term in the string of the <span style="color:#fff;background-color:#f00;">white-on-red</span> part encodes a row of the state of the chessboard, from top to bottom</li>
+		<li class="dash">`0` indicates absence of a piece in that particular grid cell, while `1` indicates presence</li>
+		<li class="dash">interpret each row of `0`s and `1`s formed this way in binary, and convert it to decimal</li>
+		<li class="dash">play out the given sequence of moves from the initial state, as given:</li>
+		<li class="dash none"><img src="img/egg09-board.png"></li>
+		<li class="dash">encode the final state of the chessboard similarly:</li>
+		<table style="border-collapse:separate;border-spacing:3px;font-family:monospace;font-size:16px;">
+			<tbody>
+				<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+				<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+				<tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+				<tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+				<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+				<tr><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+				<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+				<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+			</tbody>
+		</table>
+		<li class="dash ans">1-33-76-168-36-67-131-0</li>
 	</ul>
 </ul>
 
@@ -346,10 +395,35 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 Time for some math! Find the number which produces the plot on the bottom!
 Try these two samples: <a onclick="$('#value').val('2228207');">sample 1</a>, <a onclick="$('#value').val('607016736537520995594815505941151025266085572371665528200038731931478673846727319684910259261305939019800769557502357959237333126657517770919783070679372916294368356299408372540498306857438421105135681283249346869449792967320249238095120706670142921097242873599571883821374208364354014530087192947246803225868116625497030891935667180689024971315282228337059319954976085961871005910163343474177499795224476259823484556802260391642987108868423291931973521858141803706752591127589236027411683906358835596869641180286211179357749072326208778420088');">sample 2</a>.<textarea id="value" style="width:100%;height:68px;" placeholder="number to plot">17657949201581490152887262552977461550821547861463862839240664323911642807489754168164179332567124887458095049966838272395838833335464853226293169893063985683542234868393982863605544853380459104965350326137397441646486218169598347856207906783361422905911386919743769975974237367400302886153547602709155224361686573545769765610544442950623858438305126210029328322211845690185546981876389418111008050801364588449772605640341039292322155464883254208546726202316901388360683605114288184962864450110296056848249404578342545423849729556480</textarea><button class="btn-dl" onClick="javascript:plot();">Plot!</button>
 Your plot:<br/><canvas id="canvas" width="424" height="68" style="background:#0000dd;border-top:1px solid #0000dd;border-left:1px solid #0000dd;"></canvas>
-Target plot:<br/><img src="img/plot.png" style="width:424px;height:68px;border:1px solid #0000dd;" />
+Target plot:<br/><img class="no-border" src="img/plot.png" style="width:424px;height:68px;" />
 </pre>
 	<ul>
-		<li class="dash ans" style="word-break:break-all;">17657949201581490152887262552977461550821547861463862839240664323911642807489754168164179332567124887458095049966838272395838833335464853226293169893063985683542234868393982863605544853380459104965350326137397441646486218169598347856207906783361422905911386919743769975974237367400302886153547602709155224361686573545769765610544442950623858438305126210029328322211845690185546981876389418111008050801364588449772605640341039292322155464883254208546726202316901388360683605114288184962864450110296056848249404578342545423849729556480</li>
+		<li class="dash"><pre class="wrap" style="padding:.5em;"><code>require &quot;chunky_png&quot;
+
+img = ChunkyPNG::Image.from_file(&quot;<a href="img/plot.png">plot.png</a>&quot;)
+lookup = Hash.new(0)
+img.width.times do |x|
+	img.height.times do |y|
+		r = ChunkyPNG::Color.r(img.get_pixel(x,y))
+		g = ChunkyPNG::Color.g(img.get_pixel(x,y))
+		b = ChunkyPNG::Color.b(img.get_pixel(x,y))
+		xx = (x/4)
+		yy = (y/4)
+		if r==255 and g==255 and b==255
+			lookup[[xx, yy]] = [lookup[[xx, yy]].to_i, 1].max
+		end
+	end
+end
+bin = &quot;&quot;
+106.times {|x| 17.times{|y| bin += lookup[[x,16-y]].to_s }}
+p bin.to_i(2)*17</code></pre></li>
+		<li class="dash ans" style="word-break:break-all;"><a href="//hackyeaster.hacking-lab.com/hackyeaster/challenge10_7fe2ea3751694cb6653d6bd3e7f39d089da29dc7.html">17657949201581490152887262552977461550821547861463862839240664323911642807489754168164179332567124887458095049966838272395838833335464853226293169893063985683542234868393982863605544853380459104965350326137397441646486218169598347856207906783361422905911386919743769975974237367400302886153547602709155224361686573545769765610544442950623858438305126210029328322211845690185546981876389418111008050801364588449772605640341039292322155464883254208546726202316901388360683605114288184962864450110296056848249404578342545423849729556480</a></li>
+		<!--
+			echo -n "17657949201581490152887262552977461550821547861463862839240664323911642807489754168164179332567124887458095049966838272395838833335464853226293169893063985683542234868393982863605544853380459104965350326137397441646486218169598347856207906783361422905911386919743769975974237367400302886153547602709155224361686573545769765610544442950623858438305126210029328322211845690185546981876389418111008050801364588449772605640341039292322155464883254208546726202316901388360683605114288184962864450110296056848249404578342545423849729556480" | sha1sum | cut -d' ' -f1
+				=> 7fe2ea3751694cb6653d6bd3e7f39d089da29dc7
+			echo -n "7fe2ea3751694cb6653d6bd3e7f39d089da29dc7" | xxd -p -r | sha1sum | cut -d' ' -f1
+				=> c63733cf3c66f0311b5c029f2a981f0239d990ad
+		-->
 	</ul>
 
 	<hr class="print-hidden">
@@ -362,7 +436,17 @@ Hint: Each ring of the disc holds one letter. The first letter sits on the outer
 <a href="file/disc.pdf"><button class="btn-dl">Download</button></a>
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">letters that appear once only (i.e. unique) in each ring</li>
+		<ul>
+			<li class="ans">h</li>
+			<li class="ans">a</li>
+			<li class="ans">n</li>
+			<li class="ans">i</li>
+			<li>e, l, <font class="ans">s</font></li>
+			<li class="ans">h</li>
+			<li class="ans">o</li>
+		</ul>
+		<li class="dash ans">hanisho</li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -471,7 +555,74 @@ Download the following code and complete it! It will yield the QR code for egg 1
 <a href="file/egg17.bunny"><button class="btn-dl">Download the code</button></a>
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">1-1 mapping from <a href="//en.wikipedia.org/wiki/Logo_(programming_language)">Logo programming language</a>, replace:</li>
+			<ul>
+				<li>`hop` = `fd`</li>
+				<li>`backhop` = `bk`</li>
+			</ul>
+		<li class="dash">missing subroutine: <code>egg</code></li>
+<pre class="wrap" style="padding:.5em;"><code>to egg
+	pd
+	fd 1
+	bk 1
+	pu
+end</code></pre>
+		<li class="dash">online tool: <a href="//logo.twentygototen.org">//logo.twentygototen.org</a></li>
+		<li class="dash none"><img src="img/egg17-qrcode.png"></li>
+		<li class="dash">...in ASCII, becomes <u>egg17-qrcode.txt</u>:
+<pre class="wrap" style="padding:.5em;"><code>xxxxxxx..x.....xx.xxxxxxx
+x.....x.xx.xxxxxx.x.....x
+x.xxx.x..xxx..xx..x.xxx.x
+x.xxx.x.xx.x.xxx..x.xxx.x
+x.xxx.x...x.xx.xx.x.xxx.x
+x.....x.x.x..xxxx.x.....x
+xxxxxxx.x.x.x.x.x.xxxxxxx
+............x.xxx........
+xxxxx.xxxxx.x.x..x.x.x.x.
+.x.xxx...x...x.xx.xx.x...
+.xx...x.xx.xx.xx..x....xx
+xx.x.x.xxxxx..xx.xxx.x.xx
+xxx...x.xx.x....xxxx..x..
+x..x...x.xx.xx..xxxx.x.xx
+x.x.x.x...x..xxxx.xxx.xxx
+x..x...xx.x.xx.x.xxxx....
+x...x.x.....x.x.xxxxxxxx.
+........x.......x...xxx..
+xxxxxxx.xx.xx...x.x.x.xxx
+x.....x...xx..x.x...x...x
+x.xxx.x.x.xx...xxxxxx.xxx
+x.xxx.x.x...xxxxxxx.x..xx
+x.xxx.x.x.x..xx....x.x..x
+x.....x.xx..xx..x.xx....x
+xxxxxxx.x...x.xx.x...x.xx</code></pre>
+		<li class="dash"><pre class="wrap" style="padding:.5em;"><code>#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+import codecs
+from PIL import Image
+
+sys.stdout = codecs.getwriter(&quot;utf8&quot;)(sys.stdout)
+sys.stderr = codecs.getwriter(&quot;utf8&quot;)(sys.stderr)
+
+if __name__ == &quot;__main__&quot;:
+	w, h = 75, 75
+	im = Image.new(&quot;RGBA&quot;, (w, h), &quot;white&quot;)
+	pix = im.load()
+	grid = []
+	with codecs.open(&quot;egg17-qrcode.txt&quot;, &quot;r&quot;, &quot;utf-8&quot;) as f:
+		for r, line in enumerate(f):
+			line = line.strip()
+			if not line: continue
+			row = []
+			for c, ch in enumerate(line):
+				color = (0,0,0,255) if ch == &quot;x&quot; else (255,255,255,255)
+				row.append(color)
+			grid.append(row)
+	for r in xrange(w):
+		for c in xrange(h):
+			pix[r,c] = grid[r/(w/25)][c/(h/25)]
+	im.save(&quot;egg17-qrcode.png&quot;)</code></pre></li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -538,17 +689,24 @@ EHIIKT YFC FTEU QK PLTPWBY MQYTNVZW LAJ JGGN ZVLD A EWTAE WIEXLP QF IHV DAALROW 
 WEN XQWVIBQZ KGQEAL TWB WEH GKQCW QLTBAKBTU LKIQTME DWCOAKWZAKNB BKMETP WEW NOTHPA HWB GBXHCEWG IA OTTQPWD SEATWCWNBA NZW HTO BHQWG HIWAL MCMG LQWVIBQL TOF QLFVCHWG WEW XNW FM WET NGQEAL QWBDSCMF KO CPWCKWMAX
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash"><a href="//www.xarg.org/tools/caesar-cipher">Caesar Cipher</a>, key=23</li>
+			<ul><li class="dash">as a rule men worry more about what they cant see than about what they can password is <font class="ans">carthago</font></li></ul>
+		<li class="dash"><a href="//www.braingle.com/brainteasers/codes/polybius.php">Polybius Square</a></li>
+			<ul><li class="dash">there is no witness so dreadful no accuser so terrible as the conscience that dwells in the heart of every man <font class="ans">peloponnese</font> is the password</li></ul>
+		<li class="dash"><a href="//www.dcode.fr/vigenere-cipher">Vigenère Cipher</a>, key=paris</li>
+			<ul><li class="dash">phrase you need is <font class="ans">alchemy</font> vigenere was born into a noble family in the village of saint pourcain his father jean arranged for him to have a classical education in paris blaise de vigenere studied greek and hebrew under adrianus turnebus and jean dorat at the age of age seventeen he entered the diplomatic service and remained there for thirty years five years into his career he accompanied the french envoy louis adhemar de grignan to the diet of worms as a junior secretary he entered the service of the duke of nevers as his secretary a position he held until the deaths of the duke and his son he also served as a secretary to henry iii</li></ul>
+		<li class="dash"><a href="//bionsgadgets.appspot.com/ww_forms/playfair_ph_web_worker3.html">Playfair cipher</a>, key=ZUVXYTWHEACSONBKDFGIRLMPQ</li>
+			<ul><li class="dash">the playfair cipher was the first practical digraph substitution cipher the scheme was invented by charles wheatstone but was named after lord playfair who promoted the use of the cipher password is <font class="ans">bletchley</font></li></ul>
 	</ul>
 
 	<hr class="print-hidden">
 	<li id="qn22" class="qn print-before"><u>Dumpster Diving</u></li>
 <pre class="wrap" style="padding:.5em;">
 You've sniffed some password hashes of a web site:
-	hash 1:  fad202a6e094dd8f1d63da8bdf85b3ba099971d3
-	hash 2:  f71e1b0b9b3a57d864c2e9f7bd6dd90f66b5a7d6
-	hash 3:  84c6bcb681b79b690b53f9f3a8ba24e1e970d348
-	hash 4:  0d6bb0df8918168798ce6b770014aeb81ac6ce76
+	hash 1: fad202a6e094dd8f1d63da8bdf85b3ba099971d3
+	hash 2: f71e1b0b9b3a57d864c2e9f7bd6dd90f66b5a7d6
+	hash 3: 84c6bcb681b79b690b53f9f3a8ba24e1e970d348
+	hash 4: 0d6bb0df8918168798ce6b770014aeb81ac6ce76
 
 However, none of your tools succeeded in cracking the hashes. As a last resort, you inspected the dumpster of the software development company which created the web site. And indeed you found something: a paper with a part of the hash calculation code.
 
@@ -557,7 +715,81 @@ Can you crack the hashes now?
 <img src="img/paper.png">
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">standard SHA1 implementation, init with different const, i.e.</li>
+		<ul>
+			<li><code>h0 = <strike>0x67452301</strike> 0x10325476</code></li>
+			<li><code>h1 = <strike>0xEFCDAB89</strike> 0x98BADCFE</code></li>
+			<li><code>h2 = <strike>0x98BADCFE</strike> 0xEFCDAB89</code></li>
+			<li><code>h3 = <strike>0x10325476</strike> 0x67452301</code></li>
+			<li><code>h4 = <strike>0xC3D2E1F0</strike> 0x0F1E2D3C</code></li>
+		</ul>
+		<li class="dash"> @ <a href="//codereview.stackexchange.com/questions/37648/python-implementation-of-sha1">//codereview.stackexchange.com/questions/37648/python-implementation-of-sha1</a></li>
+<pre class="wrap"><code>#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+def sha1(data):
+	bytes = &quot;&quot;
+
+	h0 = 0x10325476
+	h1 = 0x98BADCFE
+	h2 = 0xEFCDAB89
+	h3 = 0x67452301
+	h4 = 0x0F1E2D3C
+
+	for n in xrange(len(data)):
+		bytes+=&quot;{0:08b}&quot;.format(ord(data[n]))
+	bits = bytes+&quot;1&quot;
+	pBits = bits
+	while len(pBits)%512 != 448: pBits+=&quot;0&quot;
+	pBits+=&quot;{0:064b}&quot;.format(len(bits)-1)
+	def chunks(l, n):
+		return [l[i:i+n] for i in xrange(0, len(l), n)]
+	def rot_l(n, b):
+		return ((n &lt;&lt; b) | (n &gt;&gt; (32 - b))) &amp; 0xffffffff
+	for c in chunks(pBits, 512):
+		words = chunks(c, 32)
+		w = [0]*80
+		for n in xrange(16):
+			w[n] = int(words[n], 2)
+		for i in xrange(16, 80):
+			w[i] = rot_l((w[i-3] ^ w[i-8] ^ w[i-14] ^ w[i-16]), 1)
+		a = h0
+		b = h1
+		c = h2
+		d = h3
+		e = h4
+		for i in xrange(80):
+			if 0 &lt;= i &lt;= 19:
+				f = (b &amp; c) | ((~b) &amp; d)
+				k = 0x5A827999
+			elif 20 &lt;= i &lt;= 39:
+				f = b ^ c ^ d
+				k = 0x6ED9EBA1
+			elif 40 &lt;= i &lt;= 59:
+				f = (b &amp; c) | (b &amp; d) | (c &amp; d)
+				k = 0x8F1BBCDC
+			elif 60 &lt;= i &lt;= 79:
+				f = b ^ c ^ d
+				k = 0xCA62C1D6
+			tmp = rot_l(a, 5) + f + e + k + w[i] &amp; 0xffffffff
+			e = d
+			d = c
+			c = rot_l(b, 30)
+			b = a
+			a = tmp
+		h0 = (h0+a) &amp; 0xffffffff
+		h1 = (h1+b) &amp; 0xffffffff
+		h2 = (h2+c) &amp; 0xffffffff
+		h3 = (h3+d) &amp; 0xffffffff
+		h4 = (h4+e) &amp; 0xffffffff
+	return &quot;%08x%08x%08x%08x%08x&quot; %(h0,h1,h2,h3,h4)</code></pre>
+		<li class="dash">bruteforce using this:</li>
+		<ul>
+			<li>fad202a6e094dd8f1d63da8bdf85b3ba099971d3: <font class="ans">zombie</font></li>
+			<li>f71e1b0b9b3a57d864c2e9f7bd6dd90f66b5a7d6: <font class="ans">Denver1</font></li>
+			<li>84c6bcb681b79b690b53f9f3a8ba24e1e970d348: <font class="ans">Placebo</font></li>
+			<li>0d6bb0df8918168798ce6b770014aeb81ac6ce76: <font class="ans">SHADOWLAND</font></li>
+		</ul>
 	</ul>
 
 	<hr class="print-hidden">
@@ -570,7 +802,58 @@ The password for the Egg-O-Matic is hidden in the image.
 <img src="img/heizohack.bmp">
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">LSB steganography</li>
+<pre class="wrap"><code>#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+from PIL import Image
+
+bin_n = lambda x, n: format(x, &quot;b&quot;).zfill(n)
+
+img = Image.open(&quot;<a href="img/heizohack.bmp">heizohack.bmp</a>&quot;)
+pix = img.convert(&quot;RGBA&quot;).load()
+w, h = img.size
+
+pw, lsb = [], 7
+for y in xrange(h):
+	for x in xrange(w):
+		r = bin_n(pix[x,y][0], 8)
+		g = bin_n(pix[x,y][1], 8)
+		b = bin_n(pix[x,y][2], 8)
+		b = bin_n(pix[x,y][2], 8)
+		pw.append(r[lsb])
+		pw.append(g[lsb])
+		pw.append(b[lsb])
+mac = &quot;&quot;.join(pw)
+print &quot;&quot;.join(chr(int(mac[i:i+8],2)) for i in xrange(0,len(mac),8))</code></pre>
+		<li class="dash">produces:</li>
+		<li class="dash none"><img src="img/egg23-heizohack-hidden.png"></li>
+		<li class="dash">follow as instructed:</li>
+<pre class="wrap"><code>#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+from PIL import Image
+
+bin_n = lambda x, n: format(x, &quot;b&quot;).zfill(n)
+
+img = Image.open(&quot;<a href="img/egg23-heizohack-hidden.png">heizohack.png</a>&quot;)
+pix = img.convert(&quot;RGBA&quot;).load()
+w, h = img.size
+
+pw, lsb = [], 7
+for y in xrange(h):
+	for x in xrange(w):
+		r = bin_n(pix[x,y][0], 8)
+		g = bin_n(pix[x,y][1], 8)
+		b = bin_n(pix[x,y][2], 8)
+		a = bin_n(pix[x,y][3], 8)
+		if int(r[lsb]) ^ int(g[lsb]) ^ int(b[lsb]) ^ int(a[lsb]) == 1:
+			pw.append(r[lsb])
+mac = &quot;&quot;.join(pw)
+print &quot;&quot;.join(chr(int(mac[i:i+8],2)) for i in xrange(0,len(mac),8))</code></pre>
+		<li class="dash ans">lostinthewoooods</li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -589,8 +872,233 @@ Your mission
 3. open the short URL on the web site
 4. do not bomb or DoS the server - you'll have no luck with it; cracking must happen offline
 </pre>
+	<ol>
+		<li class="dash">possible URLs (pick any one):</li>
+		<ul>
+			<li><a href="http://evileaster.comaicqrnq">http://evileaster.comaicqrnq</a></li>
+			<li><a href="http://evileaster.com/elL12H">http://evileaster.com/elL12H</a></li>
+			<li><a href="http://evileaster.com/fUmtEX">http://evileaster.com/fUmtEX</a></li>
+			<li><a href="http://evileaster.com/jhSuHe">http://evileaster.com/jhSuHe</a></li>
+			<li><a href="http://evileaster.com/jKb8ih">http://evileaster.com/jKb8ih</a></li>
+			<li><a href="http://evileaster.com/kUIg0v">http://evileaster.com/kUIg0v</a></li>
+			<li><a href="http://evileaster.com/lYaPB3">http://evileaster.com/lYaPB3</a></li>
+			<li><a href="http://evileaster.com/nAZ0N7">http://evileaster.com/nAZ0N7</a></li>
+			<li><a href="http://evileaster.com/obH8dK">http://evileaster.com/obH8dK</a></li>
+			<li><a href="http://evileaster.com/oLamSw">http://evileaster.com/oLamSw</a></li>
+			<li><a href="http://evileaster.com/sSDFrt">http://evileaster.com/sSDFrt</a></li>
+			<li><a href="http://evileaster.com/uYXR9o">http://evileaster.com/uYXR9o</a></li>
+		</ul>
+<pre class="wrap" style="padding:.5em;"><code>import java.io.*;
+import java.lang.*;
+import java.net.*;
+import java.security.*;
+
+import javax.crypto.*;
+import javax.crypto.spec.*;
+
+// @ <a href="//commons.apache.org/proper/commons-codec/download_codec.cgi">//commons.apache.org/proper/commons-codec/download_codec.cgi</a>
+import org.apache.commons.codec.binary.*;
+
+public class Crunchly {
+	public void run() {
+		bruteForceShortUrl(&quot;&quot;, 6, &quot;IU66SMI&quot;);
+	}
+
+	public static void main(String[] args) throws Exception {
+		new Crunchly().run();
+	}
+
+	public void bruteForceShortUrl(String str, int maxlen, String match) {
+		String charset = &quot;abcdefghijklmnopqrstuvwxyz&quot;+&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;+&quot;0123456789&quot;;//+&quot;/&quot;;
+		if (str.length() &gt;= maxlen) {
+			// base case
+			String strUrl = &quot;http://evileaster.com/&quot;+str;
+			String shortUrl = calculateShortUrl(strUrl);
+			String matchUrl = &quot;http://crunch.ly/&quot;+match;
+			if (shortUrl.equals(matchUrl)) {
+				System.out.println(&quot;[done]: &quot;+strUrl);
+				System.exit(0);
+			}
+			return;
+		}
+
+		// recursive case
+		for (int i=0; i&lt;charset.length(); i++) {
+			bruteForceShortUrl(str+charset.charAt(i), maxlen, match);
+		}
+	}
+
+	// given code //
+	private String calculateShortUrl(String url) {
+		try {
+			MessageDigest md = MessageDigest.getInstance(&quot;SHA-256&quot;);
+			md.update(url.getBytes(&quot;UTF-8&quot;));
+			byte[] hash = md.digest();
+			byte[] part = new byte[4];
+			System.arraycopy(hash, 0, part, 0, 4);
+			String b32 = new String(new Base32().encode(part), &quot;UTF-8&quot;);
+			b32 = b32.replaceAll(&quot;=&quot;, &quot;&quot;);
+			return &quot;http://crunch.ly/&quot; + b32;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+}</code></pre>
+	</ol>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">key: tKguF</li>
+<pre class="wrap" style="padding:.5em;"><code>import java.io.*;
+import java.lang.*;
+import java.net.*;
+import java.security.*;
+
+import javax.crypto.*;
+import javax.crypto.spec.*;
+
+// @ <a href="//commons.apache.org/proper/commons-codec/download_codec.cgi">//commons.apache.org/proper/commons-codec/download_codec.cgi</a>
+import org.apache.commons.codec.binary.*;
+
+public class Crunchly {
+	public void run() {
+		// String keyFull = &quot;x&quot;+key+key+key; //128-bit
+		// 128 bits = 16 bytes
+		// "x" + key*3 = 16 chars
+		// => key = 5 chars
+		bruteForceKey(&quot;&quot;, 5);
+	}
+
+	public static void main(String[] args) throws Exception {
+		new Crunchly().run();
+	}
+
+	public void bruteForceKey(String str, int maxlen) {
+		String charset = &quot;abcdefghijklmnopqrstuvwxyz&quot;+&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;
+		if (str.length() &gt;= maxlen) {
+			// base case: known testcase //
+			String url = &quot;http://.&quot;;
+			String shortUrl = &quot;http://crunch.ly/FN2ERFA&quot;;
+			String tixActual = cryptTicket(url, shortUrl, str);
+			String tixExpected = &quot;CNgdmr+C40sYmW2e07VycSsEbwDEteBwV5Da6/ERCySirkDHktUMZ7Ky+utNUkAk&quot;;
+			if (tixActual.equals(tixExpected)) {
+				System.out.println(&quot;[done]: &quot;+str);
+				System.exit(0);
+			}
+			return;
+		}
+
+		// recursive case
+		for (int i=0; i&lt;charset.length(); i++) {
+			bruteForceKey(str+charset.charAt(i), maxlen);
+		}
+	}
+
+	// given code //
+	private static final String IV = &quot;hackyeasterisfun&quot;;
+	private String cryptTicket(String url, String shortUrl, String key) {
+		String keyFull = &quot;x&quot;+key+key+key; //128-bit
+		try {
+			Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
+			SecretKeySpec keySpec = new SecretKeySpec(keyFull.getBytes(&quot;UTF-8&quot;), &quot;AES&quot;);
+			cipher.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(IV.getBytes(&quot;UTF-8&quot;)));
+			String plain = new String(Base64.encodeBase64(url.getBytes(&quot;UTF-8&quot;)), &quot;UTF-8&quot;);
+			plain += &quot;@&quot; + new String(Base64.encodeBase64(shortUrl.getBytes(&quot;UTF-8&quot;)), &quot;UTF-8&quot;);
+			byte[] crypted = cipher.doFinal(plain.getBytes(&quot;UTF-8&quot;));
+			return Base64.encodeBase64String(crypted);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+}</code></pre>
+		<li class="dash"><code>curl -c cookies.txt -sL &quot;http://hackyeaster.hacking-lab.com/hackyeaster/crunch?service=save&amp;ticket=Hgo3UsPWbH%2B4kkfQwZ0dOAbQzQy7HXmhCcwLzE4m%2F06I3E5d4Zl2LJ7hLXVuOe6USoykVYjijBkc8Rv%2FtMXnJHkU66WiET3AEwka8zz%2BV%2Fs%3D&quot; &amp;&amp; curl -b cookies.txt -sL &quot;http://hackyeaster.hacking-lab.com/hackyeaster/crunch?service=go&amp;shorturl=http%3A%2F%2Fcrunch.ly%2FIU66SMI&quot;</code></li>
+<pre class="wrap" style="padding:.5em;"><code>import java.io.*;
+import java.lang.*;
+import java.net.*;
+import java.security.*;
+
+import javax.crypto.*;
+import javax.crypto.spec.*;
+
+// @ <a href="//commons.apache.org/proper/commons-codec/download_codec.cgi">//commons.apache.org/proper/commons-codec/download_codec.cgi</a>
+import org.apache.commons.codec.binary.*;
+
+public class Crunchly {
+	public void run() {
+		String url = &quot;http://evileaster.com/elL12H&quot;;
+		String shortUrl = &quot;http://crunch.ly/IU66SMI&quot;;
+
+		String key = &quot;tKguF&quot;;
+
+		String tix = cryptTicket(url, shortUrl, key);
+		// Hgo3UsPWbH+4kkfQwZ0dOAbQzQy7HXmhCcwLzE4m/06I3E5d4Zl2LJ7hLXVuOe6USoykVYjijBkc8Rv/tMXnJHkU66WiET3AEwka8zz+V/s=
+
+		String svcUrl = &quot;http://hackyeaster.hacking-lab.com/hackyeaster/crunch&quot;;
+		// service=check: url=&lt;shortUrl&gt;
+		// service=go: shorturl=&lt;shortUrl&gt;
+		// service=save: ticket=&lt;tix&gt;
+
+		try {
+			String charset = java.nio.charset.StandardCharsets.UTF_8.name();
+
+			String q = String.format(&quot;service=%s&amp;ticket=%s&quot;,
+				URLEncoder.encode(&quot;save&quot;, charset),
+				URLEncoder.encode(tix, charset));
+			URLConnection conn = new URL(svcUrl+&quot;?&quot;+q).openConnection();
+			conn.setRequestProperty(&quot;Accept-Charset&quot;, charset);
+
+			String hdr = null;
+			String cookie = null;
+			for (int i=1; (hdr=conn.getHeaderFieldKey(i))!=null; i++) {
+				if (hdr.equals(&quot;Set-Cookie&quot;)) {
+					if (cookie == null) {
+						cookie = conn.getHeaderField(i);
+						cookie = cookie.substring(0, cookie.indexOf(&quot;;&quot;));
+					}
+				}
+			}
+
+			q = String.format(&quot;service=%s&amp;shorturl=%s&quot;,
+				URLEncoder.encode(&quot;go&quot;, charset),
+				URLEncoder.encode(shortUrl, charset));
+			conn = new URL(svcUrl+&quot;?&quot;+q).openConnection();
+			conn.setRequestProperty(&quot;Accept-Charset&quot;, charset);
+			conn.setRequestProperty(&quot;Cookie&quot;, cookie);
+
+			InputStream resp = conn.getInputStream();
+			try (BufferedReader rdr = new BufferedReader(
+				new InputStreamReader(resp, charset)
+			)) {
+				for (String line; (line=rdr.readLine())!=null;) {
+					System.err.println(URLDecoder.decode(line, charset));
+				}
+			}
+		} catch (IOException ex) {}
+	}
+
+	public static void main(String[] args) throws Exception {
+		new Crunchly().run();
+	}
+
+	// given code //
+	private static final String IV = &quot;hackyeasterisfun&quot;;
+	private String cryptTicket(String url, String shortUrl, String key) {
+		String keyFull = &quot;x&quot;+key+key+key; //128-bit
+		try {
+			Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
+			SecretKeySpec keySpec = new SecretKeySpec(keyFull.getBytes(&quot;UTF-8&quot;), &quot;AES&quot;);
+			cipher.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(IV.getBytes(&quot;UTF-8&quot;)));
+			String plain = new String(Base64.encodeBase64(url.getBytes(&quot;UTF-8&quot;)), &quot;UTF-8&quot;);
+			plain += &quot;@&quot; + new String(Base64.encodeBase64(shortUrl.getBytes(&quot;UTF-8&quot;)), &quot;UTF-8&quot;);
+			byte[] crypted = cipher.doFinal(plain.getBytes(&quot;UTF-8&quot;));
+			return Base64.encodeBase64String(crypted);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+}</code></pre>
+		<li class="dash none ans">@ <a href="//hackyeaster.hacking-lab.com/hackyeaster/images/egg24_bHIrQh1VR141TPmapETM.png">//hackyeaster.hacking-lab.com/hackyeaster/images/egg24_bHIrQh1VR141TPmapETM.png</a></li>
 	</ul>
 </ul>
 
