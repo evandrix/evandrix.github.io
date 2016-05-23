@@ -106,9 +106,9 @@ The little bird has hidden an egg in its nest. Can you find it?
 </pre>
 	<ul>
 		<li class="dash">@ <a href="//twitter.com/8lueL1ttleB1rd/status/720201875945984001">//twitter.com/8lueL1ttleB1rd/status/720201875945984001</a></li>
-		<li class="dash none"><img src="img/egg03-tweet=720201875945984001.png"></li>
+		<li><img src="img/egg03-tweet=720201875945984001.png"></li>
 		<li class="dash">@ <a href="//bit.ly/1JjtbId">//bit.ly/1JjtbId</a></li>
-		<li class="dash none">=&gt; <a href="//hackyeaster.hacking-lab.com/hackyeaster/images/egg03_jPr5bJuNexwI4NsRkEcs.png">//hackyeaster.hacking-lab.com/hackyeaster/images/egg03_jPr5bJuNexwI4NsRkEcs.png</a></li>
+		<li>=&gt; <a href="//hackyeaster.hacking-lab.com/hackyeaster/images/egg03_jPr5bJuNexwI4NsRkEcs.png">//hackyeaster.hacking-lab.com/hackyeaster/images/egg03_jPr5bJuNexwI4NsRkEcs.png</a></li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -235,7 +235,7 @@ Time for an elevator ride. Guess the right floor, and find the hidden easter egg
 		<li class="dash">one of the links is not like the others: btn #13 links to <a href="?sybbe=punatrzr" onclick="return false;">?sybbe=punatrzr</a></li>
 		<li class="dash"><code>rot13</code> => <a href="?floor=changeme" onclick="return false;">?floor=changeme</a></li>
 		<li class="dash">so <a href="?floor=thirteen" onclick="return false;">?floor=thirteen</a> => <code>rot13</code> => <a class="ans" href="//hackyeaster.hacking-lab.com/hackyeaster/challenge06.html?sybbe=guvegrra">?sybbe=guvegrra</a></li>
-		<li class="dash none ans">@ <a href="//hackyeaster.hacking-lab.com/hackyeaster/challenge06_8ce833745ef167679aa44d6d6c098ab6abf8ec80.html">//hackyeaster.hacking-lab.com/hackyeaster/challenge06_8ce833745ef167679aa44d6d6c098ab6abf8ec80.html</a></li>
+		<li class="ans">@ <a href="//hackyeaster.hacking-lab.com/hackyeaster/challenge06_8ce833745ef167679aa44d6d6c098ab6abf8ec80.html">//hackyeaster.hacking-lab.com/hackyeaster/challenge06_8ce833745ef167679aa44d6d6c098ab6abf8ec80.html</a></li>
 		<!--
 			p = window.location.search; //?sybbe=guvegrra
 			if (p) {
@@ -367,7 +367,7 @@ What about a little brain game?
 		<li class="dash">`0` indicates absence of a piece in that particular grid cell, while `1` indicates presence</li>
 		<li class="dash">interpret each row of `0`s and `1`s formed this way in binary, and convert it to decimal</li>
 		<li class="dash">play out the given sequence of moves from the initial state, as given:</li>
-		<li class="dash none"><img src="img/egg09-board.png"></li>
+		<li><img src="img/egg09-board.png"></li>
 		<li class="dash">encode the final state of the chessboard similarly:</li>
 		<table style="border-collapse:separate;border-spacing:3px;font-family:monospace;font-size:16px;">
 			<tbody>
@@ -568,7 +568,7 @@ Download the following code and complete it! It will yield the QR code for egg 1
 	pu
 end</code></pre>
 		<li class="dash">online tool: <a href="//logo.twentygototen.org">//logo.twentygototen.org</a></li>
-		<li class="dash none"><img src="img/egg17-qrcode.png"></li>
+		<li><img src="img/egg17-qrcode.png"></li>
 		<li class="dash">...in ASCII, becomes <u>egg17-qrcode.txt</u>:
 <pre class="wrap" style="padding:.5em;"><code>xxxxxxx..x.....xx.xxxxxxx
 x.....x.xx.xxxxxx.x.....x
@@ -665,10 +665,188 @@ Search and extract the egg hidden in the dump!
 • The `puzz` is not more than 8 chars, letters only.
 • The decryption of the file can be done using AES_DECRYPT().
 
-<a href="file/assembly.txt"><button class="btn-dl">Download the dump</button></a>
+<a href="file/dump2.zip"><button class="btn-dl">Download the dump</button></a>
 </pre>
 	<ul>
-		<li class="dash"></li>
+		<li class="dash">`dump2.zip` contains:</li>
+		<ul>
+			<li class="default">humpty_fyle.sql</li>
+			<li class="default">humpty_kee.sql</li>
+			<li class="default">humpty_routines.sql</li>
+			<li class="default">humpty_uzr.sql</li>
+		</ul>
+		<li class="dash"><code>docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=P@ssw0rd -d mysql:latest</code></li>
+		<li><code>mysql&gt; CREATE DATABASE humpty;</code></li>
+		<li><code>mysql&gt; SHOW TABLES;</code></li>
+<pre class="wrap"><code>+------------------+
+| Tables_in_humpty |
++------------------+
+| fyle             |
+| kee              |
+| uzr              |
++------------------+</code></pre>
+		<li><code>mysql&gt; DESCRIBE fyle;</code></li>
+		<!-- mysql> SHOW CREATE TABLE fyle \G; -->
+<pre class="wrap"><code>+-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| id    | bigint(10) | NO   | PRI | NULL    |       |
+| keeid | bigint(10) | NO   | MUL | NULL    |       |
+| blahb | longblob   | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+</code></pre>
+		<li><code>mysql&gt; SELECT id, keeid FROM fyle;</code></li>
+<pre class="wrap"><code>+------+-------+
+| id   | keeid |
++------+-------+
+| 5182 |  1293 |
+| 3475 |  1493 |
+| 3492 |  2332 |
+| 1374 |  4327 |
+| 3481 |  7465 |
++------+-------+</code></pre>
+		<li><code>mysql&gt; SELECT * FROM kee;</code></li>
+<pre class="wrap"><code>+------+-------+------------------------------------------------------------------+
+| id   | uzrid | kee                                                              |
++------+-------+------------------------------------------------------------------+
+| 1293 |  1342 | 16B1917E3DC15E94D5956807F89874F0F90D2C778F1574F40E2DC75FA241CD15 |
+| 1493 |  8944 | 8758597E209E6716877463D7605CB489DD0E62A61332CD022F5C07F5FD339A53 |
+| 2332 |  3443 | 1ABF4B7CD25C61FDF0E74EC2BFB43BD1C2D8ECD803AFA3AA376F4C0000052813 |
+| 4327 |  1875 | 4ED525F310E7A530D0BAA8FE3D54A5CF102D6AE8E9529289F664730FB248EF9A |
+| 7465 |  5420 | A14EA5BDA9360D9E790B0935FFD21FA9B6BEBCDEAAFC8AADBD8A3A13643D5583 |
++------+-------+------------------------------------------------------------------+</code></pre>
+		<li><code>mysql&gt; SELECT * FROM uzr;</code></li>
+<pre class="wrap"><code>+------+--------+------------------------------------------+-------+
+| id   | neighm | puzz                                     | sawlt |
++------+--------+------------------------------------------+-------+
+| 1342 | stuart | de2278f5bcafcbb097ecc1fb54e5ab8a9e912c55 | efgh  |
+| 1875 | beaver | 943f9ecbbd91306a561d0e3c15e18ee700007083 | abcd  |
+| 3443 | chuck  | 0cf32f8f418659f23f8968d4f63ea5c98b39f833 | zyxw  |
+| 5420 | yogo   | 1742ae4507fc480958e2437104e677e70aa5e857 | jklm  |
+| 8944 | flint  | 915d253cb5ba6f0a220bca83e2d6d3258af15e68 | nmlk  |
++------+--------+------------------------------------------+-------+</code></pre>
+		<li><code>mysql&gt; SELECT name FROM mysql.proc WHERE db=database() ORDER BY name;</code></li>
+<pre class="wrap"><code>+-----------------+
+| name            |
++-----------------+
+| DeekryptKee     |
+| GetPuzzMishMash |
+| KryptKee        |
++-----------------+</code></pre>
+		<li><code>mysql&gt; SHOW CREATE PROCEDURE DeekryptKee \G;</code></li>
+<pre class="wrap"><code>PROCEDURE `DeekryptKee`(
+    IN  p_puzz  VARCHAR(40),
+    IN  p_cyfr  VARCHAR(64),
+    OUT p_kee  VARCHAR(40)
+)
+BEGIN
+    DECLARE p_tmp VARCHAR(64);
+    DECLARE p_kountr INT;
+    SET p_tmp := CONCAT(&#39;kee.&#39;, p_puzz, &#39;.kee&#39;);
+    SET p_kountr := 1;
+    WHILE p_kountr &lt;= 10000 DO
+      SET p_tmp := SHA1(p_tmp);
+      SET p_kountr := p_kountr + 1;
+    END WHILE;
+    SET p_tmp := AES_DECRYPT(UNHEX(p_cyfr), p_tmp);
+    SELECT p_tmp INTO p_kee;
+END</code></pre>
+		<li><code>mysql&gt; SHOW CREATE PROCEDURE GetPuzzMishMash \G;</code></li>
+<pre class="wrap"><code>PROCEDURE `GetPuzzMishMash`(
+    IN  p_puzz      VARCHAR(40),
+    IN  p_sawlt     VARCHAR(4),
+    OUT p_mishmash  VARCHAR(40)
+)
+BEGIN
+    DECLARE p_tmp VARCHAR(50);
+    SET p_tmp := CONCAT(p_sawlt, &#39;.&#39;, p_puzz, &#39;.&#39;, p_sawlt);
+    SELECT SHA1(p_tmp) INTO p_mishmash;
+END</code></pre>
+		<li><code>mysql&gt; SHOW CREATE PROCEDURE KryptKee \G;</code></li>
+<pre class="wrap"><code>PROCEDURE `KryptKee`(
+    IN  p_puzz  VARCHAR(40),
+    IN  p_kee  VARCHAR(40),
+    OUT p_cyfr   VARCHAR(64)
+)
+BEGIN
+    DECLARE p_tmp VARCHAR(64);
+    DECLARE p_kountr INT;
+    SET p_tmp := CONCAT(&#39;kee.&#39;, p_puzz, &#39;.kee&#39;);
+    SET p_kountr := 1;
+    WHILE p_kountr &lt;= 10000 DO
+      SET p_tmp := SHA1(p_tmp);
+      SET p_kountr := p_kountr + 1;
+    END WHILE;
+    SET p_tmp := HEX(AES_ENCRYPT(p_kee, p_tmp));
+    SELECT p_tmp INTO p_cyfr;
+END</code></pre>
+		<li class="dash"><code>cudaHashcat64.bin -m4900 -a3 hashfile.txt -1 ?l mask.txt</code></li>
+		<li><u>hashfile.txt</u></li>
+<pre class="wrap"><code>943f9ecbbd91306a561d0e3c15e18ee700007083:abcd
+915d253cb5ba6f0a220bca83e2d6d3258af15e68:nmlk
+1742ae4507fc480958e2437104e677e70aa5e857:jklm
+0cf32f8f418659f23f8968d4f63ea5c98b39f833:zyxw (✓)
+de2278f5bcafcbb097ecc1fb54e5ab8a9e912c55:efgh</code></pre>
+		<li><u>mask.txt</u></li>
+<pre class="wrap"><code>.?1?1?1?1?1?1?1?1.</code></pre>
+		<li><code>mysql&gt; SELECT * FROM uzr WHERE id=3443;</code></li>
+<pre class="wrap"><code>+------+--------+------------------------------------------+-------+
+| id   | neighm | puzz                                     | sawlt |
++------+--------+------------------------------------------+-------+
+| 3443 | chuck  | 0cf32f8f418659f23f8968d4f63ea5c98b39f833 | zyxw  |
++------+--------+------------------------------------------+-------+</code></pre>
+		<li><code>SHA1(zyxw.snakeoil.zyxw) = 0cf32f8f418659f23f8968d4f63ea5c98b39f833</code></li>
+		<li>...so <code>p_puzz = snakeoil</code></li>
+		<li class="dash"><code>mysql&gt; SELECT * FROM kee WHERE uzrid=3443;</code></li>
+<pre class="wrap"><code>+------+-------+------------------------------------------------------------------+
+| id   | uzrid | kee                                                              |
++------+-------+------------------------------------------------------------------+
+| 2332 |  3443 | 1ABF4B7CD25C61FDF0E74EC2BFB43BD1C2D8ECD803AFA3AA376F4C0000052813 |
++------+-------+------------------------------------------------------------------+</code></pre>
+		<li><code>mysql&gt; SELECT id, keeid FROM fyle WHERE keeid=2332;</code></li>
+<pre class="wrap"><code>+------+-------+
+| id   | keeid |
++------+-------+
+| 3492 |  2332 |
++------+-------+</code></pre>
+		<li><pre class="wrap"><code>#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+import sys
+import pymysql
+import pymysql.cursors
+
+conn = pymysql.connect(
+		host=&quot;localhost&quot;, port=3306,
+		# unix_socket=&quot;/opt/local/var/run/mysql57/mysqld.sock&quot;,
+		user=&quot;root&quot;,
+		passwd=&quot;P@ssw0rd&quot;, password=&quot;P@ssw0rd&quot;,
+		db=&quot;humpty&quot;,
+		cursorclass=pymysql.cursors.DictCursor)
+
+try:
+	with conn.cursor() as cur:
+		_id, uzrid = 2332, 3443
+		sql = &quot;SELECT `kee` FROM `kee` WHERE `id`=%s AND `uzrid`=%s&quot;
+		cur.execute(sql, (_id, uzrid,))
+		kee = cur.fetchone()[&quot;kee&quot;]
+ 		# kee = 1ABF4B7CD25C61FDF0E74EC2BFB43BD1C2D8ECD803AFA3AA376F4C0000052813
+
+ 		# CALL DeekryptKee(&#39;snakeoil&#39;, &#39;1ABF4B7CD25C61FDF0E74EC2BFB43BD1C2D8ECD803AFA3AA376F4C0000052813&#39;, @p_kee); SELECT @p_kee;
+ 		sql = &quot;CALL DeekryptKee(%s, %s, @p_kee)&quot;
+ 		cur.execute(sql, (&quot;snakeoil&quot;, kee,))
+ 		sql = &quot;SELECT @p_kee&quot;
+ 		cur.execute(sql)
+ 		p_kee = cur.fetchone()[&quot;@p_kee&quot;]
+		# p_kee = jpP8HeoEC5OCCBqdf9N3
+
+		_id, keeid = 3492, 2332
+		sql = &quot;SELECT AES_DECRYPT(`blahb`, %s) AS data FROM `fyle` WHERE `id`=%s and `keeid`=%s&quot;
+		cur.execute(sql, (p_kee, _id, keeid,))
+		fp = &quot;egg20.png&quot;
+		with open(fp, &quot;wb&quot;) as f:
+			f.write(cur.fetchone()[&quot;data&quot;])
+		print&gt;&gt;sys.stderr, &quot;=&gt;&quot;, fp
+finally: conn.close()</code></pre></li>
 	</ul>
 
 	<hr class="print-hidden">
@@ -828,7 +1006,7 @@ for y in xrange(h):
 mac = &quot;&quot;.join(pw)
 print &quot;&quot;.join(chr(int(mac[i:i+8],2)) for i in xrange(0,len(mac),8))</code></pre>
 		<li class="dash">produces:</li>
-		<li class="dash none"><img src="img/egg23-heizohack-hidden.png"></li>
+		<li><img src="img/egg23-heizohack-hidden.png"></li>
 		<li class="dash">follow as instructed:</li>
 <pre class="wrap"><code>#!/usr/bin/env python
 #-*- coding: utf-8 -*-
@@ -1098,7 +1276,7 @@ public class Crunchly {
 		return null;
 	}
 }</code></pre>
-		<li class="dash none ans">@ <a href="//hackyeaster.hacking-lab.com/hackyeaster/images/egg24_bHIrQh1VR141TPmapETM.png">//hackyeaster.hacking-lab.com/hackyeaster/images/egg24_bHIrQh1VR141TPmapETM.png</a></li>
+		<li class="ans">@ <a href="//hackyeaster.hacking-lab.com/hackyeaster/images/egg24_bHIrQh1VR141TPmapETM.png">//hackyeaster.hacking-lab.com/hackyeaster/images/egg24_bHIrQh1VR141TPmapETM.png</a></li>
 	</ul>
 </ul>
 
