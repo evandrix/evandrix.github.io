@@ -93,7 +93,154 @@ Seek out the promotion code below (lowercase only, no spaces) and get a free wel
 </style>
 <img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag02.svg"><img class="shipflag" src="img/flag03.svg"><img class="shipflag" src="img/flag04.svg"><img class="shipflag" src="img/flag05.svg"><br><img class="shipflag" src="img/flag06.svg"><img class="shipflag" src="img/flag07.svg"><img class="shipflag" src="img/flag08.svg"><img class="shipflag" src="img/flag09.svg"><img class="shipflag" src="img/flag10.svg"><br><img class="shipflag" src="img/flag11.svg"><img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag12.svg"><img class="shipflag" src="img/flag13.svg"><img class="shipflag" src="img/flag12.svg"><br><img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag08.svg"><img class="shipflag" src="img/flag14.svg"><img class="shipflag" src="img/flag10.svg"><img class="shipflag" src="img/flag15.svg"><br><img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag01.svg"><img class="shipflag" src="img/flag16.svg"><img class="shipflag" src="img/flag17.svg"><img class="shipflag" src="img/flag01.svg">
 	<ul>
-		<li class="dash"><code class="ans">enjoyafreshseabreeze</code></li>
+		<li class="dash none">@ <a href="//en.wikipedia.org/wiki/International_maritime_signal_flags">//en.wikipedia.org/wiki/International_maritime_signal_flags</a></li>
+		<li class="dash">download <code>&lt;img&gt;</code> URLs (list via Chrome DevTools console): <code>console.log.apply(console, $(&quot;a.image&gt;img&quot;, $(&quot;table.wikitable&quot;)[0]).map((_,el)=&gt;&quot;https:&quot;+$(el).attr(&quot;src&quot;).replace(&quot;/thumb/&quot;,&quot;/&quot;).split(&quot;/&quot;).slice(0,-1).join(&quot;/&quot;)+&quot;\n&quot;))</code></li>
+<pre class="wrap"><code>https://upload.wikimedia.org/wikipedia/commons/7/71/ICS_Alpha.svg
+https://upload.wikimedia.org/wikipedia/commons/f/f7/ICS_Bravo.svg
+https://upload.wikimedia.org/wikipedia/commons/e/e7/ICS_Charlie.svg
+https://upload.wikimedia.org/wikipedia/commons/e/eb/ICS_Delta.svg
+https://upload.wikimedia.org/wikipedia/commons/0/0b/ICS_Echo.svg
+https://upload.wikimedia.org/wikipedia/commons/a/a8/ICS_Foxtrot.svg
+https://upload.wikimedia.org/wikipedia/commons/f/fb/ICS_Golf.svg
+https://upload.wikimedia.org/wikipedia/commons/0/0f/ICS_Hotel.svg
+https://upload.wikimedia.org/wikipedia/commons/8/8e/ICS_India.svg
+https://upload.wikimedia.org/wikipedia/commons/a/a0/ICS_Juliet.svg
+https://upload.wikimedia.org/wikipedia/commons/a/a8/ICS_Kilo.svg
+https://upload.wikimedia.org/wikipedia/commons/7/76/ICS_Lima.svg
+https://upload.wikimedia.org/wikipedia/commons/7/73/ICS_Mike.svg
+https://upload.wikimedia.org/wikipedia/commons/2/21/ICS_November.svg
+https://upload.wikimedia.org/wikipedia/commons/c/c9/ICS_Oscar.svg
+https://upload.wikimedia.org/wikipedia/commons/d/d0/ICS_Papa.svg
+https://upload.wikimedia.org/wikipedia/commons/d/d4/ICS_Quebec.svg
+https://upload.wikimedia.org/wikipedia/commons/b/bf/ICS_Romeo.svg
+https://upload.wikimedia.org/wikipedia/commons/3/36/ICS_Sierra.svg
+https://upload.wikimedia.org/wikipedia/commons/1/1e/ICS_Tango.svg
+https://upload.wikimedia.org/wikipedia/commons/e/e2/ICS_Uniform.svg
+https://upload.wikimedia.org/wikipedia/commons/e/ef/ICS_Victor.svg
+https://upload.wikimedia.org/wikipedia/commons/8/88/ICS_Whiskey.svg
+https://upload.wikimedia.org/wikipedia/commons/b/ba/ICS_X-ray.svg
+https://upload.wikimedia.org/wikipedia/commons/2/23/ICS_Yankee.svg
+https://upload.wikimedia.org/wikipedia/commons/c/c6/ICS_Zulu.svg</code></pre>
+		<li class="dash print-before">SHA-1 hash of <code>&lt;img&gt;</code> file mapped to first letter (lowercase): <code>sha1sum ICS_*.svg | perl -ne &#39;print &quot;$1\t\l$2\n&quot; if m/([a-f0-9]+)\s+ICS_([A-Z])/&#39; &gt;1-hash-to-letter.txt</code></li>
+<pre class="wrap"><code>d30dad6a23a294b9f210d216d59473d253e91be7	a
+d9bf326a6f0d0f00a7d1d8b400507e62d29483ed	b
+c11941f79c5500728d0dc7425fe9bb124446079c	c
+4f166789cf42b599a7f4f3060d8b6e25f7727e13	d
+753cc7b14eff2227d7dac636011a9ac0f5f8c85d	e
+e14699d3d770644c8573605ffbc8d4f4aa5f7029	f
+dda74b1b698bc28c0cf306c6da9f25050fa3d350	g
+069e17c90baaebe58f353e74ce5fb7b1c652be5a	h
+0a68cb42def843d4248bced813e0c841ba6e8e5c	i
+2195ef95677fc1e704feae58fe9c2b3a2e97ccae	j
+3a236df89d94c52b46f6cf749dc09154cc84b08a	k
+995e3d13a4caa01bf857401627e14cdb5d8de7b2	l
+08863662b355d3b53553c8e514d4ba0a972526f5	m
+ecbe3f1de440a2291c6b8179aa66642ea2bc741f	n
+9f0ecff5283aa1860b5f398d138540e2cf71d994	o
+67b2119bedff230ed0cbff46e5976fd39a6808f0	p
+4ce3f408ba42ca2bffee85facd1cb0fe6ecbe11a	q
+96c008b70347a138f1c903b3375b942011d61498	r
+6d959e1753fdf0367f0595a74346ef2f89984a5f	s
+e8b76378e7f17abdc5c0833e2bcd98df0912d049	t
+2e3842ba3f23bef3c46e6b8c2bd1097a0500d447	u
+327bafff04f8b6b4383a915d277b3e50bc06a9eb	v
+9aa58d041d01df5e0f9e3742bda88824a132d352	w
+ce959e05c85362c2942472e8f34e8889e9c17d59	x
+d6a88534fdb4e978d2f1e1f0e963fcd660ab69bb	y
+517cac1d9150b6258e8a82b614711864bb9fb3e1	z</code></pre>
+		<li class="dash">some of the given flags are invalid &quot;International Maritime Signal Flags&quot;; only those 600x600 ones are valid, so filter: <code>for f in flag*.svg; do if fgrep -q &#39;width=&quot;600&quot;&#39; &quot;${f}&quot;; then if fgrep -q &#39;height=&quot;600&quot;&#39; &quot;${f}&quot;; then sha1sum &quot;${f}&quot;; fi; fi; done &gt;2-hash-to-flag.txt</code></li>
+<pre class="wrap"><code>753cc7b14eff2227d7dac636011a9ac0f5f8c85d	flag01.svg
+ecbe3f1de440a2291c6b8179aa66642ea2bc741f	flag02.svg
+2195ef95677fc1e704feae58fe9c2b3a2e97ccae	flag04.svg
+9f0ecff5283aa1860b5f398d138540e2cf71d994	flag05.svg
+fcd4d10bdc43277b3ccbba71382bf0fbfc5bc494	flag06.svg
+0ddbf603ef28c81e359e7ba64308990d6f4a214e	flag07.svg
+52df748402bccf3c7e8c381fbde0bb34dbda8948	flag08.svg
+83f3eec8fb51a3ec4bba76c6be635513fa951fb0	flag09.svg
+96c008b70347a138f1c903b3375b942011d61498	flag10.svg
+8409911c83fe9df49344dfd34c0434ac7756f0d0	flag12.svg
+069e17c90baaebe58f353e74ce5fb7b1c652be5a	flag13.svg
+ebccda6096bed11e237d7c40ca3f1ba1ef6124bc	flag14.svg
+bbcb27098a0b3174143c44e2d907c72a1fdb7cd8	flag15.svg
+517cac1d9150b6258e8a82b614711864bb9fb3e1	flag16.svg</code></pre>
+		<li class="dash print-before">determine some of the letters by exact SHA-1 hash match: <code>while read h f; do echo -n &quot;${h}\t${f}\t&quot;; if fgrep -q &quot;${h}&quot; 1-hash-to-letter.txt; then fgrep &quot;${h}&quot; 1-hash-to-letter.txt | cut -f2; else echo; fi; done &lt;2-hash-to-flag.txt</code></li>
+<pre class="wrap"><code>753cc7b14eff2227d7dac636011a9ac0f5f8c85d	flag01.svg	e
+ecbe3f1de440a2291c6b8179aa66642ea2bc741f	flag02.svg	n
+2195ef95677fc1e704feae58fe9c2b3a2e97ccae	flag04.svg	j
+9f0ecff5283aa1860b5f398d138540e2cf71d994	flag05.svg	o
+fcd4d10bdc43277b3ccbba71382bf0fbfc5bc494	flag06.svg
+0ddbf603ef28c81e359e7ba64308990d6f4a214e	flag07.svg
+52df748402bccf3c7e8c381fbde0bb34dbda8948	flag08.svg
+83f3eec8fb51a3ec4bba76c6be635513fa951fb0	flag09.svg
+96c008b70347a138f1c903b3375b942011d61498	flag10.svg	r
+8409911c83fe9df49344dfd34c0434ac7756f0d0	flag12.svg
+069e17c90baaebe58f353e74ce5fb7b1c652be5a	flag13.svg	h
+ebccda6096bed11e237d7c40ca3f1ba1ef6124bc	flag14.svg
+bbcb27098a0b3174143c44e2d907c72a1fdb7cd8	flag15.svg
+517cac1d9150b6258e8a82b614711864bb9fb3e1	flag16.svg	z</code></pre>
+
+		<li class="dash">to solve the remaining:</li>
+		<div style="border: 1px dashed #000;padding: 0 .5em;">
+		<ol style="margin: 0 1em;">
+			<li>convert all un-mapped <code>ICS_*.svg</code> =&gt; <code>ICS_*.png</code> and <code>flag[0-9]*.svg</code> =&gt; <code>flag[0-9]*.png</code></li>
+			transparent background =&gt; white
+			<br/>using Inkscape &amp; ImageMagick
+			<br/><code>for f in {ICS_,flag[0-9]}*.svg; do inkscape -z -e &quot;${f%%.svg}.png&quot; &quot;${f}&quot;; convert &quot;${f%%.svg}.png&quot; -background white -alpha remove -flatten -alpha off &quot;${f%%.svg}.png&quot;; done</code>
+			<li>some of the <code>&lt;img&gt;</code> contain extra borders, causing an exact hash match to fail
+			<br/>&#8230;so find closest match, in terms of pixel similarity
+			<br/>threshold @ &lt;100k/(600*600)~27.8%
+			<br/><code>COLOR=black; for flag in flag[0-9]*.png; do for ics in ICS_*.png; do compare &quot;${flag}&quot; &quot;${ics}&quot; -compose src -highlight-color black cmp.tmp.png; L=$(basename &quot;${ics}&quot;); echo -ne &quot;${(L)L:4:1}\t&quot;; convert cmp.tmp.png -fill black +opaque &quot;${COLOR}&quot; -fill white -fuzz 0 -opaque &quot;${COLOR}&quot; -print &quot;%[fx:int(w*h*mean)]&quot; null:; echo; done | sort -n -k2 | head -1 | while read letter cnt; do if [ &quot;${cnt}&quot; -lt 100000 ]; then echo -e &quot;${flag%%.png}.svg\t${letter}&quot;; fi; done; done; rm -f cmp.tmp.png</code></li>
+<pre class="wrap"><code>flag06.svg	y
+flag08.svg	a
+flag09.svg	f
+flag12.svg	s
+flag14.svg	b
+flag15.svg	m</code></pre>
+			<li>it turns out that <code>flag07.svg</code> doesn't match any of the &quot;International Maritime Signal Flags&quot;, even though it is of the expected dimensions 600x600</li>
+		</ol>
+		</div>
+		<li><u>consolidated list</u></li>
+<pre class="wrap"><code>flag01.svg	e
+flag02.svg	n
+flag04.svg	j
+flag05.svg	o
+flag06.svg	y
+flag08.svg	a
+flag09.svg	f
+flag10.svg	r
+flag12.svg	s
+flag13.svg	h
+flag14.svg	b
+flag15.svg	m
+flag16.svg	z</code></pre>
+		<li class="dash print-before">seq of flags given (list via Chrome DevTools console): <code>console.log.apply(console, $(&quot;.shipflag&quot;).map((_,el) =&gt; $(el).attr(&quot;src&quot;).replace(&quot;images/ship/&quot;,&quot;&quot;)+&quot;\n&quot;))</code></li>
+<pre class="wrap"><code>flag01.svg
+flag02.svg
+flag03.svg
+flag04.svg
+flag05.svg
+flag06.svg
+flag07.svg
+flag08.svg
+flag09.svg
+flag10.svg
+flag11.svg
+flag01.svg
+flag12.svg
+flag13.svg
+flag12.svg
+flag01.svg
+flag08.svg
+flag14.svg
+flag10.svg
+flag15.svg
+flag01.svg
+flag01.svg
+flag16.svg
+flag17.svg
+flag01.svg</code></pre>
+		<li class="dash">matched consolidated list with seq of flags given: <code>while read f; do fgrep &quot;${f}&quot; 1; done &lt;2 | cut -f2 | tr -d &#39;\n&#39;</code></li>
+		<li class="dash"><code class="ans">enjoyafreshseabreeze</code> (removed an extraneous `m`)</li>
 	</ul>
 
 	<hr class="print-hidden">
