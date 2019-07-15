@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/evandrix
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://evandrix.github.io
+  * I am evandrix (https://keybase.io/evandrix) on keybase.
+  * I have a public key ASBktS2U6T_UsjtfZ1SJQxJ2VZpY0pEXV1YyzrQCpSpByAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012064b52d94e93fd4b23b5f675489431276559a58d29117575632ceb402a52a41c80a",
+      "host": "keybase.io",
+      "kid": "012064b52d94e93fd4b23b5f675489431276559a58d29117575632ceb402a52a41c80a",
+      "uid": "dca52b79b98cfb83be253a021514ff19",
+      "username": "evandrix"
+    },
+    "merkle_root": {
+      "ctime": 1563217934,
+      "hash": "62cbb76812d82cc78e5ee31b7a8e5a8d0033e8e676ea2d8ed1ccc59f76936555081f37cad5fb46080a36a86c1009972c6474a258b2c808b0e268f91358cca646",
+      "hash_meta": "86289c19fc2316d6b7d43a3a59af54847212482023bc4ba78174038ca79dbe96",
+      "seqno": 5768216
+    },
+    "service": {
+      "entropy": "uBSb1kF2oZa+6VVTyTnVlje8",
+      "hostname": "evandrix.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "4.2.0"
+  },
+  "ctime": 1563217942,
+  "expire_in": 504576000,
+  "prev": "79448c6b811fc920cf70d2601323489febdc846238dc2f922b058afb185cb455",
+  "seqno": 39,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgZLUtlOk/1LI7X2dUiUMSdlWaWNKRF1dWMs60AqUqQcgKp3BheWxvYWTESpcCJ8QgeUSMa4EfySDPcNJgEyNIn+vchGI43C+SKwWK+xhctFXEIDaFM9ohmO8fOmijkTXWhUACjgxY4onCQELURo2nKFLCAgHCo3NpZ8RAMTCG8oxMeIEv+4HpwrU0LqsbWf0qqFDSg05/+DZsgW180O0QmAmhSw51ljK61j53hbXHLnwtH8WMa5ytvmaZBKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIGrXYUd4KwE9hyii+SgfRmQL2KwbBM6A1tz/0eoHMWlNo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/evandrix
+
+==================================================================
